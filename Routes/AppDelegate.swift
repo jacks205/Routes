@@ -11,13 +11,54 @@ import Fabric
 import Crashlytics
 import CocoaLumberjack
 
+let topGradientBackgroundColor = UIColor.blackColor()
+let bottomGradientBackgroundColor = UIColor(red: 0.28, green: 0.34, blue: 0.38, alpha: 1)
+let progressBarViewBackgroundColor = UIColor(red:0.20, green:0.26, blue:0.28, alpha:1)
+
+let addRouteViewBackgroundColor = UIColor(red:0.18, green:0.22, blue:0.25, alpha:1.00)
+
+let lightGreenColor = UIColor(red:0.54, green:0.76, blue:0.37, alpha:1.00)
+let darkGreenColor = UIColor(red:0.38, green:0.69, blue:0.22, alpha:1.00)
+let lightYellowColor = UIColor(red:0.88, green:0.83, blue:0.39, alpha:1.00)
+let darkYellowColor = UIColor(red:0.80, green:0.76, blue:0.27, alpha:1.00)
+let lightRedColor = UIColor(red:0.92, green:0.33, blue:0.50, alpha:1.00)
+let darkRedColor = UIColor(red:0.85, green:0.20, blue:0.38, alpha:1.00)
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow? = UIWindow(frame: UIScreen.mainScreen().bounds)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        setupLogger()
+        Fabric.with([Crashlytics.self, Answers.self])
         
+        let navBar = UINavigationBar.appearance()
+        navBar.translucent = false
+        navBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
+        navBar.shadowImage = UIImage()
+        navBar.tintColor = UIColor.grayColor()
+        navBar.barTintColor = UIColor.clearColor()
+        navBar.titleTextAttributes = [
+            NSFontAttributeName : UIFont(name: "OpenSans", size: 16)!,
+            NSForegroundColorAttributeName : UIColor.whiteColor()
+        ]
+        
+        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor.grayColor()
+        UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = [
+            NSFontAttributeName : UIFont(name: "OpenSans", size: 12)!,
+            NSForegroundColorAttributeName : UIColor.whiteColor()
+        ]
+        
+        let vc = RoutesTableViewController()
+        let nvc = UINavigationController(rootViewController: vc)
+        vc.title = "My Routes"
+        window?.rootViewController = nvc
+        window?.makeKeyAndVisible()
+        
+        return true
+    }
+    
+    private func setupLogger() {
         DDLog.addLogger(DDTTYLogger.sharedInstance()) // TTY = Xcode console
         DDLog.addLogger(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
         
@@ -25,16 +66,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         fileLogger.rollingFrequency = 60*60*24  // 24 hours
         fileLogger.logFileManager.maximumNumberOfLogFiles = 7
         DDLog.addLogger(fileLogger)
-
-        Fabric.with([Crashlytics.self, Answers.self])
-        
-        let vc = RoutesTableViewController()
-        let nvc = UINavigationController(rootViewController: vc)
-        vc.title = "Routes"
-        window?.rootViewController = nvc
-        window?.makeKeyAndVisible()
-        
-        return true
     }
 
     func applicationWillResignActive(application: UIApplication) {

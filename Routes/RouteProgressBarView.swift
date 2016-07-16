@@ -10,7 +10,7 @@ import UIKit
 
 class RouteProgressBarView: UIView {
     
-    private let progressLayer = CAShapeLayer()
+    let progressLayer = CAShapeLayer()
     
     private var lastProgressValue = 0.0
     private var lastProgressColor = UIColor.clearColor()
@@ -21,7 +21,6 @@ class RouteProgressBarView: UIView {
     let textLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.backgroundColor = UIColor.purpleColor()
         return lb
     }()
 
@@ -33,8 +32,8 @@ class RouteProgressBarView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         createProgressLayer(lastProgressColor)
-        backgroundColor = UIColor.blueColor()
         addSubview(textLabel)
+        backgroundColor = progressBarViewBackgroundColor
         setConstraints()
     }
     
@@ -47,28 +46,35 @@ class RouteProgressBarView: UIView {
         super.updateConstraints()
     }
     
+    override func layoutSubviews() {
+        createProgressLayerPath()
+    }
+    
     func updateProgressView(percentage: Double, color: UIColor, text: String) {
         animateProgressLayer(percentage)
         animateProgressLayerColor(color)
         textLabel.text = text
-        textLabel.sizeToFit()
         lastProgressValue = percentage
         lastProgressColor = color
     }
     
-    private func createProgressLayer(startColor: UIColor) {
+    private func createProgressLayerPath() {
         let path = UIBezierPath()
         var startPoint = CGPoint(x: 0, y: frame.height / 2)
         path.moveToPoint(startPoint)
-        path.lineWidth = frame.height
         startPoint.x = startPoint.x + frame.width
         path.addLineToPoint(startPoint)
         progressLayer.path = path.CGPath
+        progressLayer.lineWidth = frame.height
+    }
+    
+    private func createProgressLayer(startColor: UIColor) {
+        createProgressLayerPath()
+        progressLayer.lineCap = kCALineCapRound
         progressLayer.strokeColor = startColor.CGColor
         progressLayer.fillColor = startColor.CGColor
         progressLayer.backgroundColor = UIColor.clearColor().CGColor
-        progressLayer.lineWidth = frame.height
-        layer.addSublayer(progressLayer)
+        layer.insertSublayer(progressLayer, atIndex: 0)
     }
     
     private func animateProgressLayer(percentage: Double) {

@@ -19,6 +19,11 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         let tb = UITableView()
         tb.translatesAutoresizingMaskIntoConstraints = false
         tb.allowsMultipleSelection = false
+        tb.tableFooterView = UIView(frame: CGRect.zero)
+        tb.separatorStyle = .None
+        tb.estimatedRowHeight = 150
+        tb.rowHeight = 150
+        tb.backgroundColor = UIColor.clearColor()
         return tb
     }()
     
@@ -26,6 +31,11 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         let sc = UISearchController(searchResultsController: nil)
         sc.dimsBackgroundDuringPresentation = false
         sc.searchBar.sizeToFit()
+        sc.searchBar.barStyle = .Black
+        sc.searchBar.searchBarStyle = .Minimal
+        sc.searchBar.tintColor = UIColor.grayColor()
+        sc.searchBar.backgroundColor = UIColor.clearColor()
+        sc.searchBar.placeholder = ""
         return sc
     }()
     
@@ -34,6 +44,15 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
             return searchController.searchBar
         }
     }
+    
+    var refreshControl: UIRefreshControl? = UIRefreshControl()
+    var activityIndicator: ActivityIndicator? = ActivityIndicator()
+    
+    private let gradientBackgroundLayer: CAGradientLayer = {
+        let gb = CAGradientLayer()
+        gb.colors = [topGradientBackgroundColor.CGColor, bottomGradientBackgroundColor.CGColor]
+        return gb
+    }()
     
     let db = DisposeBag()
     
@@ -47,6 +66,7 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
     
     override func viewWillLayoutSubviews() {
         tableView.frame = view.frame
+        gradientBackgroundLayer.frame = view.frame
     }
     
     override func updateViewConstraints() {
@@ -56,7 +76,9 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
     
     override func loadView() {
         super.loadView()
+        view.layer.insertSublayer(gradientBackgroundLayer, atIndex: 0)
         definesPresentationContext = true
+        addNavigationItems()
         bindSearchController()
         bindTableView()
         setConstraints()
@@ -82,42 +104,94 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
                 self?.configureCell(element, cell: cell)
             }
             .addDisposableTo(db)
-        
-        let refreshControl = UIRefreshControl()
-        refreshControl
-            .rx_controlEvent(.ValueChanged)
-            .subscribeNext { [unowned self] strings in
-                self.tableView.reloadData()
-                refreshControl.endRefreshing()
+        tableView
+            .rx_itemSelected
+            .subscribeNext { index in
+                DDLogInfo("Selected \(index)")
             }
             .addDisposableTo(db)
         
-        let activityIndicator = ActivityIndicator()
-        activityIndicator
-            .asObservable()
-            .bindTo(refreshControl.rx_refreshing)
-            .addDisposableTo(db)
-        
-        tableView.addSubview(refreshControl)
+        createRefreshControl()
+        tableView.backgroundView = UIView()
+        tableView.backgroundView?.backgroundColor = UIColor.clearColor()
         
         view.addSubview(tableView)
     }
     
     func bindSearchController() {
         searchController.searchResultsUpdater = self
+    
+        searchController
+            .rx_willPresent
+            .subscribeNext {
+                self.activityIndicator = nil
+                self.refreshControl?.removeFromSuperview()
+                self.refreshControl = nil
+            }
+            .addDisposableTo(db)
+        searchController
+            .rx_willDismiss
+            .subscribeNext {
+                self.createRefreshControl()
+            }
+            .addDisposableTo(db)
     }
     
     func configureCell(element: String, cell: RouteTableViewCell) {
         let random = Double(arc4random_uniform(100) + 1) / 100.0
-        var color = UIColor.greenColor()
+        var color = darkGreenColor
         if random >= 0.75 {
-            color = UIColor.redColor()
+            color = darkRedColor
         } else if random < 0.75 && random > 0.45 {
-            color = UIColor.yellowColor()
+            color = darkYellowColor
         }
-        cell.progressBarView.textLabel.font = UIFont(name: "OpenSans", size: 25)
+        cell.selectionStyle = .None
+        cell.backgroundColor = UIColor.clearColor()
+        cell.originNameLabel.text = element
+        cell.destinationNameLabel.text = element
+        cell.descriptionLabel.text = "via I-55s and Chapman Ave"
+        cell.distanceLabel.text = "47.3 mi"
+        cell.progressBarView.textLabel.font = UIFont(name: "OpenSans", size: 10)
         cell.progressBarView.textLabel.textColor = UIColor.whiteColor()
         cell.updateProgressBarView(random, color: color, text: "\(random)")
+    }
+    
+    private func createRefreshControl() {
+        refreshControl = UIRefreshControl()
+        refreshControl?.backgroundColor = UIColor.clearColor()
+        refreshControl?
+            .rx_controlEvent(.ValueChanged)
+            .subscribeNext { [unowned self] strings in
+                self.tableView.reloadData()
+                self.refreshControl?.endRefreshing()
+            }
+            .addDisposableTo(db)
+        
+        activityIndicator = ActivityIndicator()
+        activityIndicator?
+            .asObservable()
+            .bindTo(refreshControl!.rx_refreshing)
+            .addDisposableTo(db)
+        
+        tableView.addSubview(refreshControl!)
+    }
+    
+    private func addNavigationItems() {
+        let addBarBtn = UIBarButtonItem()
+        addBarBtn.image = UIImage(named: "add")
+        addBarBtn
+            .rx_tap
+            .subscribeNext { [weak self] in
+                let addLocationVC = AddLocationViewController()
+                addLocationVC.view.backgroundColor = addRouteViewBackgroundColor
+                addLocationVC.searchBar.placeholder = "Enter Starting Location"
+                let addNvc = UINavigationController(rootViewController: addLocationVC)
+                addNvc.navigationBar.tintColor = UIColor.whiteColor()
+                addNvc.navigationBar.barTintColor = bottomGradientBackgroundColor
+                self?.navigationController?.presentViewController(addNvc, animated: true, completion: nil)
+            }
+            .addDisposableTo(db)
+        navigationItem.rightBarButtonItem = addBarBtn
     }
     
     private func setConstraints() {

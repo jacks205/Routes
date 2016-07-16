@@ -27,6 +27,8 @@
 		EAF2B34C1D38FBDE00723238 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B3421D38FBDE00723238 /* OpenSans-Regular.ttf */; };
 		EAF2B34D1D38FBDE00723238 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B3431D38FBDE00723238 /* OpenSans-Semibold.ttf */; };
 		EAF2B34E1D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B3441D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf */; };
+		EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */; };
+		EAF2B3521D39B5F800723238 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +68,8 @@
 		EAF2B3421D38FBDE00723238 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		EAF2B3431D38FBDE00723238 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "Fonts/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		EAF2B3441D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "Fonts/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
 		EB88DE0F7A392BE6BB69B592 /* Pods-Routes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Routes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Routes/Pods-Routes.debug.xcconfig"; sourceTree = "<group>"; };
 		FEF99AF94876C1C6D4788C5B /* Pods_RoutesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoutesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -137,6 +141,8 @@
 				EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */,
 				EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */,
 				EA2E56E21D37246F00D2E4C7 /* Info.plist */,
+				EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */,
+				EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */,
 				EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */,
 				EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */,
 				EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */,
@@ -419,9 +425,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				EA2E56D71D37246F00D2E4C7 /* AppDelegate.swift in Sources */,
+				EAF2B3521D39B5F800723238 /* LocationTableViewCell.swift in Sources */,
 				EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */,
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
 				EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */,
+				EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */,
 				EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
