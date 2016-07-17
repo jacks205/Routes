@@ -18,6 +18,9 @@
 		EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */; };
 		EAB165241D3B3CEC0069A6EA /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAB165221D3B3CEC0069A6EA /* Montserrat-Bold.ttf */; };
 		EAB165251D3B3CEC0069A6EA /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAB165231D3B3CEC0069A6EA /* Montserrat-Regular.ttf */; };
+		EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165281D3B475D0069A6EA /* SelectRouteCollectionViewController.swift */; };
+		EABBC1131D3C1FCE0005D78B /* AddRouteBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */; };
+		EABBC1151D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */; };
 		EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */; };
 		EAF2B3451D38FBDE00723238 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */; };
 		EAF2B3461D38FBDE00723238 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */; };
@@ -64,6 +67,9 @@
 		EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		EAB165221D3B3CEC0069A6EA /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		EAB165231D3B3CEC0069A6EA /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Fonts/Montserrat/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
+		EAB165281D3B475D0069A6EA /* SelectRouteCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRouteCollectionViewController.swift; sourceTree = "<group>"; };
+		EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRouteBaseViewController.swift; sourceTree = "<group>"; };
+		EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteSummaryCollectionViewCell.swift; sourceTree = "<group>"; };
 		EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Fonts/OpenSans/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -147,17 +153,12 @@
 		EA2E56D51D37246F00D2E4C7 /* Routes */ = {
 			isa = PBXGroup;
 			children = (
+				EAB165271D3B45E80069A6EA /* Home */,
+				EAB165261D3B45D20069A6EA /* AddRoute */,
 				EA2E56D61D37246F00D2E4C7 /* AppDelegate.swift */,
 				EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */,
 				EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */,
 				EA2E56E21D37246F00D2E4C7 /* Info.plist */,
-				EAF2B3531D3B240800723238 /* AddStartingLocationViewController.swift */,
-				EAF2B3551D3B241B00723238 /* AddDestinationLocationViewController.swift */,
-				EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */,
-				EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */,
-				EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */,
-				EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */,
-				EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */,
 				EAF2B3571D3B364200723238 /* Helpers */,
 				EAA180AD1D38F21C002B22B1 /* RxSwift+Helpers */,
 				EAF2B3261D38FBAB00723238 /* Fonts */,
@@ -180,6 +181,30 @@
 				EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */,
 			);
 			name = "RxSwift+Helpers";
+			sourceTree = "<group>";
+		};
+		EAB165261D3B45D20069A6EA /* AddRoute */ = {
+			isa = PBXGroup;
+			children = (
+				EAB165281D3B475D0069A6EA /* SelectRouteCollectionViewController.swift */,
+				EAF2B3531D3B240800723238 /* AddStartingLocationViewController.swift */,
+				EAF2B3551D3B241B00723238 /* AddDestinationLocationViewController.swift */,
+				EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */,
+				EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */,
+				EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */,
+				EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */,
+			);
+			name = AddRoute;
+			sourceTree = "<group>";
+		};
+		EAB165271D3B45E80069A6EA /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */,
+				EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */,
+				EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */,
+			);
+			name = Home;
 			sourceTree = "<group>";
 		};
 		EAF2B3261D38FBAB00723238 /* Fonts */ = {
@@ -450,14 +475,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF2B3561D3B241B00723238 /* AddDestinationLocationViewController.swift in Sources */,
+				EABBC1151D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift in Sources */,
 				EA2E56D71D37246F00D2E4C7 /* AppDelegate.swift in Sources */,
 				EAF2B3521D39B5F800723238 /* LocationTableViewCell.swift in Sources */,
+				EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */,
 				EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */,
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
 				EAF2B3591D3B365F00723238 /* Extensions.swift in Sources */,
 				EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */,
 				EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */,
 				EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */,
+				EABBC1131D3C1FCE0005D78B /* AddRouteBaseViewController.swift in Sources */,
 				EAF2B3541D3B240800723238 /* AddStartingLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

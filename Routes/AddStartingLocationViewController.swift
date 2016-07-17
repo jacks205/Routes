@@ -26,5 +26,9 @@ class AddStartingLocationViewController: AddLocationViewController {
             }
             .addDisposableTo(db)
     }
+    
+    override func bindBackBtn() {
+        
+    }
 
 }

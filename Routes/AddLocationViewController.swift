@@ -11,7 +11,7 @@ import CocoaLumberjack
 import RxSwift
 import RxCocoa
 
-class AddLocationViewController: UIViewController, UITableViewDelegate {
+class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate {
     
     let locations = Variable<[String]>(["California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona"])
     
@@ -42,29 +42,28 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
     let nextBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("Next", forState: .Normal)
+        btn.setTitle("NEXT", forState: .Normal)
         btn.setTitleColor(locationAddressTextColor, forState: .Normal)
         btn.setTitleColor(locationAddressTextColor, forState: .Highlighted)
-        btn.titleLabel?.font = UIFont(name: "OpenSans", size: 14)
+        btn.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 14)
         btn.backgroundColor = bottomGradientBackgroundColor
         return btn
     }()
     
     let locationSelected: Variable<Bool> = Variable<Bool>(false)
     
-    let db = DisposeBag()
-    
     override func loadView() {
         super.loadView()
         bindTableView()
         bindNextBtn()
         bindSearchBar()
-        bindCloseBtn()
         setConstraints()
     }
     
     override func viewDidAppear(animated: Bool) {
-        searchBar.becomeFirstResponder()
+        #if RELEASE
+            searchBar.becomeFirstResponder()
+        #endif
         super.viewDidAppear(animated)
     }
 
@@ -153,19 +152,6 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
             }
             .addDisposableTo(db)
         view.addSubview(nextBtn)
-    }
-    
-    func bindCloseBtn() {
-        let closeBtn = UIBarButtonItem()
-        closeBtn.image = UIImage(named: "cancel")
-        closeBtn.tintColor = UIColor.whiteColor()
-        closeBtn
-            .rx_tap
-            .subscribeNext { [weak self] in
-                self?.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-            }
-            .addDisposableTo(db)
-        navigationItem.rightBarButtonItem = closeBtn
     }
     
     private func setConstraints() {

@@ -188,6 +188,7 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
                 let addNvc = UINavigationController(rootViewController: addLocationVC)
                 addNvc.navigationBar.tintColor = UIColor.whiteColor()
                 addNvc.navigationBar.barTintColor = bottomGradientBackgroundColor
+                addNvc.interactivePopGestureRecognizer?.enabled = false
                 self?.navigationController?.presentViewController(addNvc, animated: true, completion: nil)
             }
             .addDisposableTo(db)

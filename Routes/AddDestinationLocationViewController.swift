@@ -13,33 +13,18 @@ import RxCocoa
 
 class AddDestinationLocationViewController: AddLocationViewController {
     
-    override func loadView() {
-        super.loadView()
-        bindBackBtn()
-    }
-    
     override func bindNextBtn() {
         super.bindNextBtn()
         nextBtn
             .rx_tap
             .subscribeNext {
                 let selectedValue = self.tableView.indexPathForSelectedRow
-                DDLogInfo("Destination!")
+                let selectRouteCVC = SelectRouteCollectionViewController()
+                selectRouteCVC.view.backgroundColor = self.view.backgroundColor
+                selectRouteCVC.title = "CHOOSE ROUTE"
+                self.navigationController?.pushViewController(selectRouteCVC, animated: true)
             }
             .addDisposableTo(db)
     }
     
-    func bindBackBtn() {
-        let backBtn = UIBarButtonItem()
-        backBtn.image = UIImage(named: "back")
-        backBtn.tintColor = UIColor.whiteColor()
-        backBtn
-            .rx_tap
-            .subscribeNext { [weak self] in
-                self?.navigationController?.popViewControllerAnimated(true)
-            }
-            .addDisposableTo(db)
-        navigationItem.leftBarButtonItem = backBtn
-    }
-
 }
