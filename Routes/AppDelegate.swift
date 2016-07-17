@@ -15,7 +15,9 @@ let topGradientBackgroundColor = UIColor.blackColor()
 let bottomGradientBackgroundColor = UIColor(red: 0.28, green: 0.34, blue: 0.38, alpha: 1)
 let progressBarViewBackgroundColor = UIColor(red:0.20, green:0.26, blue:0.28, alpha:1)
 
-let addRouteViewBackgroundColor = UIColor(red:0.18, green:0.22, blue:0.25, alpha:1.00)
+let addLocationViewBackgroundColor = UIColor(red:0.18, green:0.22, blue:0.25, alpha:1.00)
+let locationCellSelectedBackgroundColor = UIColor(red:0.31, green:0.57, blue:0.88, alpha:0.8)
+let locationAddressTextColor = UIColor(red:0.59, green:0.61, blue:0.62, alpha:1.00)
 
 let lightGreenColor = UIColor(red:0.54, green:0.76, blue:0.37, alpha:1.00)
 let darkGreenColor = UIColor(red:0.38, green:0.69, blue:0.22, alpha:1.00)
@@ -39,19 +41,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navBar.tintColor = UIColor.grayColor()
         navBar.barTintColor = UIColor.clearColor()
         navBar.titleTextAttributes = [
-            NSFontAttributeName : UIFont(name: "OpenSans", size: 16)!,
+            NSFontAttributeName : UIFont(name: "Montserrat-Regular", size: 16)!,
             NSForegroundColorAttributeName : UIColor.whiteColor()
         ]
         
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).tintColor = UIColor.grayColor()
         UITextField.appearanceWhenContainedInInstancesOfClasses([UISearchBar.self]).defaultTextAttributes = [
-            NSFontAttributeName : UIFont(name: "OpenSans", size: 12)!,
+            NSFontAttributeName : UIFont(name: "OpenSans", size: 13)!,
             NSForegroundColorAttributeName : UIColor.whiteColor()
         ]
         
         let vc = RoutesTableViewController()
         let nvc = UINavigationController(rootViewController: vc)
-        vc.title = "My Routes"
+        vc.title = "ROUTES"
         window?.rootViewController = nvc
         window?.makeKeyAndVisible()
         

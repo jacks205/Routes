@@ -29,7 +29,7 @@ class LocationTableViewCell: UITableViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 2
         lb.font = UIFont(name: "OpenSans-Light", size: 12)
-        lb.textColor = UIColor.lightGrayColor()
+        lb.textColor = locationAddressTextColor
         return lb
     }()
     
@@ -59,6 +59,15 @@ class LocationTableViewCell: UITableViewCell {
         
         addressLabel.leadingAnchor.constraintEqualToAnchor(pinImageView.trailingAnchor, constant: 16).active = true
         addressLabel.topAnchor.constraintEqualToAnchor(locationNameLabel.bottomAnchor, constant: 0).active = true
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        if selected {
+            addressLabel.textColor = UIColor.whiteColor()
+        } else {
+            addressLabel.textColor = locationAddressTextColor
+        }
+        super.setSelected(selected, animated: animated)
     }
 
 }

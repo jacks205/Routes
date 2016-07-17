@@ -182,8 +182,8 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         addBarBtn
             .rx_tap
             .subscribeNext { [weak self] in
-                let addLocationVC = AddLocationViewController()
-                addLocationVC.view.backgroundColor = addRouteViewBackgroundColor
+                let addLocationVC = AddStartingLocationViewController()
+                addLocationVC.view.backgroundColor = addLocationViewBackgroundColor
                 addLocationVC.searchBar.placeholder = "Enter Starting Location"
                 let addNvc = UINavigationController(rootViewController: addLocationVC)
                 addNvc.navigationBar.tintColor = UIColor.whiteColor()

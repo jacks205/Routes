@@ -25,6 +25,7 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
         tb.estimatedRowHeight = 70
         tb.rowHeight = 70
         tb.backgroundColor = UIColor.clearColor()
+        tb.keyboardDismissMode = .OnDrag
         return tb
     }()
     
@@ -34,6 +35,7 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
         sb.searchBarStyle = .Minimal
         sb.barStyle = .Default
         sb.tintColor = UIColor.whiteColor()
+        sb.keyboardAppearance = .Dark
         return sb
     }()
     
@@ -41,11 +43,14 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.setTitle("Next", forState: .Normal)
-        btn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        btn.setTitleColor(locationAddressTextColor, forState: .Normal)
+        btn.setTitleColor(locationAddressTextColor, forState: .Highlighted)
         btn.titleLabel?.font = UIFont(name: "OpenSans", size: 14)
         btn.backgroundColor = bottomGradientBackgroundColor
         return btn
     }()
+    
+    let locationSelected: Variable<Bool> = Variable<Bool>(false)
     
     let db = DisposeBag()
     
@@ -56,6 +61,11 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
         bindSearchBar()
         bindCloseBtn()
         setConstraints()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        searchBar.becomeFirstResponder()
+        super.viewDidAppear(animated)
     }
 
     override func updateViewConstraints() {
@@ -69,6 +79,19 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
     
     func bindSearchBar() {
         navigationItem.titleView = searchBar
+        searchBar
+            .rx_searchButtonClicked
+            .subscribeNext {
+                self.searchBar.resignFirstResponder()
+            }
+            .addDisposableTo(db)
+        
+        searchBar
+            .rx_cancelButtonClicked
+            .subscribeNext {
+                self.searchBar.resignFirstResponder()
+            }
+            .addDisposableTo(db)
     }
     
     func bindTableView() {
@@ -85,7 +108,14 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
         tableView
             .rx_itemSelected
             .subscribeNext { index in
-                DDLogInfo("Selected \(index)")
+                self.locationSelected.value = true
+            }
+            .addDisposableTo(db)
+        
+        tableView
+            .rx_itemDeselected
+            .subscribeNext { index in
+                self.locationSelected.value = false
             }
             .addDisposableTo(db)
         
@@ -96,23 +126,36 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
     }
     
     func configureCell(element: String, cell: LocationTableViewCell) {
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = locationCellSelectedBackgroundColor
+        cell.selectedBackgroundView = backgroundView
         cell.locationNameLabel.text = element
         cell.addressLabel.text = "3063 Chapman Ave\nOrange, CA 92868"
         cell.backgroundColor = UIColor.clearColor()
         cell.layoutMargins = UIEdgeInsetsZero
     }
     
-    private func bindNextBtn() {
-        nextBtn
-            .rx_tap
-            .subscribeNext {
-                
+    func bindNextBtn() {
+        locationSelected
+            .asObservable()
+            .bindTo(nextBtn.rx_enabled)
+            .addDisposableTo(db)
+        locationSelected
+            .asObservable()
+            .subscribeNext { selected in
+                if selected {
+                    self.nextBtn.backgroundColor = lightGreenColor
+                    self.nextBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                } else {
+                    self.nextBtn.backgroundColor = bottomGradientBackgroundColor
+                    self.nextBtn.setTitleColor(locationAddressTextColor, forState: .Normal)
+                }
             }
             .addDisposableTo(db)
         view.addSubview(nextBtn)
     }
     
-    private func bindCloseBtn() {
+    func bindCloseBtn() {
         let closeBtn = UIBarButtonItem()
         closeBtn.image = UIImage(named: "cancel")
         closeBtn.tintColor = UIColor.whiteColor()
@@ -138,13 +181,8 @@ class AddLocationViewController: UIViewController, UITableViewDelegate {
         nextBtn.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
         
     }
+    
+    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
+        return .None
+    }
 }
-
-//struct SingleSelectionViewModel {
-//    var cellIsSelectedObservable: Observable<Bool>
-//    
-//    init(tableViewSelected: Observable<NSIndexPath>, tableViewDeselected: Observable<NSIndexPath>) {
-//        
-//        
-//    }
-//}

@@ -16,6 +16,8 @@
 		EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */; };
 		EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */; };
 		EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */; };
+		EAB165241D3B3CEC0069A6EA /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAB165221D3B3CEC0069A6EA /* Montserrat-Bold.ttf */; };
+		EAB165251D3B3CEC0069A6EA /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAB165231D3B3CEC0069A6EA /* Montserrat-Regular.ttf */; };
 		EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */; };
 		EAF2B3451D38FBDE00723238 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */; };
 		EAF2B3461D38FBDE00723238 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */; };
@@ -29,6 +31,9 @@
 		EAF2B34E1D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B3441D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf */; };
 		EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */; };
 		EAF2B3521D39B5F800723238 /* LocationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */; };
+		EAF2B3541D3B240800723238 /* AddStartingLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2B3531D3B240800723238 /* AddStartingLocationViewController.swift */; };
+		EAF2B3561D3B241B00723238 /* AddDestinationLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2B3551D3B241B00723238 /* AddDestinationLocationViewController.swift */; };
+		EAF2B3591D3B365F00723238 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAF2B3581D3B365F00723238 /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,19 +62,24 @@
 		EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
 		EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteProgressBarView.swift; sourceTree = "<group>"; };
 		EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		EAB165221D3B3CEC0069A6EA /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
+		EAB165231D3B3CEC0069A6EA /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Fonts/Montserrat/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
-		EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Fonts/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
-		EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Fonts/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
-		EAF2B33D1D38FBDE00723238 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBold.ttf"; path = "Fonts/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
-		EAF2B33E1D38FBDE00723238 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBoldItalic.ttf"; path = "Fonts/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
-		EAF2B33F1D38FBDE00723238 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Italic.ttf"; path = "Fonts/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
-		EAF2B3401D38FBDE00723238 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Light.ttf"; path = "Fonts/OpenSans-Light.ttf"; sourceTree = "<group>"; };
-		EAF2B3411D38FBDE00723238 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "Fonts/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
-		EAF2B3421D38FBDE00723238 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
-		EAF2B3431D38FBDE00723238 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "Fonts/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
-		EAF2B3441D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "Fonts/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Fonts/OpenSans/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		EAF2B33D1D38FBDE00723238 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBold.ttf"; path = "Fonts/OpenSans/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		EAF2B33E1D38FBDE00723238 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBoldItalic.ttf"; path = "Fonts/OpenSans/OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		EAF2B33F1D38FBDE00723238 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Italic.ttf"; path = "Fonts/OpenSans/OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		EAF2B3401D38FBDE00723238 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Light.ttf"; path = "Fonts/OpenSans/OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		EAF2B3411D38FBDE00723238 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-LightItalic.ttf"; path = "Fonts/OpenSans/OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		EAF2B3421D38FBDE00723238 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Fonts/OpenSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		EAF2B3431D38FBDE00723238 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "Fonts/OpenSans/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		EAF2B3441D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "Fonts/OpenSans/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
 		EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
 		EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
+		EAF2B3531D3B240800723238 /* AddStartingLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStartingLocationViewController.swift; sourceTree = "<group>"; };
+		EAF2B3551D3B241B00723238 /* AddDestinationLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDestinationLocationViewController.swift; sourceTree = "<group>"; };
+		EAF2B3581D3B365F00723238 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Extensions/Extensions.swift; sourceTree = "<group>"; };
 		EB88DE0F7A392BE6BB69B592 /* Pods-Routes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Routes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Routes/Pods-Routes.debug.xcconfig"; sourceTree = "<group>"; };
 		FEF99AF94876C1C6D4788C5B /* Pods_RoutesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoutesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -141,11 +151,14 @@
 				EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */,
 				EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */,
 				EA2E56E21D37246F00D2E4C7 /* Info.plist */,
+				EAF2B3531D3B240800723238 /* AddStartingLocationViewController.swift */,
+				EAF2B3551D3B241B00723238 /* AddDestinationLocationViewController.swift */,
 				EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */,
 				EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */,
 				EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */,
 				EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */,
 				EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */,
+				EAF2B3571D3B364200723238 /* Helpers */,
 				EAA180AD1D38F21C002B22B1 /* RxSwift+Helpers */,
 				EAF2B3261D38FBAB00723238 /* Fonts */,
 			);
@@ -172,6 +185,8 @@
 		EAF2B3261D38FBAB00723238 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				EAB165221D3B3CEC0069A6EA /* Montserrat-Bold.ttf */,
+				EAB165231D3B3CEC0069A6EA /* Montserrat-Regular.ttf */,
 				EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */,
 				EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */,
 				EAF2B33D1D38FBDE00723238 /* OpenSans-ExtraBold.ttf */,
@@ -184,6 +199,14 @@
 				EAF2B3441D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf */,
 			);
 			name = Fonts;
+			sourceTree = "<group>";
+		};
+		EAF2B3571D3B364200723238 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				EAF2B3581D3B365F00723238 /* Extensions.swift */,
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,8 +301,10 @@
 			files = (
 				EAF2B34C1D38FBDE00723238 /* OpenSans-Regular.ttf in Resources */,
 				EAF2B34D1D38FBDE00723238 /* OpenSans-Semibold.ttf in Resources */,
+				EAB165251D3B3CEC0069A6EA /* Montserrat-Regular.ttf in Resources */,
 				EA2E56E11D37246F00D2E4C7 /* LaunchScreen.storyboard in Resources */,
 				EAF2B3481D38FBDE00723238 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				EAB165241D3B3CEC0069A6EA /* Montserrat-Bold.ttf in Resources */,
 				EAF2B34E1D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				EAF2B34A1D38FBDE00723238 /* OpenSans-Light.ttf in Resources */,
 				EA2E56DE1D37246F00D2E4C7 /* Assets.xcassets in Resources */,
@@ -424,13 +449,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EAF2B3561D3B241B00723238 /* AddDestinationLocationViewController.swift in Sources */,
 				EA2E56D71D37246F00D2E4C7 /* AppDelegate.swift in Sources */,
 				EAF2B3521D39B5F800723238 /* LocationTableViewCell.swift in Sources */,
 				EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */,
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
+				EAF2B3591D3B365F00723238 /* Extensions.swift in Sources */,
 				EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */,
 				EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */,
 				EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */,
+				EAF2B3541D3B240800723238 /* AddStartingLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
