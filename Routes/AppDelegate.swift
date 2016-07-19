@@ -10,6 +10,7 @@ import UIKit
 import Fabric
 import Crashlytics
 import CocoaLumberjack
+import GoogleMaps
 
 let topGradientBackgroundColor = UIColor.blackColor()
 let bottomGradientBackgroundColor = UIColor(red: 0.28, green: 0.34, blue: 0.38, alpha: 1)
@@ -31,9 +32,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow? = UIWindow(frame: UIScreen.mainScreen().bounds)
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
+        setupLibraries()
+        setupAppearances()
+   
+        let rootVC = getRootViewController()
+        window?.rootViewController = rootVC
+        window?.makeKeyAndVisible()
+        
+        return true
+    }
+    
+    func getRootViewController() -> UIViewController {
+        let vc = RoutesTableViewController()
+        let nvc = UINavigationController(rootViewController: vc)
+        vc.title = "ROUTES"
+        return nvc
+    }
+    
+    private func setupLibraries() {
+        func setupLogger() {
+            DDLog.addLogger(DDTTYLogger.sharedInstance()) // TTY = Xcode console
+            DDLog.addLogger(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
+            
+            let fileLogger: DDFileLogger = DDFileLogger() // File Logger
+            fileLogger.rollingFrequency = 60*60*24  // 24 hours
+            fileLogger.logFileManager.maximumNumberOfLogFiles = 7
+            DDLog.addLogger(fileLogger)
+        }
         setupLogger()
         Fabric.with([Crashlytics.self, Answers.self])
-        
+        if let plistPath = NSBundle.mainBundle().pathForResource("Configuration", ofType: "plist"),
+            let config = NSDictionary(contentsOfFile: plistPath) {
+            if let GoogleAPIKey = config["GMSServices"]?["APIKey"] as? String {
+                GMSServices.provideAPIKey(GoogleAPIKey)
+            } else {
+                fatalError("Need to include valid GoogleAPIKey")
+            }
+            if let GoogleAPIKey = config["GoogleDirectionsAPI"]?["APIKey"] as? String {
+                GoogleDirectionsAPIKey = GoogleAPIKey
+            } else {
+                fatalError("Need to include valid GoogleAPIKey")
+            }
+        }
+    }
+    
+    func setupAppearances() {
         let navBar = UINavigationBar.appearance()
         navBar.translucent = false
         navBar.setBackgroundImage(UIImage(), forBarMetrics: .Default)
@@ -50,24 +93,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             NSFontAttributeName : UIFont(name: "OpenSans", size: 13)!,
             NSForegroundColorAttributeName : UIColor.whiteColor()
         ]
-        
-        let vc = RoutesTableViewController()
-        let nvc = UINavigationController(rootViewController: vc)
-        vc.title = "ROUTES"
-        window?.rootViewController = nvc
-        window?.makeKeyAndVisible()
-        
-        return true
-    }
-    
-    private func setupLogger() {
-        DDLog.addLogger(DDTTYLogger.sharedInstance()) // TTY = Xcode console
-        DDLog.addLogger(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
-        
-        let fileLogger: DDFileLogger = DDFileLogger() // File Logger
-        fileLogger.rollingFrequency = 60*60*24  // 24 hours
-        fileLogger.logFileManager.maximumNumberOfLogFiles = 7
-        DDLog.addLogger(fileLogger)
     }
 
     func applicationWillResignActive(application: UIApplication) {

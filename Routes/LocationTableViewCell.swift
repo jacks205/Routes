@@ -10,15 +10,8 @@ import UIKit
 
 class LocationTableViewCell: UITableViewCell {
     
-    override var selected: Bool {
-        didSet {
-            if selected {
-                addressLabel.textColor = UIColor.whiteColor()
-            } else {
-                addressLabel.textColor = locationAddressTextColor
-            }
-        }
-    }
+    let regularFont = UIFont(name: "OpenSans-Light", size: 14)!
+    let boldFont = UIFont(name: "OpenSans-Semibold", size: 14)!
 
     let pinImageView: UIImageView = {
         let piv = UIImageView(image: UIImage(named: "pin"))
@@ -29,7 +22,6 @@ class LocationTableViewCell: UITableViewCell {
     let locationNameLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.font = UIFont(name: "OpenSans-Semibold", size: 14)
         lb.textColor = UIColor.whiteColor()
         return lb
     }()
@@ -55,20 +47,25 @@ class LocationTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func updateConstraints() {
-        setConstraints()
-        super.updateConstraints()
-    }
-    
     func setConstraints() {
         pinImageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: 16).active = true
         pinImageView.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
         
         locationNameLabel.leadingAnchor.constraintEqualToAnchor(pinImageView.trailingAnchor, constant: 16).active = true
-        locationNameLabel.topAnchor.constraintEqualToAnchor(topAnchor, constant: 8).active = true
+        locationNameLabel.topAnchor.constraintEqualToAnchor(topAnchor, constant: 10).active = true
         
         addressLabel.leadingAnchor.constraintEqualToAnchor(pinImageView.trailingAnchor, constant: 16).active = true
         addressLabel.topAnchor.constraintEqualToAnchor(locationNameLabel.bottomAnchor, constant: 0).active = true
+        addressLabel.trailingAnchor.constraintLessThanOrEqualToAnchor(trailingAnchor, constant: -16).active = true
+    }
+    
+    override func setSelected(selected: Bool, animated: Bool) {
+        if selected {
+            addressLabel.textColor = UIColor.whiteColor()
+        } else {
+            addressLabel.textColor = locationAddressTextColor
+        }
+        super.setSelected(selected, animated: animated)
     }
 
 }

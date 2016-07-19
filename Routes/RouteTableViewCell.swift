@@ -73,11 +73,6 @@ class RouteTableViewCell: UITableViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func updateConstraints() {
-        setConstraints()
-        super.updateConstraints()
-    }
-    
     override func layoutSubviews() {
         progressBarView.layoutIfNeeded()
         createLineLayer()

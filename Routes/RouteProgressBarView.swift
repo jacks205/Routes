@@ -41,11 +41,6 @@ class RouteProgressBarView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func updateConstraints() {
-        setConstraints()
-        super.updateConstraints()
-    }
-    
     override func layoutSubviews() {
         createProgressLayerPath()
     }

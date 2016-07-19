@@ -84,14 +84,6 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         setConstraints()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
     func bindTableView() {
         tableView.tableHeaderView = searchBar
         tableView.registerClass(RouteTableViewCell.self, forCellReuseIdentifier: "RouteCell")

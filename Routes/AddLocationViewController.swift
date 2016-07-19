@@ -10,10 +10,11 @@ import UIKit
 import CocoaLumberjack
 import RxSwift
 import RxCocoa
+import GoogleMaps
 
 class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate {
     
-    let locations = Variable<[String]>(["California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona", "California", "Arizona"])
+    let locations: Variable<[RoutesLocation]> = Variable<[RoutesLocation]>([])
     
     let tableView: UITableView = {
         let tb = UITableView()
@@ -22,9 +23,9 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
         tb.tableFooterView = UIView(frame: CGRect.zero)
         tb.separatorInset = UIEdgeInsetsZero
         tb.layoutMargins = UIEdgeInsetsZero
-        tb.estimatedRowHeight = 70
-        tb.rowHeight = 70
-        tb.backgroundColor = UIColor.clearColor()
+        tb.estimatedRowHeight = 72
+        tb.rowHeight = 72
+        tb.backgroundColor = addLocationViewBackgroundColor
         tb.keyboardDismissMode = .OnDrag
         return tb
     }()
@@ -39,23 +40,11 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
         return sb
     }()
     
-    let nextBtn: UIButton = {
-        let btn = UIButton()
-        btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("NEXT", forState: .Normal)
-        btn.setTitleColor(locationAddressTextColor, forState: .Normal)
-        btn.setTitleColor(locationAddressTextColor, forState: .Highlighted)
-        btn.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 14)
-        btn.backgroundColor = bottomGradientBackgroundColor
-        return btn
-    }()
-    
     let locationSelected: Variable<Bool> = Variable<Bool>(false)
     
     override func loadView() {
         super.loadView()
         bindTableView()
-        bindNextBtn()
         bindSearchBar()
         setConstraints()
     }
@@ -70,10 +59,6 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
     override func updateViewConstraints() {
         setConstraints()
         super.updateViewConstraints()
-    }
-    
-    override func viewDidLayoutSubviews() {
-        tableView.contentInset.bottom = nextBtn.frame.height + 10
     }
     
     func bindSearchBar() {
@@ -91,6 +76,26 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
                 self.searchBar.resignFirstResponder()
             }
             .addDisposableTo(db)
+        
+        #if DEBUG
+            let throttle = 0.7
+        #else
+            let throttle = 0.25
+        #endif
+        
+        searchBar
+            .rx_text
+            .asDriver()
+            .throttle(throttle)
+            .distinctUntilChanged()
+            .flatMap { query in
+                GMSPlacesClient.sharedClient()
+                    .rx_autocompleteQuery(query, bounds: routesLocationManager.rx_bounds.value, filter: nil)
+                    .asDriver(onErrorJustReturn: [])
+            }
+            .map { $0.map(RoutesLocation.init) }
+            .drive(locations)
+            .addDisposableTo(db)
     }
     
     func bindTableView() {
@@ -104,68 +109,27 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
                 self?.configureCell(element, cell: cell)
             }
             .addDisposableTo(db)
-        tableView
-            .rx_itemSelected
-            .subscribeNext { index in
-                self.locationSelected.value = true
-            }
-            .addDisposableTo(db)
-        
-        tableView
-            .rx_itemDeselected
-            .subscribeNext { index in
-                self.locationSelected.value = false
-            }
-            .addDisposableTo(db)
-        
+
         tableView.backgroundView = UIView()
-        tableView.backgroundView?.backgroundColor = UIColor.clearColor()
-        
+        tableView.backgroundView?.backgroundColor = addLocationViewBackgroundColor
         view.addSubview(tableView)
     }
     
-    func configureCell(element: String, cell: LocationTableViewCell) {
+    func configureCell(element: RoutesLocation, cell: LocationTableViewCell) {
         let backgroundView = UIView()
         backgroundView.backgroundColor = locationCellSelectedBackgroundColor
         cell.selectedBackgroundView = backgroundView
-        cell.locationNameLabel.text = element
-        cell.addressLabel.text = "3063 Chapman Ave\nOrange, CA 92868"
+        cell.locationNameLabel.attributedText = element.boldNameText(cell.boldFont, regularFont: cell.regularFont)
+        cell.addressLabel.text = element.address
         cell.backgroundColor = UIColor.clearColor()
         cell.layoutMargins = UIEdgeInsetsZero
     }
-    
-    func bindNextBtn() {
-        locationSelected
-            .asObservable()
-            .bindTo(nextBtn.rx_enabled)
-            .addDisposableTo(db)
-        locationSelected
-            .asObservable()
-            .subscribeNext { selected in
-                if selected {
-                    self.nextBtn.backgroundColor = lightGreenColor
-                    self.nextBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-                } else {
-                    self.nextBtn.backgroundColor = bottomGradientBackgroundColor
-                    self.nextBtn.setTitleColor(locationAddressTextColor, forState: .Normal)
-                }
-            }
-            .addDisposableTo(db)
-        view.addSubview(nextBtn)
-    }
-    
+
     private func setConstraints() {
         tableView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
         tableView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
         tableView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
         tableView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
-        
-        nextBtn.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
-        nextBtn.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
-        nextBtn.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
-        nextBtn.heightAnchor.constraintEqualToConstant(44).active = true
-        nextBtn.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
-        
     }
     
     func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {

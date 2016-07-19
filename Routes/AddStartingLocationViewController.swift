@@ -13,18 +13,20 @@ import RxCocoa
 
 class AddStartingLocationViewController: AddLocationViewController {
     
-    override func bindNextBtn() {
-        super.bindNextBtn()
-        nextBtn
-            .rx_tap
-            .subscribeNext {
-                let selectedValue = self.tableView.indexPathForSelectedRow
+    override func bindTableView() {
+        super.bindTableView()
+        tableView
+            .rx_itemSelected
+            .subscribeNext { index in
+                let location = self.locations.value[index.row]
                 let addLocationVC = AddDestinationLocationViewController()
+                addLocationVC.originLocation = location
                 addLocationVC.view.backgroundColor = addLocationViewBackgroundColor
                 addLocationVC.searchBar.placeholder = "Enter Destination"
                 self.navigationController?.pushViewController(addLocationVC, animated: true)
             }
             .addDisposableTo(db)
+        
     }
     
     override func bindBackBtn() {

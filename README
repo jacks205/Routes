@@ -1,0 +1,12 @@
+TODO:
+- Google attributions
+- Set production keys
+- Geocoding
+- Autocomplete
+- Mapbox
+- Directions
+- Locally saving data
+- When refreshing data, using the "summary" property to find saved route, else use fastest and tell the user that its a different route
+
+
+https://developers.google.com/maps/pricing-and-plans/

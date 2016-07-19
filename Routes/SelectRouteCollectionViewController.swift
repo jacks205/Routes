@@ -15,13 +15,22 @@ private let reuseIdentifier = "RouteCollectionCell"
 
 class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    let routes = Variable<[String]>(["California", "Arizona", "Texas"])
+    let routes = Variable<[Route]>([])
+    
+    var originLocation: RoutesLocation?
+    var destinationLocation: RoutesLocation?
+    
+    var directionsResponse: DirectionsResponse? {
+        didSet {
+            routes.value = directionsResponse!.routes
+        }
+    }
     
     let collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: CenterCellCollectionViewFlowLayout())
         cv.registerClass(RouteSummaryCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = UIColor.clearColor()
+        cv.backgroundColor = addLocationViewBackgroundColor
         cv.showsHorizontalScrollIndicator = false
         cv.decelerationRate = UIScrollViewDecelerationRateFast
         return cv
@@ -118,21 +127,26 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
             .addDisposableTo(db)
     }
     
-    func configureCell(row: Int, element: String, cell: RouteSummaryCollectionViewCell) {
+    func configureCell(row: Int, element: Route, cell: RouteSummaryCollectionViewCell) {
         cell.backgroundColor = progressBarViewBackgroundColor
         cell.layer.cornerRadius = 12
-        cell.startingLocationLabel.text = "Essex Apartments\n3063 Chapman Ave\nApt 3107\nOrange, CA 92868"
-        cell.destinationLocationLabel.text = "Essex Apartments\n3063 Chapman Ave\nApt 3107\nOrange, CA 92868"
-        cell.distanceValueLabel.text = "8 mi"
-        cell.timeValueLabel.text = "38 mins"
-        switch row {
-        case 0:
+        guard let leg = element.legs.first else {
+            return
+        }
+        cell.originLabel.text = originLocation?.name
+        cell.destinationLabel.text = destinationLocation?.name
+        cell.distanceValueLabel.text = leg.distance.text
+        cell.timeValueLabel.text = leg.duration.text
+        cell.viaValueLabel.text = element.summary
+        cell.layoutIfNeeded()
+        
+        let duration = Double(leg.duration.value) / Double(leg.traffic.value)
+        if duration > 0.80 {
             cell.timeValueLabel.textColor = darkGreenColor
-        case 1:
+        } else if duration > 0.60 {
             cell.timeValueLabel.textColor = darkYellowColor
-        case 2:
+        } else {
             cell.timeValueLabel.textColor = darkRedColor
-        default: break
         }
     }
     
@@ -140,10 +154,8 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
         view.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
         view.addConstraintsWithFormat("V:|[v0][v1(44)]-|", views: collectionView, confirmBtn)
         
-//        nextBtn.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
         confirmBtn.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
         confirmBtn.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
-//        nextBtn.heightAnchor.constraintEqualToConstant(44).active = true
         confirmBtn.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
     }
     

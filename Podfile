@@ -13,6 +13,8 @@ target 'Routes' do
   pod 'RxCocoa', '2.6.0'
   pod 'Moya/RxSwift', '6.5.0'
   pod 'Moya-ObjectMapper/RxSwift', '1.3'
+  pod 'GoogleMaps', '1.13.2'
+  pod 'JGProgressHUD', '1.3.4'
 
   target 'RoutesTests' do
     inherit! :search_paths

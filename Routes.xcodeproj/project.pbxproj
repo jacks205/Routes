@@ -13,6 +13,10 @@
 		EA2E56DE1D37246F00D2E4C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */; };
 		EA2E56E11D37246F00D2E4C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */; };
 		EA2E56EC1D37246F00D2E4C7 /* RoutesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E56EB1D37246F00D2E4C7 /* RoutesTests.swift */; };
+		EA894F6D1D3C689B00FE5F56 /* RouteLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */; };
+		EA894F6F1D3D766600FE5F56 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA894F6E1D3D766600FE5F56 /* Configuration.plist */; };
+		EA894F711D3D891C00FE5F56 /* RoutesDirectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F701D3D891C00FE5F56 /* RoutesDirectionsAPI.swift */; };
+		EA894F731D3DA23600FE5F56 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F721D3DA23600FE5F56 /* Route.swift */; };
 		EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */; };
 		EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */; };
 		EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */; };
@@ -62,6 +66,10 @@
 		EA2E56E71D37246F00D2E4C7 /* RoutesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoutesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2E56EB1D37246F00D2E4C7 /* RoutesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesTests.swift; sourceTree = "<group>"; };
 		EA2E56ED1D37246F00D2E4C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteLocationManager.swift; sourceTree = "<group>"; };
+		EA894F6E1D3D766600FE5F56 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
+		EA894F701D3D891C00FE5F56 /* RoutesDirectionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesDirectionsAPI.swift; sourceTree = "<group>"; };
+		EA894F721D3DA23600FE5F56 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
 		EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteProgressBarView.swift; sourceTree = "<group>"; };
 		EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
@@ -156,9 +164,13 @@
 				EAB165271D3B45E80069A6EA /* Home */,
 				EAB165261D3B45D20069A6EA /* AddRoute */,
 				EA2E56D61D37246F00D2E4C7 /* AppDelegate.swift */,
+				EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */,
+				EA894F701D3D891C00FE5F56 /* RoutesDirectionsAPI.swift */,
+				EA894F721D3DA23600FE5F56 /* Route.swift */,
 				EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */,
 				EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */,
 				EA2E56E21D37246F00D2E4C7 /* Info.plist */,
+				EA894F6E1D3D766600FE5F56 /* Configuration.plist */,
 				EAF2B3571D3B364200723238 /* Helpers */,
 				EAA180AD1D38F21C002B22B1 /* RxSwift+Helpers */,
 				EAF2B3261D38FBAB00723238 /* Fonts */,
@@ -293,6 +305,11 @@
 					EA2E56D21D37246F00D2E4C7 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 23KKLX956K;
+						SystemCapabilities = {
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					EA2E56E61D37246F00D2E4C7 = {
 						CreatedOnToolsVersion = 7.3.1;
@@ -330,6 +347,7 @@
 				EA2E56E11D37246F00D2E4C7 /* LaunchScreen.storyboard in Resources */,
 				EAF2B3481D38FBDE00723238 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				EAB165241D3B3CEC0069A6EA /* Montserrat-Bold.ttf in Resources */,
+				EA894F6F1D3D766600FE5F56 /* Configuration.plist in Resources */,
 				EAF2B34E1D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				EAF2B34A1D38FBDE00723238 /* OpenSans-Light.ttf in Resources */,
 				EA2E56DE1D37246F00D2E4C7 /* Assets.xcassets in Resources */,
@@ -477,7 +495,9 @@
 				EAF2B3561D3B241B00723238 /* AddDestinationLocationViewController.swift in Sources */,
 				EABBC1151D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift in Sources */,
 				EA2E56D71D37246F00D2E4C7 /* AppDelegate.swift in Sources */,
+				EA894F711D3D891C00FE5F56 /* RoutesDirectionsAPI.swift in Sources */,
 				EAF2B3521D39B5F800723238 /* LocationTableViewCell.swift in Sources */,
+				EA894F731D3DA23600FE5F56 /* Route.swift in Sources */,
 				EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */,
 				EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */,
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
@@ -486,6 +506,7 @@
 				EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */,
 				EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */,
 				EABBC1131D3C1FCE0005D78B /* AddRouteBaseViewController.swift in Sources */,
+				EA894F6D1D3C689B00FE5F56 /* RouteLocationManager.swift in Sources */,
 				EAF2B3541D3B240800723238 /* AddStartingLocationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

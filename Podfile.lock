@@ -10,6 +10,8 @@ PODS:
   - Crashlytics (3.7.2):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.7)
+  - GoogleMaps (1.13.2)
+  - JGProgressHUD (1.3.4)
   - Moya (6.5.0):
     - Moya/Core (= 6.5.0)
   - Moya-ObjectMapper/Core (1.3):
@@ -35,6 +37,8 @@ DEPENDENCIES:
   - CocoaLumberjack/Swift (= 2.3.0)
   - Crashlytics (= 3.7.2)
   - Fabric (= 1.6.7)
+  - GoogleMaps (= 1.13.2)
+  - JGProgressHUD
   - Moya-ObjectMapper/RxSwift (= 1.3)
   - Moya/RxSwift (= 6.5.0)
   - RxCocoa (= 2.6.0)
@@ -45,6 +49,8 @@ SPEC CHECKSUMS:
   CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
   Crashlytics: 130ab943f8c78cda7a814b434f270b2e2c8a3cba
   Fabric: caf7580c725e64db144f610ac65cd60956911dc7
+  GoogleMaps: b20a103ff307f58392e603cf142e59d7e30374c1
+  JGProgressHUD: fc8587fdcaad0f518529045cef0fb2ed3d030fbe
   Moya: f7a4044719381cc6299f9ad3e0ef05f426f0557b
   Moya-ObjectMapper: 8795f291109d4fcb7eeb07c4e20fd6e28b400294
   ObjectMapper: 4eb08a726e9791a93b2632049951b56a7c17e471
@@ -52,6 +58,6 @@ SPEC CHECKSUMS:
   RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
   RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
 
-PODFILE CHECKSUM: 4a949a271d4cbb69129bc82a23106a3f434fe20b
+PODFILE CHECKSUM: f2d81dd5582edebe728d79da96578c0df4c9b200
 
 COCOAPODS: 1.0.1

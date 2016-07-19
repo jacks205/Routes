@@ -7,15 +7,86 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
+import GoogleMaps
+
+class RoutesLocation {
+    
+    let prediction: GMSAutocompletePrediction
+    
+    init(prediction: GMSAutocompletePrediction) {
+        self.prediction = prediction
+    }
+
+    var name: String {
+        return prediction.attributedPrimaryText.string
+    }
+    
+    var address: String? {
+        return prediction.attributedSecondaryText?.string
+    }
+    
+    var fullAddress: String? {
+        return prediction.attributedFullText.string
+    }
+    
+    var placeID: String? {
+        return prediction.placeID
+    }
+    
+    func boldNameText(boldFont: UIFont, regularFont: UIFont) -> NSMutableAttributedString? {
+        return prediction.boldedPrimaryText(boldFont, regularFont: regularFont)
+    }
+}
+
+extension GMSAutocompletePrediction {
+    func boldedPrimaryText(boldFont: UIFont, regularFont: UIFont) -> NSMutableAttributedString? {
+        guard let bolded = attributedPrimaryText.mutableCopy() as? NSMutableAttributedString else {
+            return nil
+        }
+        bolded.enumerateAttribute(kGMSAutocompleteMatchAttribute, inRange: NSRange(location: 0, length: bolded.length), options: []) { (value, range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
+            let font = value == nil ? regularFont : boldFont
+            bolded.addAttribute(NSFontAttributeName, value: font, range: range)
+        }
+        return bolded
+    }
+}
+
+extension GMSPlacesClient {
+    func rx_autocompleteQuery(query: String, bounds: GMSCoordinateBounds?, filter: GMSAutocompleteFilter?) -> Observable<[GMSAutocompletePrediction]> {
+        return Observable<[GMSAutocompletePrediction]>.create { obs -> Disposable in
+            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            self.autocompleteQuery(query, bounds: bounds, filter: filter, callback: { (predictions, error) in
+                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                defer { obs.onCompleted() }
+                guard error == nil else {
+                    obs.onError(error!)
+                    return
+                }
+                if let predictions = predictions {
+                    obs.onNext(predictions)
+                } else {
+                    obs.onNext([])
+                }
+            })
+            return NopDisposable.instance
+        }
+    }
+}
 
 extension UIView {
-    func addConstraintsWithFormat(format: String, views: UIView...) {
+    func addConstraintsWithFormat(format: String, metrics: [String: AnyObject]?, views: [UIView]) {
         var viewsDictionary = [String : UIView]()
         for (index, view) in views.enumerate() {
             let key = "v\(index)"
             viewsDictionary[key] = view
         }
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(), metrics: nil, views: viewsDictionary))
+        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(), metrics: metrics, views: viewsDictionary))
+    }
+    
+    func addConstraintsWithFormat(format: String, views: UIView...) {
+        addConstraintsWithFormat(format, metrics: nil, views: views)
     }
 }
 
