@@ -15,16 +15,7 @@ private let reuseIdentifier = "RouteCollectionCell"
 
 class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    let routes = Variable<[Route]>([])
-    
-    var originLocation: RoutesLocation?
-    var destinationLocation: RoutesLocation?
-    
-    var directionsResponse: DirectionsResponse? {
-        didSet {
-            routes.value = directionsResponse!.routes
-        }
-    }
+    let routes = Variable<[RouteObject]>([])
     
     let collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: CenterCellCollectionViewFlowLayout())
@@ -127,17 +118,19 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
             .addDisposableTo(db)
     }
     
-    func configureCell(row: Int, element: Route, cell: RouteSummaryCollectionViewCell) {
+    func configureCell(row: Int, element: RouteObject, cell: RouteSummaryCollectionViewCell) {
         cell.backgroundColor = progressBarViewBackgroundColor
         cell.layer.cornerRadius = 12
-        guard let leg = element.legs.first else {
+        
+        guard let leg = element.route.legs.first else {
             return
         }
-        cell.originLabel.text = originLocation?.name
-        cell.destinationLabel.text = destinationLocation?.name
+        
+        cell.originLabel.text = element.origin.name
+        cell.destinationLabel.text = element.destination.name
         cell.distanceValueLabel.text = leg.distance.text
         cell.timeValueLabel.text = leg.duration.text
-        cell.viaValueLabel.text = element.summary
+        cell.viaValueLabel.text = element.route.summary
         cell.layoutIfNeeded()
         
         let duration = Double(leg.duration.value) / Double(leg.traffic.value)

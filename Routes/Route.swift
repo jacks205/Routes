@@ -9,6 +9,32 @@
 import ObjectMapper
 import CoreLocation
 
+struct RouteObject {
+    var map: UIImage?
+    let route: Route
+    let origin: RoutesLocation
+    let destination: RoutesLocation
+    
+    init(route: Route, origin: RoutesLocation, destination: RoutesLocation, image: UIImage? = nil) {
+        self.route = route
+        self.origin = origin
+        self.destination = destination
+        map = image
+    }
+    
+    init(routeObject: RouteObject, image: UIImage? = nil) {
+        route = routeObject.route
+        origin = routeObject.origin
+        destination = routeObject.destination
+        if let image = image {
+            map = image
+        } else {
+            map = routeObject.map
+        }
+    }
+    
+}
+
 struct DirectionsResponse: Mappable {
     var geocodedWaypoints: [GeocodedWaypoint]!
     var routes: [Route]!

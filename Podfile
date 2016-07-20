@@ -15,6 +15,7 @@ target 'Routes' do
   pod 'Moya-ObjectMapper/RxSwift', '1.3'
   pod 'GoogleMaps', '1.13.2'
   pod 'JGProgressHUD', '1.3.4'
+  pod 'MapboxStatic.swift', :git => 'https://github.com/mapbox/MapboxStatic.swift.git', :tag => 'v0.6.1'
 
   target 'RoutesTests' do
     inherit! :search_paths

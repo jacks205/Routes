@@ -10,6 +10,24 @@ import UIKit
 import RxSwift
 import RxCocoa
 import GoogleMaps
+import MapboxStatic
+
+extension Snapshot {
+    func rx_image() -> Observable<UIImage?> {
+        return Observable<UIImage?>.create { obs -> Disposable in
+            let task = self.image { (image, error) in
+                defer { obs.onCompleted() }
+                guard error == nil else {
+                    obs.onError(error!)
+                    return
+                }
+                obs.onNext(image)
+            }
+            task.resume()
+            return AnonymousDisposable { task.cancel() }
+        }
+    }
+}
 
 class RoutesLocation {
     
