@@ -9,7 +9,7 @@
 import CoreLocation
 import RxSwift
 import RxCocoa
-import GoogleMaps
+import GooglePlaces
 
 let routesLocationManager = RoutesLocationManager()
 

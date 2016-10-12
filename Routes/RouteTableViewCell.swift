@@ -128,5 +128,4 @@ class RouteTableViewCell: UITableViewCell {
         progressBarView.widthAnchor.constraintEqualToAnchor(widthAnchor, multiplier: 1/2.5, constant: 0).active = true
         progressBarView.heightAnchor.constraintEqualToConstant(30).active = true
     }
-    
 }

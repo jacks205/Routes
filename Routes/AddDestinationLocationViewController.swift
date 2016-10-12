@@ -11,30 +11,38 @@ import RxSwift
 import RxCocoa
 import Moya_ObjectMapper
 import JGProgressHUD
+import MapboxStatic
 
 class AddDestinationLocationViewController: AddLocationViewController {
     
-    var originLocation: RoutesLocation?
-    var destinationLocation: RoutesLocation?
+    var rx_originLocation = Variable<RoutesLocation>(RoutesLocation())
+    var rx_destinationLocation = Variable<RoutesLocation>(RoutesLocation())
     
     let hud = JGProgressHUD(style: .ExtraLight)
     
     override func bindTableView() {
         super.bindTableView()
-        
+        let selectRouteVC = getSelectRouteViewController()
         //TODO: Rewrite to use HERE API and load in maps
-        tableView
+        let rx_destinationSelected = tableView
             .rx_itemSelected
-            .flatMap { self.rx_getPlaceIDs($0) }
-            .flatMap { self.rx_getDirections($0.0, destinationPlaceID: $0.1) }
+            .map { $0.row }
+            .filter { $0 > -1 }
+            .asDriver(onErrorJustReturn: -1)
         
+        rx_destinationSelected
+            .map { self.locations.value[$0] }
+            .drive(rx_destinationLocation)
+            .addDisposableTo(db)
+        
+    
     }
     
-    private func rx_getPlaceIDs(index: NSIndexPath) -> Observable<(String, String)> {
+    private func rx_getPlaceIDs(row: Int) -> Observable<(String, String)> {
         return Observable.create { obs -> Disposable in
-            self.destinationLocation = self.locations.value[index.row]
-            if  let destinationPlaceID = self.destinationLocation?.placeID,
-                let originPlaceID = self.originLocation?.placeID {
+            self.rx_destinationLocation.value = self.locations.value[row]
+            if  let destinationPlaceID = self.rx_destinationLocation.value.placeID,
+                let originPlaceID = self.rx_originLocation.value.placeID {
                 obs.onNext((originPlaceID, destinationPlaceID))
             }
             obs.onCompleted()
@@ -42,12 +50,6 @@ class AddDestinationLocationViewController: AddLocationViewController {
         }
     }
     
-    private func rx_getDirections(originPlaceID: String, destinationPlaceID: String) -> Observable<DirectionsResponse> {
-        hud.showInView(view)
-        return RoutesDirectionAPI
-            .request(.DirectionsPlaceID(origin: originPlaceID, destination: destinationPlaceID))
-            .mapObject(DirectionsResponse)
-    }
     
     private func getSelectRouteViewController() -> SelectRouteCollectionViewController {
         let selectRouteCVC = SelectRouteCollectionViewController()

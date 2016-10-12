@@ -15,18 +15,26 @@ class AddStartingLocationViewController: AddLocationViewController {
     
     override func bindTableView() {
         super.bindTableView()
-        tableView
+        let addLocationVC = AddDestinationLocationViewController()
+        let rx_originSelected = tableView
             .rx_itemSelected
-            .subscribeNext { index in
-                let location = self.locations.value[index.row]
-                let addLocationVC = AddDestinationLocationViewController()
-                addLocationVC.originLocation = location
+            .map { $0.row }
+            .filter { $0 > -1 }
+            .asDriver(onErrorJustReturn: -1)
+        
+        rx_originSelected
+            .map { self.locations.value[$0] }
+            .drive(addLocationVC.rx_originLocation)
+            .addDisposableTo(db)
+        
+        rx_originSelected
+            .asObservable()
+            .subscribeNext { row in
                 addLocationVC.view.backgroundColor = addLocationViewBackgroundColor
-                addLocationVC.searchBar.placeholder = "Enter Destination"
+                addLocationVC.searchBar.placeholder = "Enter Starting Location"
                 self.navigationController?.pushViewController(addLocationVC, animated: true)
             }
             .addDisposableTo(db)
-        
     }
     
     override func bindBackBtn() {

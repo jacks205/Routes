@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RouteProgressBarView: UIView {
+class RouteProgressBarView: UIView, CAAnimationDelegate {
     
     let progressLayer = CAShapeLayer()
     

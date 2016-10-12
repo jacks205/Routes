@@ -21,6 +21,7 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         tb.allowsMultipleSelection = false
         tb.tableFooterView = UIView(frame: CGRect.zero)
         tb.separatorStyle = .None
+        tb.separatorInset = UIEdgeInsetsZero
         tb.estimatedRowHeight = 150
         tb.rowHeight = 150
         tb.backgroundColor = UIColor.clearColor()
@@ -65,13 +66,7 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
     }
     
     override func viewWillLayoutSubviews() {
-        tableView.frame = view.frame
         gradientBackgroundLayer.frame = view.frame
-    }
-    
-    override func updateViewConstraints() {
-        setConstraints()
-        super.updateViewConstraints()
     }
     
     override func loadView() {

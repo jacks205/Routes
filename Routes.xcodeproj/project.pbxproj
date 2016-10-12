@@ -15,7 +15,7 @@
 		EA2E56EC1D37246F00D2E4C7 /* RoutesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E56EB1D37246F00D2E4C7 /* RoutesTests.swift */; };
 		EA894F6D1D3C689B00FE5F56 /* RouteLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */; };
 		EA894F6F1D3D766600FE5F56 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA894F6E1D3D766600FE5F56 /* Configuration.plist */; };
-		EA894F711D3D891C00FE5F56 /* RoutesDirectionsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F701D3D891C00FE5F56 /* RoutesDirectionsAPI.swift */; };
+		EA894F711D3D891C00FE5F56 /* RoutesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */; };
 		EA894F731D3DA23600FE5F56 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F721D3DA23600FE5F56 /* Route.swift */; };
 		EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */; };
 		EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */; };
@@ -68,7 +68,7 @@
 		EA2E56ED1D37246F00D2E4C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteLocationManager.swift; sourceTree = "<group>"; };
 		EA894F6E1D3D766600FE5F56 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
-		EA894F701D3D891C00FE5F56 /* RoutesDirectionsAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesDirectionsAPI.swift; sourceTree = "<group>"; };
+		EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesAPI.swift; sourceTree = "<group>"; };
 		EA894F721D3DA23600FE5F56 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
 		EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteProgressBarView.swift; sourceTree = "<group>"; };
@@ -165,7 +165,7 @@
 				EAB165261D3B45D20069A6EA /* AddRoute */,
 				EA2E56D61D37246F00D2E4C7 /* AppDelegate.swift */,
 				EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */,
-				EA894F701D3D891C00FE5F56 /* RoutesDirectionsAPI.swift */,
+				EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */,
 				EA894F721D3DA23600FE5F56 /* Route.swift */,
 				EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */,
 				EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */,
@@ -299,7 +299,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0800;
 				ORGANIZATIONNAME = "Mark Jackson";
 				TargetAttributes = {
 					EA2E56D21D37246F00D2E4C7 = {
@@ -381,7 +381,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		164ADCD4E8BD653FB59B2315 /* [CP] Embed Pods Frameworks */ = {
@@ -411,7 +411,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		4427D27BCED896BD7185744F /* [CP] Copy Pods Resources */ = {
@@ -495,7 +495,7 @@
 				EAF2B3561D3B241B00723238 /* AddDestinationLocationViewController.swift in Sources */,
 				EABBC1151D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift in Sources */,
 				EA2E56D71D37246F00D2E4C7 /* AppDelegate.swift in Sources */,
-				EA894F711D3D891C00FE5F56 /* RoutesDirectionsAPI.swift in Sources */,
+				EA894F711D3D891C00FE5F56 /* RoutesAPI.swift in Sources */,
 				EAF2B3521D39B5F800723238 /* LocationTableViewCell.swift in Sources */,
 				EA894F731D3DA23600FE5F56 /* Route.swift in Sources */,
 				EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */,
@@ -555,8 +555,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -578,11 +580,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -600,8 +603,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -617,9 +622,11 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 2.3;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -628,15 +635,17 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = EB88DE0F7A392BE6BB69B592 /* Pods-Routes.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = Routes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacks205.routes.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -644,14 +653,16 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = BF3CCCE4C69D0CBC1B72A495 /* Pods-Routes.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				INFOPLIST_FILE = Routes/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacks205.routes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};

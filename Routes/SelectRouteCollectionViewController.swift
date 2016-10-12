@@ -15,7 +15,8 @@ private let reuseIdentifier = "RouteCollectionCell"
 
 class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
-    let routes = Variable<[RouteObject]>([])
+    let maps = Variable<[UIImage]>([])
+    let routes = Variable<[RouteType]>([])
     
     let collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: CenterCellCollectionViewFlowLayout())
@@ -118,22 +119,21 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
             .addDisposableTo(db)
     }
     
-    func configureCell(row: Int, element: RouteObject, cell: RouteSummaryCollectionViewCell) {
+    func configureCell(row: Int, element: RouteType, cell: RouteSummaryCollectionViewCell) {
         cell.backgroundColor = progressBarViewBackgroundColor
         cell.layer.cornerRadius = 12
         
-        guard let leg = element.route.legs.first else {
-            return
-        }
         
-        cell.originLabel.text = element.origin.name
-        cell.destinationLabel.text = element.destination.name
-        cell.distanceValueLabel.text = leg.distance.text
-        cell.timeValueLabel.text = leg.duration.text
-        cell.viaValueLabel.text = element.route.summary
+        cell.originLabel.text = ""
+        cell.destinationLabel.text = ""
+        
+        let summary = element.summary
+        cell.distanceValueLabel.text = "\(summary.distance) mi"
+        let (hours, minutes) = summary.travelTime.secondsToHoursMinutes()
+        cell.timeValueLabel.text = (hours > 0 ? "\(hours) hrs" : "") + (minutes > 0 ? "\(minutes) min" : "")
         cell.layoutIfNeeded()
         
-        let duration = Double(leg.duration.value) / Double(leg.traffic.value)
+        let duration = summary.baseTime / summary.travelTime
         if duration > 0.80 {
             cell.timeValueLabel.textColor = darkGreenColor
         } else if duration > 0.60 {

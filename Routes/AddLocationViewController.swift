@@ -10,7 +10,7 @@ import UIKit
 import CocoaLumberjack
 import RxSwift
 import RxCocoa
-import GoogleMaps
+import GooglePlaces
 
 class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate {
     

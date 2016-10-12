@@ -10,7 +10,7 @@ import UIKit
 import Fabric
 import Crashlytics
 import CocoaLumberjack
-import GoogleMaps
+import GooglePlaces
 
 let topGradientBackgroundColor = UIColor.blackColor()
 let bottomGradientBackgroundColor = UIColor(red: 0.28, green: 0.34, blue: 0.38, alpha: 1)
@@ -63,15 +63,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self, Answers.self])
         if let plistPath = NSBundle.mainBundle().pathForResource("Configuration", ofType: "plist"),
             let config = NSDictionary(contentsOfFile: plistPath) {
+            
             if let GoogleAPIKey = config["GMSServices"]?["APIKey"] as? String {
-                GMSServices.provideAPIKey(GoogleAPIKey)
+                GMSPlacesClient.provideAPIKey(GoogleAPIKey)
             } else {
                 fatalError("Need to include valid GoogleAPIKey")
             }
-            if let GoogleAPIKey = config["GoogleDirectionsAPI"]?["APIKey"] as? String {
-                GoogleDirectionsAPIKey = GoogleAPIKey
+            
+            #if DEBUG
+                let hereAPIConfig = config["HERE_API"]?["DEBUG"] as? NSDictionary
+            #else
+                let hereAPIConfig = config["HERE_API"]?["RELEASE"] as? NSDictionary
+            #endif
+            
+            if let appId = hereAPIConfig?["app_id"] as? String {
+                HERE_API_APP_ID = appId
             } else {
-                fatalError("Need to include valid GoogleAPIKey")
+                fatalError("Need to include valid HERE API app_id")
+            }
+            if let appCode = hereAPIConfig?["app_code"] as? String {
+                HERE_API_APP_CODE = appCode
+            } else {
+                fatalError("Need to include valid HERE API app_code")
             }
         }
     }

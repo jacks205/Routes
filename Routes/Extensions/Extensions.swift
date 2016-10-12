@@ -9,7 +9,7 @@
 import UIKit
 import RxSwift
 import RxCocoa
-import GoogleMaps
+import GooglePlaces
 import MapboxStatic
 
 extension Snapshot {
@@ -32,6 +32,10 @@ extension Snapshot {
 class RoutesLocation {
     
     let prediction: GMSAutocompletePrediction
+    
+    init() {
+        self.prediction = GMSAutocompletePrediction()
+    }
     
     init(prediction: GMSAutocompletePrediction) {
         self.prediction = prediction
@@ -148,6 +152,17 @@ class CenterCellCollectionViewFlowLayout: UICollectionViewFlowLayout {
         }
         
         return CGPoint(x: candidateAttributes!.center.x - halfWidth, y: proposedContentOffset.y)
+    }
+    
+}
+
+extension Double {
+    func metersToMiles() -> Double {
+        return self * 0.000621371
+    }
+    
+    func secondsToHoursMinutes() -> (Int, Int) {
+        return (Int(self) / 3600, Int(self) / 60)
     }
     
 }
