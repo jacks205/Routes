@@ -17,7 +17,7 @@ class AddStartingLocationViewController: AddLocationViewController {
         super.bindTableView()
         let addLocationVC = AddDestinationLocationViewController()
         let rx_originSelected = tableView
-            .rx_itemSelected
+            .rx.itemSelected
             .map { $0.row }
             .filter { $0 > -1 }
             .asDriver(onErrorJustReturn: -1)
@@ -29,11 +29,11 @@ class AddStartingLocationViewController: AddLocationViewController {
         
         rx_originSelected
             .asObservable()
-            .subscribeNext { row in
+            .subscribe(onNext: { row in
                 addLocationVC.view.backgroundColor = addLocationViewBackgroundColor
                 addLocationVC.searchBar.placeholder = "Enter Starting Location"
                 self.navigationController?.pushViewController(addLocationVC, animated: true)
-            }
+            })
             .addDisposableTo(db)
     }
     

@@ -20,11 +20,11 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         tb.translatesAutoresizingMaskIntoConstraints = false
         tb.allowsMultipleSelection = false
         tb.tableFooterView = UIView(frame: CGRect.zero)
-        tb.separatorStyle = .None
-        tb.separatorInset = UIEdgeInsetsZero
+        tb.separatorStyle = .none
+        tb.separatorInset = UIEdgeInsets.zero
         tb.estimatedRowHeight = 150
         tb.rowHeight = 150
-        tb.backgroundColor = UIColor.clearColor()
+        tb.backgroundColor = UIColor.clear
         return tb
     }()
     
@@ -32,10 +32,10 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         let sc = UISearchController(searchResultsController: nil)
         sc.dimsBackgroundDuringPresentation = false
         sc.searchBar.sizeToFit()
-        sc.searchBar.barStyle = .Black
-        sc.searchBar.searchBarStyle = .Minimal
-        sc.searchBar.tintColor = UIColor.grayColor()
-        sc.searchBar.backgroundColor = UIColor.clearColor()
+        sc.searchBar.barStyle = .black
+        sc.searchBar.searchBarStyle = .minimal
+        sc.searchBar.tintColor = UIColor.gray
+        sc.searchBar.backgroundColor = UIColor.clear
         sc.searchBar.placeholder = ""
         return sc
     }()
@@ -49,15 +49,15 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
     var refreshControl: UIRefreshControl? = UIRefreshControl()
     var activityIndicator: ActivityIndicator? = ActivityIndicator()
     
-    private let gradientBackgroundLayer: CAGradientLayer = {
+    fileprivate let gradientBackgroundLayer: CAGradientLayer = {
         let gb = CAGradientLayer()
-        gb.colors = [topGradientBackgroundColor.CGColor, bottomGradientBackgroundColor.CGColor]
+        gb.colors = [topGradientBackgroundColor.cgColor, bottomGradientBackgroundColor.cgColor]
         return gb
     }()
     
     let db = DisposeBag()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
     }
     
@@ -71,7 +71,7 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
     
     override func loadView() {
         super.loadView()
-        view.layer.insertSublayer(gradientBackgroundLayer, atIndex: 0)
+        view.layer.insertSublayer(gradientBackgroundLayer, at: 0)
         definesPresentationContext = true
         addNavigationItems()
         bindSearchController()
@@ -81,9 +81,9 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
     
     func bindTableView() {
         tableView.tableHeaderView = searchBar
-        tableView.registerClass(RouteTableViewCell.self, forCellReuseIdentifier: "RouteCell")
+        tableView.register(RouteTableViewCell.self, forCellReuseIdentifier: "RouteCell")
         tableView
-            .rx_setDelegate(self)
+            .rx.setDelegate(self)
             .addDisposableTo(db)
         routes
             .asObservable()
@@ -92,15 +92,15 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
             }
             .addDisposableTo(db)
         tableView
-            .rx_itemSelected
-            .subscribeNext { index in
+            .rx.itemSelected
+            .subscribe(onNext: { index in
                 DDLogInfo("Selected \(index)")
-            }
+            })
             .addDisposableTo(db)
         
         createRefreshControl()
         tableView.backgroundView = UIView()
-        tableView.backgroundView?.backgroundColor = UIColor.clearColor()
+        tableView.backgroundView?.backgroundColor = UIColor.clear
         
         view.addSubview(tableView)
     }
@@ -109,22 +109,22 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         searchController.searchResultsUpdater = self
     
         searchController
-            .rx_willPresent
-            .subscribeNext {
+            .rx.willPresent
+            .subscribe(onNext: {
                 self.activityIndicator = nil
                 self.refreshControl?.removeFromSuperview()
                 self.refreshControl = nil
-            }
+            })
             .addDisposableTo(db)
         searchController
-            .rx_willDismiss
-            .subscribeNext {
+            .rx.willDismiss
+            .subscribe(onNext: {
                 self.createRefreshControl()
-            }
+            })
             .addDisposableTo(db)
     }
     
-    func configureCell(element: String, cell: RouteTableViewCell) {
+    func configureCell(_ element: String, cell: RouteTableViewCell) {
         let random = Double(arc4random_uniform(100) + 1) / 100.0
         var color = darkGreenColor
         if random >= 0.75 {
@@ -132,64 +132,64 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         } else if random < 0.75 && random > 0.45 {
             color = darkYellowColor
         }
-        cell.selectionStyle = .None
-        cell.backgroundColor = UIColor.clearColor()
+        cell.selectionStyle = .none
+        cell.backgroundColor = UIColor.clear
         cell.originNameLabel.text = element
         cell.destinationNameLabel.text = element
         cell.descriptionLabel.text = "via I-55s and Chapman Ave"
         cell.distanceLabel.text = "47.3 mi"
         cell.progressBarView.textLabel.font = UIFont(name: "OpenSans", size: 10)
-        cell.progressBarView.textLabel.textColor = UIColor.whiteColor()
+        cell.progressBarView.textLabel.textColor = UIColor.white
         cell.updateProgressBarView(random, color: color, text: "\(random)")
     }
     
-    private func createRefreshControl() {
+    fileprivate func createRefreshControl() {
         refreshControl = UIRefreshControl()
-        refreshControl?.backgroundColor = UIColor.clearColor()
+        refreshControl?.backgroundColor = UIColor.clear
         refreshControl?
-            .rx_controlEvent(.ValueChanged)
-            .subscribeNext { [unowned self] strings in
+            .rx.controlEvent(.valueChanged)
+            .subscribe(onNext: { [unowned self] strings in
                 self.tableView.reloadData()
                 self.refreshControl?.endRefreshing()
-            }
+            })
             .addDisposableTo(db)
         
         activityIndicator = ActivityIndicator()
         activityIndicator?
             .asObservable()
-            .bindTo(refreshControl!.rx_refreshing)
+            .bindTo(refreshControl!.rx.refreshing)
             .addDisposableTo(db)
         
         tableView.addSubview(refreshControl!)
     }
     
-    private func addNavigationItems() {
+    fileprivate func addNavigationItems() {
         let addBarBtn = UIBarButtonItem()
         addBarBtn.image = UIImage(named: "add")
         addBarBtn
-            .rx_tap
-            .subscribeNext { [weak self] in
+            .rx.tap
+            .subscribe(onNext: { [weak self] in
                 let addLocationVC = AddStartingLocationViewController()
                 addLocationVC.view.backgroundColor = addLocationViewBackgroundColor
                 addLocationVC.searchBar.placeholder = "Enter Starting Location"
                 let addNvc = UINavigationController(rootViewController: addLocationVC)
-                addNvc.navigationBar.tintColor = UIColor.whiteColor()
+                addNvc.navigationBar.tintColor = .white
                 addNvc.navigationBar.barTintColor = bottomGradientBackgroundColor
-                addNvc.interactivePopGestureRecognizer?.enabled = false
-                self?.navigationController?.presentViewController(addNvc, animated: true, completion: nil)
-            }
+                addNvc.interactivePopGestureRecognizer?.isEnabled = false
+                self?.navigationController?.present(addNvc, animated: true, completion: nil)
+            })
             .addDisposableTo(db)
         navigationItem.rightBarButtonItem = addBarBtn
     }
     
-    private func setConstraints() {
-        tableView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
-        tableView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
-        tableView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
-        tableView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+    fileprivate func setConstraints() {
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
         
     }
 

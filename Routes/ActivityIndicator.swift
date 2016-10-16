@@ -13,12 +13,12 @@ import Foundation
 #endif
 
 struct ActivityToken<E> : ObservableConvertibleType, Disposable {
-    private let _source: Observable<E>
-    private let _dispose: AnonymousDisposable
+    fileprivate let _source: Observable<E>
+    fileprivate let _dispose: Disposable
     
-    init(source: Observable<E>, disposeAction: () -> ()) {
+    init(source: Observable<E>, disposeAction: @escaping () -> ()) {
         _source = source
-        _dispose = AnonymousDisposable(disposeAction)
+        _dispose = Disposables.create(with: disposeAction)
     }
     
     func dispose() {
@@ -39,21 +39,21 @@ struct ActivityToken<E> : ObservableConvertibleType, Disposable {
 class ActivityIndicator: DriverConvertibleType {
     typealias E = Bool
     
-    private let _lock = NSRecursiveLock()
-    private let _variable = Variable(0)
-    private let _loading: Driver<Bool>
+    fileprivate let _lock = NSRecursiveLock()
+    fileprivate let _variable = Variable(0)
+    fileprivate let _loading: Driver<Bool>
     
     init() {
         _loading = _variable.asObservable()
             .map { $0 > 0 }
             .distinctUntilChanged()
-            .asDriver { (error: ErrorType) -> Driver<Bool> in
+            .asDriver { (error: Error) -> Driver<Bool> in
                 _ = fatalError("Loader can't fail")
                 return Driver.empty()
         }
     }
     
-    func trackActivity<O: ObservableConvertibleType>(source: O) -> Observable<O.E> {
+    func trackActivity<O: ObservableConvertibleType>(_ source: O) -> Observable<O.E> {
         return Observable.using({ () -> ActivityToken<O.E> in
             self.increment()
             return ActivityToken(source: source.asObservable(), disposeAction: self.decrement)
@@ -62,13 +62,13 @@ class ActivityIndicator: DriverConvertibleType {
         }
     }
     
-    private func increment() {
+    fileprivate func increment() {
         _lock.lock()
         _variable.value = _variable.value + 1
         _lock.unlock()
     }
     
-    private func decrement() {
+    fileprivate func decrement() {
         _lock.lock()
         _variable.value = _variable.value - 1
         _lock.unlock()
@@ -80,7 +80,7 @@ class ActivityIndicator: DriverConvertibleType {
 }
 
 extension ObservableConvertibleType {
-    func trackActivity(activityIndicator: ActivityIndicator) -> Observable<E> {
+    func trackActivity(_ activityIndicator: ActivityIndicator) -> Observable<E> {
         return activityIndicator.trackActivity(self)
     }
 }
