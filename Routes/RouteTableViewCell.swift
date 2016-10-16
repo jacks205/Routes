@@ -26,7 +26,7 @@ class RouteTableViewCell: UITableViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(name: "OpenSans", size: 15)
-        lb.textColor = UIColor.whiteColor()
+        lb.textColor = UIColor.white
         return lb
     }()
     
@@ -34,7 +34,7 @@ class RouteTableViewCell: UITableViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(name: "OpenSans", size: 15)
-        lb.textColor = UIColor.whiteColor()
+        lb.textColor = UIColor.white
         return lb
     }()
     
@@ -42,7 +42,7 @@ class RouteTableViewCell: UITableViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(name: "OpenSans-Light", size: 12)
-        lb.textColor = UIColor.lightGrayColor()
+        lb.textColor = UIColor.lightGray
         return lb
     }()
     
@@ -50,11 +50,12 @@ class RouteTableViewCell: UITableViewCell {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.font = UIFont(name: "OpenSans-Light", size: 28)
-        lb.textColor = UIColor.whiteColor()
+        lb.textColor = UIColor.white
         return lb
     }()
     
     var progressBarView: RouteProgressBarView!
+    var lineLayer: CAShapeLayer?
     
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -74,8 +75,10 @@ class RouteTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
-        progressBarView.layoutIfNeeded()
-        createLineLayer()
+        super.layoutSubviews()
+        if lineLayer == nil {
+            createLineLayer()
+        }
     }
     
     func setupProgressBarView() {
@@ -86,46 +89,46 @@ class RouteTableViewCell: UITableViewCell {
         progressBarView.clipsToBounds = true
     }
     
-    func updateProgressBarView(percentage: Double, color: UIColor, text: String) {
+    func updateProgressBarView(_ percentage: Double, color: UIColor, text: String) {
         progressBarView.updateProgressView(percentage, color: color, text: text)
     }
     
-    private func createLineLayer() {
+    fileprivate func createLineLayer() {
         let path = UIBezierPath()
         var startPoint = CGPoint(x: progressBarView.frame.origin.x + progressBarView.frame.width / 2, y: progressBarView.frame.origin.y + progressBarView.frame.height / 2)
-        path.moveToPoint(startPoint)
+        path.move(to: startPoint)
         startPoint.x = frame.width
-        path.addLineToPoint(startPoint)
-        let lineLayer = CAShapeLayer()
-        lineLayer.path = path.CGPath
-        lineLayer.lineWidth = 1
-        lineLayer.strokeColor = progressBarViewBackgroundColor.CGColor
-        lineLayer.backgroundColor = progressBarViewBackgroundColor.CGColor
-        layer.insertSublayer(lineLayer, atIndex: 0)
+        path.addLine(to: startPoint)
+        lineLayer = CAShapeLayer()
+        lineLayer?.path = path.cgPath
+        lineLayer?.lineWidth = 1
+        lineLayer?.strokeColor = progressBarViewBackgroundColor.cgColor
+        lineLayer?.backgroundColor = progressBarViewBackgroundColor.cgColor
+        layer.insertSublayer(lineLayer!, at: 0)
     }
     
-    private func setConstraints() {
-        originNameLabel.topAnchor.constraintEqualToAnchor(topAnchor, constant: 10).active = true
-        originNameLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: 10).active = true
+    fileprivate func setConstraints() {
+        originNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        originNameLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         
-        arrowImageView.leadingAnchor.constraintEqualToAnchor(originNameLabel.trailingAnchor, constant: 10).active = true
-        arrowImageView.centerYAnchor.constraintEqualToAnchor(originNameLabel.centerYAnchor, constant: 0).active = true
+        arrowImageView.leadingAnchor.constraint(equalTo: originNameLabel.trailingAnchor, constant: 10).isActive = true
+        arrowImageView.centerYAnchor.constraint(equalTo: originNameLabel.centerYAnchor, constant: 0).isActive = true
         
-        destinationNameLabel.leadingAnchor.constraintEqualToAnchor(arrowImageView.trailingAnchor, constant: 10).active = true
-        destinationNameLabel.centerYAnchor.constraintEqualToAnchor(originNameLabel.centerYAnchor, constant: 0).active = true
+        destinationNameLabel.leadingAnchor.constraint(equalTo: arrowImageView.trailingAnchor, constant: 10).isActive = true
+        destinationNameLabel.centerYAnchor.constraint(equalTo: originNameLabel.centerYAnchor, constant: 0).isActive = true
         
-        carImageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: 10).active = true
-        carImageView.topAnchor.constraintEqualToAnchor(originNameLabel.bottomAnchor, constant: 12).active = true
+        carImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        carImageView.topAnchor.constraint(equalTo: originNameLabel.bottomAnchor, constant: 12).isActive = true
         
-        descriptionLabel.leadingAnchor.constraintEqualToAnchor(carImageView.trailingAnchor, constant: 8).active = true
-        descriptionLabel.centerYAnchor.constraintEqualToAnchor(carImageView.centerYAnchor, constant: 0).active = true
+        descriptionLabel.leadingAnchor.constraint(equalTo: carImageView.trailingAnchor, constant: 8).isActive = true
+        descriptionLabel.centerYAnchor.constraint(equalTo: carImageView.centerYAnchor, constant: 0).isActive = true
         
-        distanceLabel.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: 10).active = true
-        distanceLabel.topAnchor.constraintEqualToAnchor(carImageView.bottomAnchor, constant: 10).active = true
+        distanceLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
+        distanceLabel.topAnchor.constraint(equalTo: carImageView.bottomAnchor, constant: 10).isActive = true
         
-        progressBarView.topAnchor.constraintEqualToAnchor(distanceLabel.bottomAnchor, constant: 10).active = true
-        progressBarView.leftAnchor.constraintEqualToAnchor(leftAnchor, constant: 10).active = true
-        progressBarView.widthAnchor.constraintEqualToAnchor(widthAnchor, multiplier: 1/2.5, constant: 0).active = true
-        progressBarView.heightAnchor.constraintEqualToConstant(30).active = true
+        progressBarView.topAnchor.constraint(equalTo: distanceLabel.bottomAnchor, constant: 10).isActive = true
+        progressBarView.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        progressBarView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1/2.5, constant: 0).isActive = true
+        progressBarView.heightAnchor.constraint(equalToConstant: 30).isActive = true
     }
 }

@@ -13,7 +13,7 @@ struct HERERoutePlacesAPIResponse: Mappable {
     var results: [PlaceAutoCompleteResult]!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         results <- map["results"]
@@ -26,7 +26,7 @@ struct PlaceAutoCompleteResult: Mappable {
     var vicinity: String!
     var highlightedVicinity: String!
     var category: String!
-    private var _position: [Double]!
+    fileprivate var _position: [Double]!
     var position: (Double, Double) {
         get {
             return (_position[0], _position[1])
@@ -35,7 +35,7 @@ struct PlaceAutoCompleteResult: Mappable {
     var id: String!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         title <- map["title"]
@@ -54,7 +54,7 @@ struct HERERouteDirectionsAPIResponse: Mappable {
     var language: String!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         metaInfo <- map["response.metaInfo"]
@@ -70,7 +70,7 @@ struct RouteResponseMetaInfo: Mappable {
     var interfaceVersion: String!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         timestamp <- map["timestamp"]
@@ -87,7 +87,7 @@ struct RouteType: Mappable {
     var summary: RouteSummary!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         waypoints <- map["waypoint"]
@@ -96,7 +96,6 @@ struct RouteType: Mappable {
         summary <- map["summary"]
     }
 }
-
 
 struct RouteWaypoint: Mappable {
     var linkId: String!
@@ -110,7 +109,7 @@ struct RouteWaypoint: Mappable {
     var shapeIndex: Int!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         linkId <- map["linkId"]
@@ -133,7 +132,7 @@ struct RouteLeg: Mappable {
     var maneuver: [RouteManeuver]!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         start <- map["start"]
@@ -152,7 +151,7 @@ struct RouteManeuver: Mappable {
     var travelTime: Double!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         id <- map["id"]
@@ -171,7 +170,7 @@ struct RouteSummary: Mappable {
     var travelTime: Double!
     
     // MARK: JSON
-    init?(_ map: Map) { }
+    init?(map: Map) { }
     
     mutating func mapping(map: Map) {
         distance <- map["distance"]
@@ -184,7 +183,7 @@ struct RouteSummary: Mappable {
 
 extension CLLocationCoordinate2D: Mappable {
     // MARK: JSON
-    public init?(_ map: Map) {
+    public init?(map: Map) {
         self.init()
     }
     

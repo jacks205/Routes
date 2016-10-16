@@ -1,13 +1,13 @@
 PODS:
-  - Alamofire (3.5.0)
-  - CocoaLumberjack/Core (2.3.0)
-  - CocoaLumberjack/Default (2.3.0):
+  - Alamofire (4.0.0)
+  - CocoaLumberjack/Core (3.0.0)
+  - CocoaLumberjack/Default (3.0.0):
     - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.3.0):
+  - CocoaLumberjack/Extensions (3.0.0):
     - CocoaLumberjack/Default
-  - CocoaLumberjack/Swift (2.3.0):
+  - CocoaLumberjack/Swift (3.0.0):
     - CocoaLumberjack/Extensions
-  - Crashlytics (3.8.1):
+  - Crashlytics (3.8.2):
     - Fabric (~> 1.6.3)
   - Fabric (1.6.8)
   - Firebase/AdMob (3.6.0):
@@ -24,34 +24,33 @@ PODS:
   - Google-Mobile-Ads-SDK (7.11.0)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
-  - GoogleMaps/Base (2.0.1)
-  - GooglePlaces (2.0.1):
-    - GoogleMaps/Base (= 2.0.1)
+  - GoogleMaps/Base (2.1.0)
+  - GooglePlaces (2.1.0):
+    - GoogleMaps/Base (= 2.1.0)
   - GoogleSymbolUtilities (1.1.1)
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
   - JGProgressHUD (1.4)
-  - MapboxStatic.swift (0.6.1)
-  - Moya (7.0.2):
-    - Moya/Core (= 7.0.2)
+  - Moya (8.0.0-beta.2):
+    - Moya/Core (= 8.0.0-beta.2)
   - Moya-ObjectMapper/Core (1.4):
-    - Moya (~> 7.0.2)
-    - ObjectMapper (~> 1.4)
+    - Moya
+    - ObjectMapper
   - Moya-ObjectMapper/RxSwift (1.4):
     - Moya-ObjectMapper/Core
-    - Moya/RxSwift (~> 7.0.2)
-    - RxSwift (~> 2.6.0)
-  - Moya/Core (7.0.2):
-    - Alamofire (~> 3.5)
-    - Result (~> 2.0)
-  - Moya/RxSwift (7.0.2):
+    - Moya/RxSwift
+    - RxSwift
+  - Moya/Core (8.0.0-beta.2):
+    - Alamofire (~> 4.0.0)
+    - Result
+  - Moya/RxSwift (8.0.0-beta.2):
     - Moya/Core
-    - RxSwift (~> 2.0)
-  - ObjectMapper (1.4.0)
-  - Result (2.1.3)
-  - RxCocoa (2.6.0):
-    - RxSwift (~> 2.5)
-  - RxSwift (2.6.0)
+    - RxSwift
+  - ObjectMapper (2.0.0)
+  - Result (3.0.0)
+  - RxCocoa (3.0.0-beta.1):
+    - RxSwift (~> 3.0.0-beta.1)
+  - RxSwift (3.0.0-beta.2)
 
 DEPENDENCIES:
   - CocoaLumberjack/Swift
@@ -60,45 +59,52 @@ DEPENDENCIES:
   - Firebase/AdMob
   - GooglePlaces
   - JGProgressHUD
-  - MapboxStatic.swift (from `https://github.com/mapbox/MapboxStatic.swift.git`, branch `master`)
-  - Moya-ObjectMapper/RxSwift
-  - Moya/RxSwift
-  - RxCocoa
-  - RxSwift
+  - Moya (from `https://github.com/Moya/Moya`)
+  - Moya-ObjectMapper/RxSwift (from `https://github.com/ivanbruel/Moya-ObjectMapper`)
+  - RxCocoa (= 3.0.0-beta.1)
+  - RxSwift (from `https://github.com/ReactiveX/RxSwift`)
 
 EXTERNAL SOURCES:
-  MapboxStatic.swift:
-    :branch: master
-    :git: https://github.com/mapbox/MapboxStatic.swift.git
+  Moya:
+    :git: https://github.com/Moya/Moya
+  Moya-ObjectMapper:
+    :git: https://github.com/ivanbruel/Moya-ObjectMapper
+  RxSwift:
+    :git: https://github.com/ReactiveX/RxSwift
 
 CHECKOUT OPTIONS:
-  MapboxStatic.swift:
-    :commit: d6f162baef04c73b4f699c1b728a3d81776950e6
-    :git: https://github.com/mapbox/MapboxStatic.swift.git
+  Moya:
+    :commit: aa8604e5c22da70850dd3597b797975378fe2207
+    :git: https://github.com/Moya/Moya
+  Moya-ObjectMapper:
+    :commit: b0ea096d5c77371be2ca1afecff59371a112c11a
+    :git: https://github.com/ivanbruel/Moya-ObjectMapper
+  RxSwift:
+    :commit: 832f79cd02a2eae6316ff989eb38c2dced826a34
+    :git: https://github.com/ReactiveX/RxSwift
 
 SPEC CHECKSUMS:
-  Alamofire: b70a7352335f8ea5babd0a923eb7e8eacc67b877
-  CocoaLumberjack: 97fab7ee5f507fe54445cca7ea80f926729cfd15
-  Crashlytics: 4391d8df0b125345e9f209c5db6e7f40a6a8435d
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  CocoaLumberjack: c823149bccc5519a9447aeb433be7b1212a7d6a5
+  Crashlytics: 27acca95a01b042a8294291dd6dff27f8f6af6d7
   Fabric: 5755268d0171435ab167e3d0878a28a777deaf10
   Firebase: 34187200ef4979dbd485c7aa685ef078bf587c86
   FirebaseAnalytics: 3f5358d9104adf159cc8d99b7b501e50099a39ad
   FirebaseInstanceID: ba1e640935235e5fac39dfa816fe7660e72e1a8a
   Google-Mobile-Ads-SDK: 0e864ab93ba1ff8afe92e16de0e4e883f581ed33
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
-  GoogleMaps: f09da64fc987c1aa29394567c3cab5a3df83c402
-  GooglePlaces: 72fab1d1651c6df0322f2aad245ffb15b80d3c56
+  GoogleMaps: 06589b9a38097bce0cd6e90f0fd9b5e4b4a9344c
+  GooglePlaces: 16e96266483b8010e9f275399403647978523c86
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
   JGProgressHUD: 1617b0940cf80bb53e8f7d6f0fd69252ea45d6d4
-  MapboxStatic.swift: a3ad6eb4a535718e354ee1928158d921ae59cb1f
-  Moya: 430be684a6a53d5ad8c0b8222c4232d4f1810848
-  Moya-ObjectMapper: a50b96426316be8892fe20dfe02cf8bc947e657d
-  ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
-  Result: 18e1a7597fbcca5923c565b40a25a98afafdee02
-  RxCocoa: 89ab00d5753502520227940e3a0e0a0413683c6b
-  RxSwift: 77f3a0b15324baa7a1c9bfa9f199648a82424e26
+  Moya: 920d40f738e6f4ece84010cec701bb9693be8251
+  Moya-ObjectMapper: d5ac1aafdc31f2b50620ae78b8d4cdefd0504791
+  ObjectMapper: aed2570edabbd3c9b26c939e1cabdb6558f933e0
+  Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
+  RxCocoa: 8cecf331302b8ae5381bbab1bccba4ede2eae6a8
+  RxSwift: 0ea939d7d97cb70657190ffde8dc2a9b455778fc
 
-PODFILE CHECKSUM: 898bf2b28ed87bde7b8ac33ef2bfbdc60772c259
+PODFILE CHECKSUM: 2e27b8c498f225cbf6de6182a00a9f1ffb1dda8c
 
 COCOAPODS: 1.1.0.rc.2

@@ -72,11 +72,11 @@
 		EA894F721D3DA23600FE5F56 /* Route.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteTableViewCell.swift; sourceTree = "<group>"; };
 		EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteProgressBarView.swift; sourceTree = "<group>"; };
-		EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		EAA180AE1D38F233002B22B1 /* ActivityIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = ActivityIndicator.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EAB165221D3B3CEC0069A6EA /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Bold.ttf"; path = "Fonts/Montserrat/Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		EAB165231D3B3CEC0069A6EA /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Montserrat-Regular.ttf"; path = "Fonts/Montserrat/Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		EAB165281D3B475D0069A6EA /* SelectRouteCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRouteCollectionViewController.swift; sourceTree = "<group>"; };
-		EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRouteBaseViewController.swift; sourceTree = "<group>"; };
+		EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddRouteBaseViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteSummaryCollectionViewCell.swift; sourceTree = "<group>"; };
 		EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -89,9 +89,9 @@
 		EAF2B3421D38FBDE00723238 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Regular.ttf"; path = "Fonts/OpenSans/OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		EAF2B3431D38FBDE00723238 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Semibold.ttf"; path = "Fonts/OpenSans/OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		EAF2B3441D38FBDE00723238 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-SemiboldItalic.ttf"; path = "Fonts/OpenSans/OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
-		EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLocationViewController.swift; sourceTree = "<group>"; };
+		EAF2B34F1D39A68700723238 /* AddLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddLocationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTableViewCell.swift; sourceTree = "<group>"; };
-		EAF2B3531D3B240800723238 /* AddStartingLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddStartingLocationViewController.swift; sourceTree = "<group>"; };
+		EAF2B3531D3B240800723238 /* AddStartingLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddStartingLocationViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EAF2B3551D3B241B00723238 /* AddDestinationLocationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddDestinationLocationViewController.swift; sourceTree = "<group>"; };
 		EAF2B3581D3B365F00723238 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Extensions/Extensions.swift; sourceTree = "<group>"; };
 		EB88DE0F7A392BE6BB69B592 /* Pods-Routes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Routes.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Routes/Pods-Routes.debug.xcconfig"; sourceTree = "<group>"; };
@@ -305,6 +305,7 @@
 					EA2E56D21D37246F00D2E4C7 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = 23KKLX956K;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.Maps.iOS = {
 								enabled = 0;
@@ -645,7 +646,7 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacks205.routes.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)Debug";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
@@ -662,7 +663,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.jacks205.routes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 2.3;
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};

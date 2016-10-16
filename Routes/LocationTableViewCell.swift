@@ -22,7 +22,7 @@ class LocationTableViewCell: UITableViewCell {
     let locationNameLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
-        lb.textColor = UIColor.whiteColor()
+        lb.textColor = UIColor.white
         return lb
     }()
     
@@ -48,20 +48,20 @@ class LocationTableViewCell: UITableViewCell {
     }
     
     func setConstraints() {
-        pinImageView.leadingAnchor.constraintEqualToAnchor(leadingAnchor, constant: 16).active = true
-        pinImageView.centerYAnchor.constraintEqualToAnchor(centerYAnchor).active = true
+        pinImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        pinImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
-        locationNameLabel.leadingAnchor.constraintEqualToAnchor(pinImageView.trailingAnchor, constant: 16).active = true
-        locationNameLabel.topAnchor.constraintEqualToAnchor(topAnchor, constant: 10).active = true
+        locationNameLabel.leadingAnchor.constraint(equalTo: pinImageView.trailingAnchor, constant: 16).isActive = true
+        locationNameLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         
-        addressLabel.leadingAnchor.constraintEqualToAnchor(pinImageView.trailingAnchor, constant: 16).active = true
-        addressLabel.topAnchor.constraintEqualToAnchor(locationNameLabel.bottomAnchor, constant: 0).active = true
-        addressLabel.trailingAnchor.constraintLessThanOrEqualToAnchor(trailingAnchor, constant: -16).active = true
+        addressLabel.leadingAnchor.constraint(equalTo: pinImageView.trailingAnchor, constant: 16).isActive = true
+        addressLabel.topAnchor.constraint(equalTo: locationNameLabel.bottomAnchor, constant: 0).isActive = true
+        addressLabel.trailingAnchor.constraint(lessThanOrEqualTo: trailingAnchor, constant: -16).isActive = true
     }
     
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         if selected {
-            addressLabel.textColor = UIColor.whiteColor()
+            addressLabel.textColor = UIColor.white
         } else {
             addressLabel.textColor = locationAddressTextColor
         }

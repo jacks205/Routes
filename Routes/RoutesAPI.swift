@@ -20,68 +20,72 @@ var HERE_API_APP_CODE: String?
     let RoutesDirectionAPI: RxMoyaProvider<HERERouteAPI> = RxMoyaProvider<HERERouteAPI>()
 #endif
 
-
 // MARK: - Provider support
 
 private extension String {
     var URLEscapedString: String {
-        return self.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLHostAllowedCharacterSet())!
+        return self.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlHostAllowed)!
     }
 }
 
 public enum HERERouteAPI {
-    case CalculateRoute((CLLocationCoordinate2D, CLLocationCoordinate2D), (CLLocationCoordinate2D, CLLocationCoordinate2D))
-    case GetRoute(String)
+    case calculateRoute((CLLocationCoordinate2D, CLLocationCoordinate2D), (CLLocationCoordinate2D, CLLocationCoordinate2D))
+    case getRoute(String)
 }
 
 extension HERERouteAPI: TargetType {
-    public var baseURL: NSURL { return NSURL(string: "https://route.cit.api.here.com/routing/7.2")! }
+    public var baseURL: URL { return URL(string: "https://route.cit.api.here.com/routing/7.2")! }
     public var path: String {
         switch self {
-        case .CalculateRoute:
+        case .calculateRoute:
             return "/calculateroute.json"
-        case .GetRoute:
+        case .getRoute:
             return "/getroute.json"
         }
     }
     public var method: Moya.Method {
-        return .GET
+        return .get
     }
-    public var parameters: [String: AnyObject]? {
+    public var parameters: [String: Any]? {
         guard let apiId = HERE_API_APP_ID, let apiCode = HERE_API_APP_CODE else {
             fatalError("HERE API ID and CODE must be provided.")
         }
-        var defaultParameters: [String: AnyObject] = [
-            "app_id": apiId,
-            "app_code": apiCode,
-            "mode": "fastest;car;traffic:enabled",
-            "alternatives": 2,
-            "metricSystem": "imperial",
-            "routeAttributes": "waypoints,summary,legs,lines,routeId"
+        var defaultParameters: [String: Any] = [
+            "app_id": apiId as AnyObject,
+            "app_code": apiCode as AnyObject,
+            "mode": "fastest;car;traffic:enabled" as AnyObject,
+            "alternatives": 2 as AnyObject,
+            "metricSystem": "imperial" as AnyObject,
+            "routeAttributes": "waypoints,summary,legs,lines,routeId" as AnyObject
         ]
         switch self {
-        case .CalculateRoute(let waypoint0, let waypoint1):
-            defaultParameters["waypoint0"] = "geo!\(waypoint0.0),\(waypoint0.1)"
-            defaultParameters["waypoint1"] = "geo!\(waypoint1.0),\(waypoint1.1)"
-        case .GetRoute(let routeId):
-            defaultParameters["routeId"] = routeId
+        case .calculateRoute(let waypoint0, let waypoint1):
+            defaultParameters["waypoint0"] = "geo!\(waypoint0.0),\(waypoint0.1)" as AnyObject?
+            defaultParameters["waypoint1"] = "geo!\(waypoint1.0),\(waypoint1.1)" as AnyObject?
+        case .getRoute(let routeId):
+            defaultParameters["routeId"] = routeId as AnyObject?
         }
         return defaultParameters
     }
     
-    public var sampleData: NSData {
-        return NSData()
+    public var sampleData: Data {
+        return Data()
     }
     
     public var multipartBody: [MultipartFormData]? {
         return nil
     }
+    
+    public var task: Task {
+        return Task.request
+    }
+    
 }
 
-private func JSONResponseDataFormatter(data: NSData) -> NSData {
+private func JSONResponseDataFormatter(_ data: Data) -> Data {
     do {
-        let dataAsJSON = try NSJSONSerialization.JSONObjectWithData(data, options: [])
-        let prettyData =  try NSJSONSerialization.dataWithJSONObject(dataAsJSON, options: .PrettyPrinted)
+        let dataAsJSON = try JSONSerialization.jsonObject(with: data, options: [])
+        let prettyData =  try JSONSerialization.data(withJSONObject: dataAsJSON, options: .prettyPrinted)
         return prettyData
     } catch {
         return data //fallback to original data if it cant be serialized

@@ -21,22 +21,22 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
         tb.translatesAutoresizingMaskIntoConstraints = false
         tb.allowsMultipleSelection = false
         tb.tableFooterView = UIView(frame: CGRect.zero)
-        tb.separatorInset = UIEdgeInsetsZero
-        tb.layoutMargins = UIEdgeInsetsZero
+        tb.separatorInset = UIEdgeInsets.zero
+        tb.layoutMargins = UIEdgeInsets.zero
         tb.estimatedRowHeight = 72
         tb.rowHeight = 72
         tb.backgroundColor = addLocationViewBackgroundColor
-        tb.keyboardDismissMode = .OnDrag
+        tb.keyboardDismissMode = .onDrag
         return tb
     }()
     
     let searchBar: UISearchBar = {
         let sb = UISearchBar()
         sb.showsCancelButton = false
-        sb.searchBarStyle = .Minimal
-        sb.barStyle = .Default
-        sb.tintColor = UIColor.whiteColor()
-        sb.keyboardAppearance = .Dark
+        sb.searchBarStyle = .minimal
+        sb.barStyle = .default
+        sb.tintColor = UIColor.white
+        sb.keyboardAppearance = .dark
         return sb
     }()
     
@@ -49,7 +49,7 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
         setConstraints()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         #if RELEASE
             searchBar.becomeFirstResponder()
         #endif
@@ -64,17 +64,17 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
     func bindSearchBar() {
         navigationItem.titleView = searchBar
         searchBar
-            .rx_searchButtonClicked
-            .subscribeNext {
+            .rx.searchButtonClicked
+            .subscribe(onNext: {
                 self.searchBar.resignFirstResponder()
-            }
+            })
             .addDisposableTo(db)
         
         searchBar
-            .rx_cancelButtonClicked
-            .subscribeNext {
+            .rx.cancelButtonClicked
+            .subscribe(onNext: {
                 self.searchBar.resignFirstResponder()
-            }
+            })
             .addDisposableTo(db)
         
         #if DEBUG
@@ -84,13 +84,13 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
         #endif
         
         searchBar
-            .rx_text
+            .rx.text
             .asDriver()
             .throttle(throttle)
             .distinctUntilChanged()
             .flatMap { query in
-                GMSPlacesClient.sharedClient()
-                    .rx_autocompleteQuery(query, bounds: routesLocationManager.rx_bounds.value, filter: nil)
+                GMSPlacesClient.shared()
+                    .rx_autocompleteQuery(query, bounds: RoutesLocationService.instance.bounds.value, filter: nil)
                     .asDriver(onErrorJustReturn: [])
             }
             .map { $0.map(RoutesLocation.init) }
@@ -99,13 +99,13 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
     }
     
     func bindTableView() {
-        tableView.registerClass(LocationTableViewCell.self, forCellReuseIdentifier: "LocationCell")
+        tableView.register(LocationTableViewCell.self, forCellReuseIdentifier: "LocationCell")
         tableView
-            .rx_setDelegate(self)
+            .rx.setDelegate(self)
             .addDisposableTo(db)
         locations
             .asObservable()
-            .bindTo(tableView.rx_itemsWithCellIdentifier("LocationCell", cellType: LocationTableViewCell.self)) { [weak self] (row, element, cell) in
+            .bindTo(tableView.rx.items(cellIdentifier: "LocationCell", cellType: LocationTableViewCell.self)) { [weak self] (row, element, cell) in
                 self?.configureCell(element, cell: cell)
             }
             .addDisposableTo(db)
@@ -115,24 +115,24 @@ class AddLocationViewController: AddRouteBaseViewController, UITableViewDelegate
         view.addSubview(tableView)
     }
     
-    func configureCell(element: RoutesLocation, cell: LocationTableViewCell) {
+    func configureCell(_ element: RoutesLocation, cell: LocationTableViewCell) {
         let backgroundView = UIView()
         backgroundView.backgroundColor = locationCellSelectedBackgroundColor
         cell.selectedBackgroundView = backgroundView
         cell.locationNameLabel.attributedText = element.boldNameText(cell.boldFont, regularFont: cell.regularFont)
         cell.addressLabel.text = element.address
-        cell.backgroundColor = UIColor.clearColor()
-        cell.layoutMargins = UIEdgeInsetsZero
+        cell.backgroundColor = UIColor.clear
+        cell.layoutMargins = UIEdgeInsets.zero
     }
 
-    private func setConstraints() {
-        tableView.topAnchor.constraintEqualToAnchor(view.topAnchor).active = true
-        tableView.rightAnchor.constraintEqualToAnchor(view.rightAnchor).active = true
-        tableView.bottomAnchor.constraintEqualToAnchor(view.bottomAnchor).active = true
-        tableView.leftAnchor.constraintEqualToAnchor(view.leftAnchor).active = true
+    fileprivate func setConstraints() {
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
     }
     
-    func tableView(tableView: UITableView, editingStyleForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCellEditingStyle {
-        return .None
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
+        return .none
     }
 }

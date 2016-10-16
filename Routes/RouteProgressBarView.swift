@@ -12,8 +12,8 @@ class RouteProgressBarView: UIView, CAAnimationDelegate {
     
     let progressLayer = CAShapeLayer()
     
-    private var lastProgressValue = 0.0
-    private var lastProgressColor = UIColor.clearColor()
+    fileprivate var lastProgressValue = 0.0
+    fileprivate var lastProgressColor = UIColor.clear
     
     var animationDuration = 3.0
     var animationTimingFunction = CAMediaTimingFunction(controlPoints: 0.23, 1.0, 0.32, 1.0)
@@ -45,7 +45,7 @@ class RouteProgressBarView: UIView, CAAnimationDelegate {
         createProgressLayerPath()
     }
     
-    func updateProgressView(percentage: Double, color: UIColor, text: String) {
+    func updateProgressView(_ percentage: Double, color: UIColor, text: String) {
         animateProgressLayer(percentage)
         animateProgressLayerColor(color)
         textLabel.text = text
@@ -53,53 +53,53 @@ class RouteProgressBarView: UIView, CAAnimationDelegate {
         lastProgressColor = color
     }
     
-    private func createProgressLayerPath() {
+    fileprivate func createProgressLayerPath() {
         let path = UIBezierPath()
         var startPoint = CGPoint(x: 0, y: frame.height / 2)
-        path.moveToPoint(startPoint)
+        path.move(to: startPoint)
         startPoint.x = startPoint.x + frame.width
-        path.addLineToPoint(startPoint)
-        progressLayer.path = path.CGPath
+        path.addLine(to: startPoint)
+        progressLayer.path = path.cgPath
         progressLayer.lineWidth = frame.height
     }
     
-    private func createProgressLayer(startColor: UIColor) {
+    fileprivate func createProgressLayer(_ startColor: UIColor) {
         createProgressLayerPath()
         progressLayer.lineCap = kCALineCapRound
-        progressLayer.strokeColor = startColor.CGColor
-        progressLayer.fillColor = startColor.CGColor
-        progressLayer.backgroundColor = UIColor.clearColor().CGColor
-        layer.insertSublayer(progressLayer, atIndex: 0)
+        progressLayer.strokeColor = startColor.cgColor
+        progressLayer.fillColor = startColor.cgColor
+        progressLayer.backgroundColor = UIColor.clear.cgColor
+        layer.insertSublayer(progressLayer, at: 0)
     }
     
-    private func animateProgressLayer(percentage: Double) {
+    fileprivate func animateProgressLayer(_ percentage: Double) {
         let animation = CABasicAnimation(keyPath: "strokeEnd")
         animation.fromValue = lastProgressValue
         animation.toValue = percentage
         animation.duration = animationDuration
         animation.delegate = self
-        animation.removedOnCompletion = false
+        animation.isRemovedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         animation.timingFunction = animationTimingFunction
-        progressLayer.addAnimation(animation, forKey: "strokeEnd")
+        progressLayer.add(animation, forKey: "strokeEnd")
     }
     
-    private func animateProgressLayerColor(color: UIColor) {
+    fileprivate func animateProgressLayerColor(_ color: UIColor) {
         let animation = CABasicAnimation(keyPath: "strokeColor")
-        animation.fromValue = lastProgressColor.CGColor
-        animation.toValue = color.CGColor
+        animation.fromValue = lastProgressColor.cgColor
+        animation.toValue = color.cgColor
         animation.duration = animationDuration
         animation.delegate = self
-        animation.removedOnCompletion = false
+        animation.isRemovedOnCompletion = false
         animation.fillMode = kCAFillModeForwards
         animation.timingFunction = animationTimingFunction
-        progressLayer.addAnimation(animation, forKey: "strokeColor")
+        progressLayer.add(animation, forKey: "strokeColor")
     }
     
-    private func setConstraints() {
+    fileprivate func setConstraints() {
         let margins = layoutMarginsGuide
-        textLabel.leadingAnchor.constraintEqualToAnchor(margins.leadingAnchor, constant: 10).active = true
-        textLabel.centerYAnchor.constraintEqualToAnchor(margins.centerYAnchor).active = true
+        textLabel.leadingAnchor.constraint(equalTo: margins.leadingAnchor, constant: 10).isActive = true
+        textLabel.centerYAnchor.constraint(equalTo: margins.centerYAnchor).isActive = true
     }
 
 }

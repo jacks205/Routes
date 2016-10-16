@@ -7,12 +7,31 @@
 //
 
 import UIKit
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
 
 class RouteSummaryCollectionViewCell: UICollectionViewCell {
     
-    override var selected: Bool {
+    override var isSelected: Bool {
         didSet {
-            if selected {
+            if isSelected {
                 backgroundColor = bottomGradientBackgroundColor
             } else {
                 backgroundColor = progressBarViewBackgroundColor
@@ -32,8 +51,8 @@ class RouteSummaryCollectionViewCell: UICollectionViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 0
         lb.font = UIFont(name: "OpenSans", size: 14)
-        lb.textColor = UIColor.whiteColor()
-        lb.textAlignment = .Center
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
         return lb
     }()
     
@@ -42,37 +61,37 @@ class RouteSummaryCollectionViewCell: UICollectionViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 0
         lb.font = UIFont(name: "OpenSans", size: 14)
-        lb.textColor = UIColor.whiteColor()
-        lb.textAlignment = .Center
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
         return lb
     }()
     
-    private let arrowImageView: UIImageView = {
+    fileprivate let arrowImageView: UIImageView = {
         let ai = UIImageView(image: UIImage(named: "route-arrow"))
         ai.translatesAutoresizingMaskIntoConstraints = false
         ai.tintColor = bottomGradientBackgroundColor
         return ai
     }()
     
-    private let distanceLabel: UILabel = {
+    fileprivate let distanceLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 0
         lb.font = UIFont(name: "Montserrat-Regular", size: 12)
         lb.text = "DISTANCE"
-        lb.textColor = UIColor.whiteColor()
-        lb.textAlignment = .Center
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
         return lb
     }()
     
-    private let timeLabel: UILabel = {
+    fileprivate let timeLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 0
         lb.font = UIFont(name: "Montserrat-Regular", size: 12)
         lb.text = "TIME"
-        lb.textColor = UIColor.whiteColor()
-        lb.textAlignment = .Center
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
         return lb
     }()
     
@@ -81,8 +100,8 @@ class RouteSummaryCollectionViewCell: UICollectionViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 0
         lb.font = UIFont(name: "OpenSans", size: 12)
-        lb.textColor = UIColor.whiteColor()
-        lb.textAlignment = .Center
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
         return lb
     }()
     
@@ -91,19 +110,19 @@ class RouteSummaryCollectionViewCell: UICollectionViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 0
         lb.font = UIFont(name: "OpenSans", size: 12)
-        lb.textColor = UIColor.whiteColor()
-        lb.textAlignment = .Center
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
         return lb
     }()
     
-    private let viaLabel: UILabel = {
+    fileprivate let viaLabel: UILabel = {
         let lb = UILabel()
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 0
         lb.font = UIFont(name: "Montserrat-Regular", size: 12)
         lb.text = "VIA"
-        lb.textColor = UIColor.whiteColor()
-        lb.textAlignment = .Center
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
         return lb
     }()
     
@@ -112,8 +131,8 @@ class RouteSummaryCollectionViewCell: UICollectionViewCell {
         lb.translatesAutoresizingMaskIntoConstraints = false
         lb.numberOfLines = 0
         lb.font = UIFont(name: "OpenSans-Semibold", size: 14)
-        lb.textColor = UIColor.whiteColor()
-        lb.textAlignment = .Center
+        lb.textColor = UIColor.white
+        lb.textAlignment = .center
         return lb
     }()
     
@@ -132,8 +151,8 @@ class RouteSummaryCollectionViewCell: UICollectionViewCell {
         setConstraints()
     }
     
-    private var originLabelHeightConstraint: NSLayoutConstraint?
-    private var destinationLabelHeightConstraint: NSLayoutConstraint?
+    fileprivate var originLabelHeightConstraint: NSLayoutConstraint?
+    fileprivate var destinationLabelHeightConstraint: NSLayoutConstraint?
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -144,53 +163,50 @@ class RouteSummaryCollectionViewCell: UICollectionViewCell {
         if originLabelHeightConstraint == nil && destinationLabelHeightConstraint == nil {
             originLabel.sizeToFit()
             destinationLabel.sizeToFit()
-            originLabelHeightConstraint = originLabel.heightAnchor.constraintEqualToConstant(originLabel.frame.height)
-            destinationLabelHeightConstraint = destinationLabel.heightAnchor.constraintEqualToConstant(destinationLabel.frame.height)
-            originLabelHeightConstraint?.active = true
-            destinationLabelHeightConstraint?.active = true
+            originLabelHeightConstraint = originLabel.heightAnchor.constraint(equalToConstant: originLabel.frame.height)
+            destinationLabelHeightConstraint = destinationLabel.heightAnchor.constraint(equalToConstant: destinationLabel.frame.height)
+            originLabelHeightConstraint?.isActive = true
+            destinationLabelHeightConstraint?.isActive = true
         }
         
     }
     
-    private func setConstraints() {
+    fileprivate func setConstraints() {
         let mapHeight = frame.size.height * 0.4
         let mapHeightMetric = ["mapHeight": mapHeight]
         addConstraintsWithFormat("H:|-16-[v0]-16-|", views: mapView)
         addConstraintsWithFormat("V:|-10-[v1(mapHeight)]-16-[v0]", metrics: mapHeightMetric, views: [distanceLabel, mapView])
         addConstraintsWithFormat("V:[v1]-16-[v0]", metrics: nil, views: [timeLabel, mapView])
         
-        addConstraintsWithFormat("V:[v0]-0-[v1]", views: distanceLabel, distanceValueLabel)
+        addConstraintsWithFormat("V:[v0]-0-[v1]", distanceValueLabel, views: distanceLabel)
         addConstraintsWithFormat("H:|-48-[v0]", views: distanceLabel)
-        distanceValueLabel.centerXAnchor.constraintEqualToAnchor(distanceLabel.centerXAnchor, constant: 0).active = true
+        distanceValueLabel.centerXAnchor.constraint(equalTo: distanceLabel.centerXAnchor, constant: 0).isActive = true
         
-        addConstraintsWithFormat("V:[v0]-0-[v1]", views: timeLabel, timeValueLabel)
+        addConstraintsWithFormat("V:[v0]-0-[v1]", timeValueLabel, views: timeLabel)
         addConstraintsWithFormat("H:[v0]-48-|", views: timeLabel)
-        timeValueLabel.centerXAnchor.constraintEqualToAnchor(timeLabel.centerXAnchor, constant: 0).active = true
+        timeValueLabel.centerXAnchor.constraint(equalTo: timeLabel.centerXAnchor, constant: 0).isActive = true
         
-        addConstraintsWithFormat("V:[v0]-8-[v1]", views: distanceValueLabel, viaLabel)
-        addConstraintsWithFormat("V:[v0]-0-[v1]", views: viaLabel, viaValueLabel)
-        viaLabel.centerXAnchor.constraintEqualToAnchor(centerXAnchor, constant: 0).active = true
-        viaValueLabel.centerXAnchor.constraintEqualToAnchor(viaLabel.centerXAnchor, constant: 0).active = true
+        addConstraintsWithFormat("V:[v0]-8-[v1]", viaLabel, views: distanceValueLabel)
+        addConstraintsWithFormat("V:[v0]-0-[v1]", viaValueLabel, views: viaLabel)
+        viaLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true
+        viaValueLabel.centerXAnchor.constraint(equalTo: viaLabel.centerXAnchor, constant: 0).isActive = true
         
-        originLabel.centerXAnchor.constraintEqualToAnchor(centerXAnchor, constant: 0).active = true
-        originLabel.widthAnchor.constraintEqualToAnchor(mapView.widthAnchor, multiplier: 0.9).active = true
-        if UIApplication.sharedApplication().keyWindow?.rootViewController?.view.frame.width > 320 {
-            originLabel.topAnchor.constraintEqualToAnchor(viaValueLabel.bottomAnchor, constant: 32).active = true
+        originLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true
+        originLabel.widthAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 0.9).isActive = true
+        if UIApplication.shared.keyWindow?.rootViewController?.view.frame.width > 320 {
+            originLabel.topAnchor.constraint(equalTo: viaValueLabel.bottomAnchor, constant: 32).isActive = true
         } else {
-            originLabel.topAnchor.constraintEqualToAnchor(viaValueLabel.bottomAnchor, constant: 24).active = true
+            originLabel.topAnchor.constraint(equalTo: viaValueLabel.bottomAnchor, constant: 24).isActive = true
         }
         
-        arrowImageView.widthAnchor.constraintEqualToConstant(arrowImageView.frame.width).active = true
-        arrowImageView.heightAnchor.constraintEqualToConstant(arrowImageView.frame.height).active = true
-        arrowImageView.centerXAnchor.constraintEqualToAnchor(centerXAnchor, constant: 0).active = true
-        arrowImageView.topAnchor.constraintEqualToAnchor(originLabel.bottomAnchor, constant: 12).active = true
+        arrowImageView.widthAnchor.constraint(equalToConstant: arrowImageView.frame.width).isActive = true
+        arrowImageView.heightAnchor.constraint(equalToConstant: arrowImageView.frame.height).isActive = true
+        arrowImageView.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true
+        arrowImageView.topAnchor.constraint(equalTo: originLabel.bottomAnchor, constant: 12).isActive = true
         
-        destinationLabel.centerXAnchor.constraintEqualToAnchor(centerXAnchor, constant: 0).active = true
-        destinationLabel.topAnchor.constraintEqualToAnchor(arrowImageView.bottomAnchor, constant: 12).active = true
-        destinationLabel.widthAnchor.constraintEqualToAnchor(mapView.widthAnchor, multiplier: 0.9).active = true
-        
-        
-        
+        destinationLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 0).isActive = true
+        destinationLabel.topAnchor.constraint(equalTo: arrowImageView.bottomAnchor, constant: 12).isActive = true
+        destinationLabel.widthAnchor.constraint(equalTo: mapView.widthAnchor, multiplier: 0.9).isActive = true
     }
     
 }

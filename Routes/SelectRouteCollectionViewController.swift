@@ -20,7 +20,7 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
     
     let collectionView: UICollectionView = {
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: CenterCellCollectionViewFlowLayout())
-        cv.registerClass(RouteSummaryCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        cv.register(RouteSummaryCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.backgroundColor = addLocationViewBackgroundColor
         cv.showsHorizontalScrollIndicator = false
@@ -31,9 +31,9 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
     let confirmBtn: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
-        btn.setTitle("CONFIRM", forState: .Normal)
-        btn.setTitleColor(locationAddressTextColor, forState: .Normal)
-        btn.setTitleColor(locationAddressTextColor, forState: .Highlighted)
+        btn.setTitle("CONFIRM", for: UIControlState())
+        btn.setTitleColor(locationAddressTextColor, for: UIControlState())
+        btn.setTitleColor(locationAddressTextColor, for: .highlighted)
         btn.titleLabel?.font = UIFont(name: "Montserrat-Regular", size: 14)
         btn.backgroundColor = bottomGradientBackgroundColor
         return btn
@@ -56,16 +56,15 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
     }
     
     override func updateViewConstraints() {
-        setConstraints()
         super.updateViewConstraints()
     }
     
-    private func bindCollectionView() {
+    fileprivate func bindCollectionView() {
         collectionView
-            .rx_setDelegate(self)
+            .rx.setDelegate(self)
             .addDisposableTo(db)
         if let flowLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
-            flowLayout.scrollDirection = .Horizontal
+            flowLayout.scrollDirection = .horizontal
             flowLayout.minimumLineSpacing = view.frame.width * (cellSizeDifference / 4)
         }
         routes
@@ -76,17 +75,17 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
             }
             .addDisposableTo(db)
         collectionView
-            .rx_itemSelected
-            .subscribeNext { index in
+            .rx.itemSelected
+            .subscribe(onNext: { index in
                 self.routeSelected.value = true
-            }
+            })
             .addDisposableTo(db)
         
         collectionView
-            .rx_itemDeselected
-            .subscribeNext { index in
+            .rx.itemDeselected
+            .subscribe(onNext: { index in
                 self.routeSelected.value = false
-            }
+            })
             .addDisposableTo(db)
         collectionView.frame = view.frame
         collectionView.contentInset = UIEdgeInsets(top: 0, left: view.frame.width * (cellSizeDifference / 2), bottom: 0, right: view.frame.width * (cellSizeDifference / 2))
@@ -96,63 +95,63 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, UICollect
     func bindNextBtn() {
         routeSelected
             .asObservable()
-            .bindTo(confirmBtn.rx_enabled)
+            .bindTo(confirmBtn.rx.enabled)
             .addDisposableTo(db)
         routeSelected
             .asObservable()
-            .subscribeNext { selected in
+            .subscribe(onNext: { selected in
                 if selected {
                     self.confirmBtn.backgroundColor = lightGreenColor
-                    self.confirmBtn.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                    self.confirmBtn.setTitleColor(.white, for: .normal)
                 } else {
                     self.confirmBtn.backgroundColor = bottomGradientBackgroundColor
-                    self.confirmBtn.setTitleColor(locationAddressTextColor, forState: .Normal)
+                    self.confirmBtn.setTitleColor(locationAddressTextColor, for: .normal)
                 }
-            }
+            })
             .addDisposableTo(db)
         view.addSubview(confirmBtn)
         confirmBtn
-            .rx_tap
-            .subscribeNext {
-                self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-            }
+            .rx.tap
+            .subscribe(onNext: {
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            })
             .addDisposableTo(db)
     }
     
-    func configureCell(row: Int, element: RouteType, cell: RouteSummaryCollectionViewCell) {
+    func configureCell(_ row: Int, element: RouteType, cell: RouteSummaryCollectionViewCell) {
         cell.backgroundColor = progressBarViewBackgroundColor
         cell.layer.cornerRadius = 12
-        
-        
         cell.originLabel.text = ""
         cell.destinationLabel.text = ""
         
         let summary = element.summary
-        cell.distanceValueLabel.text = "\(summary.distance) mi"
-        let (hours, minutes) = summary.travelTime.secondsToHoursMinutes()
+        cell.distanceValueLabel.text = "\(summary?.distance) mi"
+        let (hours, minutes) = (summary?.travelTime.secondsToHoursMinutes())!
         cell.timeValueLabel.text = (hours > 0 ? "\(hours) hrs" : "") + (minutes > 0 ? "\(minutes) min" : "")
         cell.layoutIfNeeded()
         
-        let duration = summary.baseTime / summary.travelTime
-        if duration > 0.80 {
-            cell.timeValueLabel.textColor = darkGreenColor
-        } else if duration > 0.60 {
-            cell.timeValueLabel.textColor = darkYellowColor
-        } else {
-            cell.timeValueLabel.textColor = darkRedColor
+        if let summary = summary {
+            let duration = summary.baseTime / summary.travelTime
+            if duration > 0.80 {
+                cell.timeValueLabel.textColor = darkGreenColor
+            } else if duration > 0.60 {
+                cell.timeValueLabel.textColor = darkYellowColor
+            } else {
+                cell.timeValueLabel.textColor = darkRedColor
+            }
         }
     }
     
     func setConstraints() {
         view.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
-        view.addConstraintsWithFormat("V:|[v0][v1(44)]-|", views: collectionView, confirmBtn)
+        view.addConstraintsWithFormat("V:|[v0][v1(44)]-|", confirmBtn, views: collectionView)
         
-        confirmBtn.leadingAnchor.constraintEqualToAnchor(view.leadingAnchor).active = true
-        confirmBtn.trailingAnchor.constraintEqualToAnchor(view.trailingAnchor).active = true
-        confirmBtn.centerXAnchor.constraintEqualToAnchor(view.centerXAnchor).active = true
+        confirmBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        confirmBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        confirmBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     }
     
-    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: view.frame.width * cellSizePercentage, height: view.frame.height * cellSizePercentage)
     }
 }

@@ -9,15 +9,13 @@ target 'Routes' do
   pod 'Fabric'
   pod 'Crashlytics'
   pod 'CocoaLumberjack/Swift'
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'Moya/RxSwift'
-  pod 'Moya-ObjectMapper/RxSwift'
   pod 'GooglePlaces'
   pod 'JGProgressHUD'
-  pod 'MapboxStatic.swift', :git => 'https://github.com/mapbox/MapboxStatic.swift.git', :branch => 'master'
   pod 'Firebase/AdMob'
-
+  pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/ivanbruel/Moya-ObjectMapper'
+  pod 'Moya', :git => 'https://github.com/Moya/Moya'
+  pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift'
+  pod 'RxCocoa', '3.0.0-beta.1'
   target 'RoutesTests' do
     inherit! :search_paths
     # Pods for testing

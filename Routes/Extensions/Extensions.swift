@@ -10,31 +10,30 @@ import UIKit
 import RxSwift
 import RxCocoa
 import GooglePlaces
-import MapboxStatic
 
-extension Snapshot {
-    func rx_image() -> Observable<UIImage?> {
-        return Observable<UIImage?>.create { obs -> Disposable in
-            let task = self.image { (image, error) in
-                defer { obs.onCompleted() }
-                guard error == nil else {
-                    obs.onError(error!)
-                    return
-                }
-                obs.onNext(image)
-            }
-            task.resume()
-            return AnonymousDisposable { task.cancel() }
-        }
-    }
-}
+//extension Snapshot {
+//    func rx.image() -> Observable<UIImage?> {
+//        return Observable<UIImage?>.create { obs -> Disposable in
+//            let task = self.image { (image, error) in
+//                defer { obs.onCompleted() }
+//                guard error == nil else {
+//                    obs.onError(error!)
+//                    return
+//                }
+//                obs.onNext(image)
+//            }
+//            task.resume()
+//            return AnonymousDisposable { task.cancel() }
+//        }
+//    }
+//}
 
 class RoutesLocation {
     
-    let prediction: GMSAutocompletePrediction
+    let prediction: GMSAutocompletePrediction?
     
     init() {
-        self.prediction = GMSAutocompletePrediction()
+        prediction = nil
     }
     
     init(prediction: GMSAutocompletePrediction) {
@@ -42,32 +41,32 @@ class RoutesLocation {
     }
 
     var name: String {
-        return prediction.attributedPrimaryText.string
+        return prediction?.attributedPrimaryText.string ?? ""
     }
     
     var address: String? {
-        return prediction.attributedSecondaryText?.string
+        return prediction?.attributedSecondaryText?.string
     }
     
     var fullAddress: String? {
-        return prediction.attributedFullText.string
+        return prediction?.attributedFullText.string
     }
     
     var placeID: String? {
-        return prediction.placeID
+        return prediction?.placeID
     }
     
-    func boldNameText(boldFont: UIFont, regularFont: UIFont) -> NSMutableAttributedString? {
-        return prediction.boldedPrimaryText(boldFont, regularFont: regularFont)
+    func boldNameText(_ boldFont: UIFont, regularFont: UIFont) -> NSMutableAttributedString? {
+        return prediction?.boldedPrimaryText(boldFont, regularFont: regularFont)
     }
 }
 
 extension GMSAutocompletePrediction {
-    func boldedPrimaryText(boldFont: UIFont, regularFont: UIFont) -> NSMutableAttributedString? {
+    func boldedPrimaryText(_ boldFont: UIFont, regularFont: UIFont) -> NSMutableAttributedString? {
         guard let bolded = attributedPrimaryText.mutableCopy() as? NSMutableAttributedString else {
             return nil
         }
-        bolded.enumerateAttribute(kGMSAutocompleteMatchAttribute, inRange: NSRange(location: 0, length: bolded.length), options: []) { (value, range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
+        bolded.enumerateAttribute(kGMSAutocompleteMatchAttribute, in: NSRange(location: 0, length: bolded.length), options: []) { (value, range: NSRange, stop: UnsafeMutablePointer<ObjCBool>) -> Void in
             let font = value == nil ? regularFont : boldFont
             bolded.addAttribute(NSFontAttributeName, value: font, range: range)
         }
@@ -76,11 +75,11 @@ extension GMSAutocompletePrediction {
 }
 
 extension GMSPlacesClient {
-    func rx_autocompleteQuery(query: String, bounds: GMSCoordinateBounds?, filter: GMSAutocompleteFilter?) -> Observable<[GMSAutocompletePrediction]> {
+    func rx_autocompleteQuery(_ query: String, bounds: GMSCoordinateBounds?, filter: GMSAutocompleteFilter?) -> Observable<[GMSAutocompletePrediction]> {
         return Observable<[GMSAutocompletePrediction]>.create { obs -> Disposable in
-            UIApplication.sharedApplication().networkActivityIndicatorVisible = true
+            UIApplication.shared.isNetworkActivityIndicatorVisible = true
             self.autocompleteQuery(query, bounds: bounds, filter: filter, callback: { (predictions, error) in
-                UIApplication.sharedApplication().networkActivityIndicatorVisible = false
+                UIApplication.shared.isNetworkActivityIndicatorVisible = false
                 defer { obs.onCompleted() }
                 guard error == nil else {
                     obs.onError(error!)
@@ -92,22 +91,22 @@ extension GMSPlacesClient {
                     obs.onNext([])
                 }
             })
-            return NopDisposable.instance
+            return Disposables.create()
         }
     }
 }
 
 extension UIView {
-    func addConstraintsWithFormat(format: String, metrics: [String: AnyObject]?, views: [UIView]) {
+    func addConstraintsWithFormat(_ format: String, metrics: [String: Any]?, views: [UIView]) {
         var viewsDictionary = [String : UIView]()
-        for (index, view) in views.enumerate() {
+        for (index, view) in views.enumerated() {
             let key = "v\(index)"
             viewsDictionary[key] = view
         }
-        addConstraints(NSLayoutConstraint.constraintsWithVisualFormat(format, options: NSLayoutFormatOptions(), metrics: metrics, views: viewsDictionary))
+        addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutFormatOptions(), metrics: metrics, views: viewsDictionary))
     }
     
-    func addConstraintsWithFormat(format: String, views: UIView...) {
+    func addConstraintsWithFormat(_ format: String, views: UIView...) {
         addConstraintsWithFormat(format, metrics: nil, views: views)
     }
 }
@@ -115,7 +114,7 @@ extension UIView {
 //https://gist.github.com/mmick66/9812223
 class CenterCellCollectionViewFlowLayout: UICollectionViewFlowLayout {
     
-    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+    override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         
         let rectBounds: CGRect = self.collectionView!.bounds
         let halfWidth: CGFloat = rectBounds.size.width * CGFloat(0.50)
@@ -123,15 +122,15 @@ class CenterCellCollectionViewFlowLayout: UICollectionViewFlowLayout {
         
         let proposedRect: CGRect = self.collectionView!.bounds
         
-        let attributesArray: NSArray = self.layoutAttributesForElementsInRect(proposedRect)!
+        let attributesArray: NSArray = self.layoutAttributesForElements(in: proposedRect)! as NSArray
         
         var candidateAttributes: UICollectionViewLayoutAttributes?
         
-        for layoutAttributes: AnyObject in attributesArray {
+        for layoutAttributes: Any in attributesArray {
             
             if let _layoutAttributes = layoutAttributes as? UICollectionViewLayoutAttributes {
                 
-                if _layoutAttributes.representedElementCategory != UICollectionElementCategory.Cell {
+                if _layoutAttributes.representedElementCategory != UICollectionElementCategory.cell {
                     continue
                 }
                 

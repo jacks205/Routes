@@ -11,23 +11,22 @@ import RxSwift
 import RxCocoa
 import GooglePlaces
 
-let routesLocationManager = RoutesLocationManager()
-
-class RoutesLocationManager {
+class RoutesLocationService {
     
-    private (set) var rx_authorized: Driver<Bool>
-    private (set) var rx_location: Driver<CLLocationCoordinate2D>
-    private (set) var rx_bounds = Variable<GMSCoordinateBounds?>(nil)
+    static let instance = RoutesLocationService()
     
-    private let locationManager = CLLocationManager()
+    fileprivate (set) var authorized: Driver<Bool>
+    fileprivate (set) var location: Driver<CLLocationCoordinate2D>
+    fileprivate (set) var bounds = Variable<GMSCoordinateBounds?>(nil)
+    
+    fileprivate let locationManager = CLLocationManager()
     
     let db = DisposeBag()
     
     init() {
         locationManager.distanceFilter = kCLDistanceFilterNone
         locationManager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
-        
-        rx_authorized = Observable.deferred { [weak locationManager] in
+        authorized = Observable.deferred { [weak locationManager] in
             let status = CLLocationManager.authorizationStatus()
             guard let locationManager = locationManager else {
                 return Observable.just(status)
@@ -36,17 +35,17 @@ class RoutesLocationManager {
                 .rx_didChangeAuthorizationStatus
                 .startWith(status)
             }
-            .asDriver(onErrorJustReturn: CLAuthorizationStatus.NotDetermined)
+            .asDriver(onErrorJustReturn: CLAuthorizationStatus.notDetermined)
             .map {
                 switch $0 {
-                case .AuthorizedWhenInUse:
+                case .authorizedAlways:
                     return true
                 default:
                     return false
                 }
         }
         
-        rx_location = locationManager
+        location = locationManager
             .rx_didUpdateLocations
             .asDriver(onErrorJustReturn: [])
             .flatMap {
@@ -54,10 +53,10 @@ class RoutesLocationManager {
             }
             .map { $0.coordinate }
         
-        rx_location
+        location
             .map { location in
                 //http://stackoverflow.com/a/31127466/4684652
-                func locationWithBearing(bearing: Double, distanceMeters: Double, origin: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
+                func locationWithBearing(_ bearing: Double, distanceMeters: Double, origin: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
                     let distRadians = distanceMeters / (6372797.6)
                     
                     let rbearing = bearing * M_PI / 180.0
@@ -74,11 +73,50 @@ class RoutesLocationManager {
                 let southWest = locationWithBearing(225, distanceMeters: 50000, origin: location)
                 return GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
             }
-            .drive(rx_bounds)
+            .drive(bounds)
             .addDisposableTo(db)
         
         locationManager.requestWhenInUseAuthorization()
         locationManager.startUpdatingLocation()
+    }
+    
+}
+
+class RxCLLocationManagerDelegateProxy: DelegateProxy, CLLocationManagerDelegate, DelegateProxyType {
+    //We need a way to read the current delegate
+    static func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
+        //swiftlint:disable force_cast
+        let lm: CLLocationManager = object as! CLLocationManager
+        return lm.delegate
+    }
+    //We need a way to set the current delegate
+    static func setCurrentDelegate(_ delegate: AnyObject?, toObject object: AnyObject) {
+        //swiftlint:disable force_cast
+        let lm: CLLocationManager = object as! CLLocationManager
+        lm.delegate = delegate as? CLLocationManagerDelegate
+    }
+}
+
+extension CLLocationManager {
+    
+    public var rx_delegate: DelegateProxy {
+        return RxCLLocationManagerDelegateProxy.proxyForObject(RxCLLocationManagerDelegateProxy.self)
+    }
+    
+    public var rx_didChangeAuthorizationStatus: Observable<CLAuthorizationStatus> {
+        return rx_delegate.observe(#selector(CLLocationManagerDelegate.locationManager(_:didChangeAuthorization:)))
+            .map { params in
+                //swiftlint:disable force_cast
+                return params[1] as! CLAuthorizationStatus
+        }
+    }
+    
+    public var rx_didUpdateLocations: Observable<[CLLocation]> {
+        return rx_delegate.observe(#selector(CLLocationManagerDelegate.locationManager(_:didUpdateLocations:)))
+            .map { params in
+                //swiftlint:disable force_cast
+                return params[1] as! [CLLocation]
+        }
     }
     
 }
