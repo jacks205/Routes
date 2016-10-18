@@ -17,7 +17,9 @@ class RoutesLocationService {
     
     fileprivate (set) var authorized: Driver<Bool>
     fileprivate (set) var location: Driver<CLLocationCoordinate2D>
-    fileprivate (set) var bounds = Variable<GMSCoordinateBounds?>(nil)
+    
+    let userLocation = Variable<CLLocationCoordinate2D?>(nil)
+    let bounds = Variable<GMSCoordinateBounds?>(nil)
     
     fileprivate let locationManager = CLLocationManager()
     
@@ -54,6 +56,12 @@ class RoutesLocationService {
             .map { $0.coordinate }
         
         location
+            .asObservable()
+            .map { Optional<CLLocationCoordinate2D>($0) }
+            .bindTo(userLocation)
+            .addDisposableTo(db)
+        
+        location
             .map { location in
                 //http://stackoverflow.com/a/31127466/4684652
                 func locationWithBearing(_ bearing: Double, distanceMeters: Double, origin: CLLocationCoordinate2D) -> CLLocationCoordinate2D {
@@ -82,7 +90,7 @@ class RoutesLocationService {
     
 }
 
-class RxCLLocationManagerDelegateProxy: DelegateProxy, CLLocationManagerDelegate, DelegateProxyType {
+fileprivate class RxCLLocationManagerDelegateProxy: DelegateProxy, CLLocationManagerDelegate, DelegateProxyType {
     //We need a way to read the current delegate
     static func currentDelegateFor(_ object: AnyObject) -> AnyObject? {
         //swiftlint:disable force_cast
@@ -97,13 +105,13 @@ class RxCLLocationManagerDelegateProxy: DelegateProxy, CLLocationManagerDelegate
     }
 }
 
-extension CLLocationManager {
+fileprivate extension CLLocationManager {
     
-    public var rx_delegate: DelegateProxy {
-        return RxCLLocationManagerDelegateProxy.proxyForObject(RxCLLocationManagerDelegateProxy.self)
+    fileprivate var rx_delegate: DelegateProxy {
+        return proxyForObject(RxCLLocationManagerDelegateProxy.self, self)
     }
     
-    public var rx_didChangeAuthorizationStatus: Observable<CLAuthorizationStatus> {
+    fileprivate var rx_didChangeAuthorizationStatus: Observable<CLAuthorizationStatus> {
         return rx_delegate.observe(#selector(CLLocationManagerDelegate.locationManager(_:didChangeAuthorization:)))
             .map { params in
                 //swiftlint:disable force_cast
@@ -111,7 +119,7 @@ extension CLLocationManager {
         }
     }
     
-    public var rx_didUpdateLocations: Observable<[CLLocation]> {
+    fileprivate var rx_didUpdateLocations: Observable<[CLLocation]> {
         return rx_delegate.observe(#selector(CLLocationManagerDelegate.locationManager(_:didUpdateLocations:)))
             .map { params in
                 //swiftlint:disable force_cast

@@ -16,6 +16,7 @@ target 'Routes' do
   pod 'Moya', :git => 'https://github.com/Moya/Moya'
   pod 'RxSwift', :git => 'https://github.com/ReactiveX/RxSwift'
   pod 'RxCocoa', '3.0.0-beta.1'
+  pod 'Kanna', '~> 2.0.0'
   target 'RoutesTests' do
     inherit! :search_paths
     # Pods for testing

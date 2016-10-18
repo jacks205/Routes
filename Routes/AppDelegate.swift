@@ -20,6 +20,9 @@ let addLocationViewBackgroundColor = UIColor(red:0.18, green:0.22, blue:0.25, al
 let locationCellSelectedBackgroundColor = UIColor(red:0.31, green:0.57, blue:0.88, alpha:0.8)
 let locationAddressTextColor = UIColor(red:0.59, green:0.61, blue:0.62, alpha:1.00)
 
+let lightBlueColorText = UIColor(red:0.18, green:0.80, blue:1.00, alpha:1.0)
+
+let lightBlueColor = UIColor(red:0.15, green:0.66, blue:0.83, alpha:1.0)
 let lightGreenColor = UIColor(red:0.54, green:0.76, blue:0.37, alpha:1.00)
 let darkGreenColor = UIColor(red:0.38, green:0.69, blue:0.22, alpha:1.00)
 let lightYellowColor = UIColor(red:0.88, green:0.83, blue:0.39, alpha:1.00)
@@ -43,12 +46,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func getRootViewController() -> UIViewController {
-        let vc = RoutesTableViewController()
+        //TODO: REMOVE TEST CODE
+//        let vc = RoutesTableViewController()
+        let jsonStr = t_getSampleJSONString()
+        let res = HERERouteDirectionsAPIResponse(JSONString: jsonStr)
+        let vc = SelectRouteCollectionViewController(routes: res!.routes)
+        
+        vc.view.backgroundColor = addLocationViewBackgroundColor
         let nvc = UINavigationController(rootViewController: vc)
-        vc.title = "ROUTES"
+        nvc.navigationBar.tintColor = .white
+        nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
+        vc.title = "CHOOSE ROUTE"
+
+        //END TEST
         return nvc
     }
     
+    //TODO: Clean up
     fileprivate func setupLibraries() {
         func setupLogger() {
             DDLog.add(DDTTYLogger.sharedInstance()) // TTY = Xcode console
@@ -131,5 +145,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    //MARK: - Testing
+    fileprivate func t_getSampleJSONString() -> String {
+        if let path = Bundle.main.path(forResource: "sample_here_response", ofType: "json")
+        {
+            let url = URL(fileURLWithPath: path)
+            if let jsonData = try? Data(contentsOf: url, options: .mappedIfSafe),
+                let json = String(data: jsonData, encoding: .utf8)
+            {
+                return json
+            }
+        }
+        fatalError()
+    }
 }

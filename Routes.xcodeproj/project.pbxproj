@@ -13,6 +13,15 @@
 		EA2E56DE1D37246F00D2E4C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */; };
 		EA2E56E11D37246F00D2E4C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */; };
 		EA2E56EC1D37246F00D2E4C7 /* RoutesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E56EB1D37246F00D2E4C7 /* RoutesTests.swift */; };
+		EA3DFA261DB37E7400215049 /* sample_here_response.json in Resources */ = {isa = PBXBuildFile; fileRef = EA3DFA251DB37E7400215049 /* sample_here_response.json */; };
+		EA3DFA2B1DB3821E00215049 /* SelectRouteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA2A1DB3821E00215049 /* SelectRouteViewModel.swift */; };
+		EA3DFA2E1DB4F57C00215049 /* RouteSummaryOverlayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA2D1DB4F57B00215049 /* RouteSummaryOverlayCollectionViewCell.swift */; };
+		EA3DFA301DB4F86200215049 /* RouteSummaryDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA2F1DB4F86200215049 /* RouteSummaryDetailView.swift */; };
+		EA3DFA321DB5549500215049 /* ShowDirectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA311DB5549500215049 /* ShowDirectionView.swift */; };
+		EA3DFA341DB55C9000215049 /* PriorityQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA331DB55C9000215049 /* PriorityQueue.swift */; };
+		EA3DFA361DB5771100215049 /* RouteSummaryRenameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA351DB5771100215049 /* RouteSummaryRenameView.swift */; };
+		EA3DFA381DB5778100215049 /* RouteRenameTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA371DB5778100215049 /* RouteRenameTextView.swift */; };
+		EA3DFA3A1DB5C99E00215049 /* RoutesKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA391DB5C99E00215049 /* RoutesKeyboardToolbar.swift */; };
 		EA894F6D1D3C689B00FE5F56 /* RouteLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */; };
 		EA894F6F1D3D766600FE5F56 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA894F6E1D3D766600FE5F56 /* Configuration.plist */; };
 		EA894F711D3D891C00FE5F56 /* RoutesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */; };
@@ -66,6 +75,15 @@
 		EA2E56E71D37246F00D2E4C7 /* RoutesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoutesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2E56EB1D37246F00D2E4C7 /* RoutesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesTests.swift; sourceTree = "<group>"; };
 		EA2E56ED1D37246F00D2E4C7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		EA3DFA251DB37E7400215049 /* sample_here_response.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; name = sample_here_response.json; path = Samples/sample_here_response.json; sourceTree = "<group>"; };
+		EA3DFA2A1DB3821E00215049 /* SelectRouteViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SelectRouteViewModel.swift; path = ViewModels/SelectRouteViewModel.swift; sourceTree = "<group>"; };
+		EA3DFA2D1DB4F57B00215049 /* RouteSummaryOverlayCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteSummaryOverlayCollectionViewCell.swift; path = Views/RouteSummaryOverlayCollectionViewCell.swift; sourceTree = "<group>"; };
+		EA3DFA2F1DB4F86200215049 /* RouteSummaryDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteSummaryDetailView.swift; path = Views/RouteSummaryDetailView.swift; sourceTree = "<group>"; };
+		EA3DFA311DB5549500215049 /* ShowDirectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShowDirectionView.swift; path = Views/ShowDirectionView.swift; sourceTree = "<group>"; };
+		EA3DFA331DB55C9000215049 /* PriorityQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PriorityQueue.swift; path = Helpers/PriorityQueue.swift; sourceTree = "<group>"; };
+		EA3DFA351DB5771100215049 /* RouteSummaryRenameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteSummaryRenameView.swift; path = Views/RouteSummaryRenameView.swift; sourceTree = "<group>"; };
+		EA3DFA371DB5778100215049 /* RouteRenameTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteRenameTextView.swift; path = Views/RouteRenameTextView.swift; sourceTree = "<group>"; };
+		EA3DFA391DB5C99E00215049 /* RoutesKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoutesKeyboardToolbar.swift; path = Views/RoutesKeyboardToolbar.swift; sourceTree = "<group>"; };
 		EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteLocationManager.swift; sourceTree = "<group>"; };
 		EA894F6E1D3D766600FE5F56 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesAPI.swift; sourceTree = "<group>"; };
@@ -161,12 +179,10 @@
 		EA2E56D51D37246F00D2E4C7 /* Routes */ = {
 			isa = PBXGroup;
 			children = (
-				EAB165271D3B45E80069A6EA /* Home */,
-				EAB165261D3B45D20069A6EA /* AddRoute */,
+				EA3DFA291DB381F300215049 /* ViewModels */,
+				EA3DFA281DB381C800215049 /* Views */,
+				EA3DFA271DB381BC00215049 /* Models */,
 				EA2E56D61D37246F00D2E4C7 /* AppDelegate.swift */,
-				EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */,
-				EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */,
-				EA894F721D3DA23600FE5F56 /* Route.swift */,
 				EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */,
 				EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */,
 				EA2E56E21D37246F00D2E4C7 /* Info.plist */,
@@ -174,6 +190,7 @@
 				EAF2B3571D3B364200723238 /* Helpers */,
 				EAA180AD1D38F21C002B22B1 /* RxSwift+Helpers */,
 				EAF2B3261D38FBAB00723238 /* Fonts */,
+				EA3DFA241DB37DF100215049 /* Samples */,
 			);
 			path = Routes;
 			sourceTree = "<group>";
@@ -185,6 +202,55 @@
 				EA2E56ED1D37246F00D2E4C7 /* Info.plist */,
 			);
 			path = RoutesTests;
+			sourceTree = "<group>";
+		};
+		EA3DFA241DB37DF100215049 /* Samples */ = {
+			isa = PBXGroup;
+			children = (
+				EA3DFA251DB37E7400215049 /* sample_here_response.json */,
+			);
+			name = Samples;
+			sourceTree = "<group>";
+		};
+		EA3DFA271DB381BC00215049 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */,
+				EA894F721D3DA23600FE5F56 /* Route.swift */,
+				EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		EA3DFA281DB381C800215049 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				EA3DFA2C1DB4E06B00215049 /* CustomViews */,
+				EAB165271D3B45E80069A6EA /* Home */,
+				EAB165261D3B45D20069A6EA /* AddRoute */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		EA3DFA291DB381F300215049 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				EA3DFA2A1DB3821E00215049 /* SelectRouteViewModel.swift */,
+			);
+			name = ViewModels;
+			sourceTree = "<group>";
+		};
+		EA3DFA2C1DB4E06B00215049 /* CustomViews */ = {
+			isa = PBXGroup;
+			children = (
+				EA3DFA2D1DB4F57B00215049 /* RouteSummaryOverlayCollectionViewCell.swift */,
+				EA3DFA2F1DB4F86200215049 /* RouteSummaryDetailView.swift */,
+				EA3DFA311DB5549500215049 /* ShowDirectionView.swift */,
+				EA3DFA351DB5771100215049 /* RouteSummaryRenameView.swift */,
+				EA3DFA371DB5778100215049 /* RouteRenameTextView.swift */,
+				EA3DFA391DB5C99E00215049 /* RoutesKeyboardToolbar.swift */,
+			);
+			name = CustomViews;
 			sourceTree = "<group>";
 		};
 		EAA180AD1D38F21C002B22B1 /* RxSwift+Helpers */ = {
@@ -242,6 +308,7 @@
 			isa = PBXGroup;
 			children = (
 				EAF2B3581D3B365F00723238 /* Extensions.swift */,
+				EA3DFA331DB55C9000215049 /* PriorityQueue.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -346,6 +413,7 @@
 				EAF2B34D1D38FBDE00723238 /* OpenSans-Semibold.ttf in Resources */,
 				EAB165251D3B3CEC0069A6EA /* Montserrat-Regular.ttf in Resources */,
 				EA2E56E11D37246F00D2E4C7 /* LaunchScreen.storyboard in Resources */,
+				EA3DFA261DB37E7400215049 /* sample_here_response.json in Resources */,
 				EAF2B3481D38FBDE00723238 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				EAB165241D3B3CEC0069A6EA /* Montserrat-Bold.ttf in Resources */,
 				EA894F6F1D3D766600FE5F56 /* Configuration.plist in Resources */,
@@ -494,21 +562,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				EAF2B3561D3B241B00723238 /* AddDestinationLocationViewController.swift in Sources */,
+				EA3DFA361DB5771100215049 /* RouteSummaryRenameView.swift in Sources */,
 				EABBC1151D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift in Sources */,
 				EA2E56D71D37246F00D2E4C7 /* AppDelegate.swift in Sources */,
+				EA3DFA3A1DB5C99E00215049 /* RoutesKeyboardToolbar.swift in Sources */,
 				EA894F711D3D891C00FE5F56 /* RoutesAPI.swift in Sources */,
 				EAF2B3521D39B5F800723238 /* LocationTableViewCell.swift in Sources */,
+				EA3DFA341DB55C9000215049 /* PriorityQueue.swift in Sources */,
+				EA3DFA2B1DB3821E00215049 /* SelectRouteViewModel.swift in Sources */,
 				EA894F731D3DA23600FE5F56 /* Route.swift in Sources */,
 				EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */,
 				EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */,
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
+				EA3DFA2E1DB4F57C00215049 /* RouteSummaryOverlayCollectionViewCell.swift in Sources */,
+				EA3DFA301DB4F86200215049 /* RouteSummaryDetailView.swift in Sources */,
 				EAF2B3591D3B365F00723238 /* Extensions.swift in Sources */,
 				EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */,
 				EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */,
 				EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */,
+				EA3DFA381DB5778100215049 /* RouteRenameTextView.swift in Sources */,
 				EABBC1131D3C1FCE0005D78B /* AddRouteBaseViewController.swift in Sources */,
 				EA894F6D1D3C689B00FE5F56 /* RouteLocationManager.swift in Sources */,
 				EAF2B3541D3B240800723238 /* AddStartingLocationViewController.swift in Sources */,
+				EA3DFA321DB5549500215049 /* ShowDirectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -2,6 +2,7 @@ included: # paths to include during linting. `--path` is ignored if present.
   - Routes
 excluded: # paths to ignore during linting. Takes precedence over `included`.
   - Pods
+  - Routes/Helpers
 disabled_rules: # rule identifiers to exclude from running
   - trailing_whitespace
   - line_length

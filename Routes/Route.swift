@@ -58,7 +58,7 @@ struct HERERouteDirectionsAPIResponse: Mappable {
     
     mutating func mapping(map: Map) {
         metaInfo <- map["response.metaInfo"]
-        routes <- map["response.routes"]
+        routes <- map["response.route"]
         language <- map["response.language"]
     }
 }

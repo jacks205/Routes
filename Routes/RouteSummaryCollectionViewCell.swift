@@ -39,6 +39,13 @@ class RouteSummaryCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    static let cellSizePercentage: CGFloat = 0.85
+    static var cellSizeDifference: CGFloat {
+        get {
+            return 1 - cellSizePercentage
+        }
+    }
+    
     let mapView: UIView = {
         let mv = UIView()
         mv.translatesAutoresizingMaskIntoConstraints = false

@@ -22,10 +22,10 @@ class AddDestinationLocationViewController: AddLocationViewController {
         //TODO: Rewrite to use HERE API and load in maps
     }
     
-    fileprivate func getSelectRouteViewController() -> SelectRouteCollectionViewController {
-        let selectRouteCVC = SelectRouteCollectionViewController()
-        selectRouteCVC.view.backgroundColor = self.view.backgroundColor
-        selectRouteCVC.title = "SELECT ROUTE"
-        return selectRouteCVC
-    }
+//    fileprivate func getSelectRouteViewController() -> SelectRouteCollectionViewController {
+//        let selectRouteCVC = SelectRouteCollectionViewController()
+//        selectRouteCVC.view.backgroundColor = self.view.backgroundColor
+//        selectRouteCVC.title = "SELECT ROUTE"
+//        return selectRouteCVC
+//    }
 }
