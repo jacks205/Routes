@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		1A2AF858B9D7FA24773C30CC /* Pods_Routes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C0536A1EED692664FEE20D1F /* Pods_Routes.framework */; };
 		2FC804B275CFA6DD1B31CAE7 /* Pods_RoutesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF99AF94876C1C6D4788C5B /* Pods_RoutesTests.framework */; };
+		EA18A88A1DB86FBE00216FD8 /* RouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A8891DB86FBE00216FD8 /* RouteDetailsViewController.swift */; };
+		EA18A88C1DB8717500216FD8 /* RoutesMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A88B1DB8717500216FD8 /* RoutesMapView.swift */; };
+		EA18A88E1DB89C7100216FD8 /* ManeuverDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A88D1DB89C7100216FD8 /* ManeuverDetailView.swift */; };
+		EA18A8941DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A8931DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift */; };
 		EA2E56D71D37246F00D2E4C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E56D61D37246F00D2E4C7 /* AppDelegate.swift */; };
 		EA2E56DE1D37246F00D2E4C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */; };
 		EA2E56E11D37246F00D2E4C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */; };
@@ -67,6 +71,10 @@
 		8C5C4055F0A6443BE596E4EF /* Pods-RoutesTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoutesTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoutesTests/Pods-RoutesTests.release.xcconfig"; sourceTree = "<group>"; };
 		BF3CCCE4C69D0CBC1B72A495 /* Pods-Routes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Routes.release.xcconfig"; path = "Pods/Target Support Files/Pods-Routes/Pods-Routes.release.xcconfig"; sourceTree = "<group>"; };
 		C0536A1EED692664FEE20D1F /* Pods_Routes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Routes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		EA18A8891DB86FBE00216FD8 /* RouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteDetailsViewController.swift; path = Views/RouteDetailsViewController.swift; sourceTree = "<group>"; };
+		EA18A88B1DB8717500216FD8 /* RoutesMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesMapView.swift; sourceTree = "<group>"; };
+		EA18A88D1DB89C7100216FD8 /* ManeuverDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManeuverDetailView.swift; path = Views/ManeuverDetailView.swift; sourceTree = "<group>"; };
+		EA18A8931DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManeuverDetailTableViewCell.swift; sourceTree = "<group>"; };
 		EA2E56D31D37246F00D2E4C7 /* RoutesDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoutesDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2E56D61D37246F00D2E4C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -243,12 +251,17 @@
 		EA3DFA2C1DB4E06B00215049 /* CustomViews */ = {
 			isa = PBXGroup;
 			children = (
+				EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */,
 				EA3DFA2D1DB4F57B00215049 /* RouteSummaryOverlayCollectionViewCell.swift */,
 				EA3DFA2F1DB4F86200215049 /* RouteSummaryDetailView.swift */,
 				EA3DFA311DB5549500215049 /* ShowDirectionView.swift */,
 				EA3DFA351DB5771100215049 /* RouteSummaryRenameView.swift */,
 				EA3DFA371DB5778100215049 /* RouteRenameTextView.swift */,
 				EA3DFA391DB5C99E00215049 /* RoutesKeyboardToolbar.swift */,
+				EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */,
+				EA18A88B1DB8717500216FD8 /* RoutesMapView.swift */,
+				EA18A88D1DB89C7100216FD8 /* ManeuverDetailView.swift */,
+				EA18A8931DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -279,8 +292,7 @@
 			isa = PBXGroup;
 			children = (
 				EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */,
-				EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */,
-				EAA180AB1D38E65B002B22B1 /* RouteProgressBarView.swift */,
+				EA18A8891DB86FBE00216FD8 /* RouteDetailsViewController.swift */,
 			);
 			name = Home;
 			sourceTree = "<group>";
@@ -574,11 +586,15 @@
 				EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */,
 				EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */,
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
+				EA18A88E1DB89C7100216FD8 /* ManeuverDetailView.swift in Sources */,
+				EA18A88C1DB8717500216FD8 /* RoutesMapView.swift in Sources */,
 				EA3DFA2E1DB4F57C00215049 /* RouteSummaryOverlayCollectionViewCell.swift in Sources */,
 				EA3DFA301DB4F86200215049 /* RouteSummaryDetailView.swift in Sources */,
 				EAF2B3591D3B365F00723238 /* Extensions.swift in Sources */,
 				EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */,
+				EA18A8941DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift in Sources */,
 				EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */,
+				EA18A88A1DB86FBE00216FD8 /* RouteDetailsViewController.swift in Sources */,
 				EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */,
 				EA3DFA381DB5778100215049 /* RouteRenameTextView.swift in Sources */,
 				EABBC1131D3C1FCE0005D78B /* AddRouteBaseViewController.swift in Sources */,

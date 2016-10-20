@@ -92,10 +92,32 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
     }
     
     private func bindShowDirectionsBtn() {
+        func detailsViewController(route: RouteType) -> UIViewController {
+            let rDetailVC = RouteDetailsViewController(route: route)
+            let nvc = UINavigationController(rootViewController: rDetailVC)
+            nvc.navigationBar.tintColor = .white
+            nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
+            rDetailVC.title = "DIRECTIONS"
+            rDetailVC.view.backgroundColor = addLocationViewBackgroundColor
+            rDetailVC.navigationItem.leftBarButtonItem = nil
+            rDetailVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: .plain, target: nil, action: nil)
+            rDetailVC.navigationItem
+                .rightBarButtonItem?
+                .rx.tap
+                .subscribe(onNext: {
+                    nvc.dismiss(animated: true, completion: nil)
+                })
+                .addDisposableTo(rDetailVC.db)
+            return nvc
+        }
+        
         showDirectionsBtn
             .btn.rx.tap
-            .subscribe(onNext: {
-                
+            .map { _ in return self.currentCollectionViewCenterRow.value }
+            .map { row in return self.selectRouteViewModel.routes.value[row] }
+            .subscribe(onNext: { route in
+                let vc = detailsViewController(route: route)
+                self.navigationController?.present(vc, animated: true, completion: nil)
             })
             .addDisposableTo(db)
         
@@ -186,7 +208,9 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
             .asObservable()
             .distinctUntilChanged()
             .flatMap { i -> Observable<MKPolyline> in
-                return self.selectRouteViewModel.rx_polyline(maneuvers: self.selectRouteViewModel.maneuvers[i])
+                return self.selectRouteViewModel
+                    .legs[i]
+                    .rx_polyline()
             }
             .subscribe(onNext: { polyline in
                 let oldOverlays = self.mapView.overlays

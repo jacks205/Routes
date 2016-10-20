@@ -51,12 +51,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let jsonStr = t_getSampleJSONString()
         let res = HERERouteDirectionsAPIResponse(JSONString: jsonStr)
         let vc = SelectRouteCollectionViewController(routes: res!.routes)
+//        let vc = RouteDetailsViewController(route: res!.routes![0])
         
         vc.view.backgroundColor = addLocationViewBackgroundColor
         let nvc = UINavigationController(rootViewController: vc)
         nvc.navigationBar.tintColor = .white
         nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
         vc.title = "CHOOSE ROUTE"
+//        vc.title = "DIRECTIONS"
 
         //END TEST
         return nvc

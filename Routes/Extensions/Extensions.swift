@@ -11,6 +11,7 @@ import RxSwift
 import RxCocoa
 import GooglePlaces
 import Kanna
+import MapKit
 
 class RoutesLocation {
     
@@ -104,6 +105,30 @@ extension UIView {
     }
 }
 
+extension UIFont {
+    
+    static func montserratRegular(size: CGFloat) -> UIFont? {
+        return UIFont(name: "Montserrat-Regular", size: size)
+    }
+    
+    static func montserratBold(size: CGFloat) -> UIFont? {
+        return UIFont(name: "Montserrat-Bold", size: size)
+    }
+    
+    static func openSansRegular(size: CGFloat) -> UIFont? {
+        return UIFont(name: "OpenSans-Regular", size: size)
+    }
+    
+    static func openSansLight(size: CGFloat) -> UIFont? {
+        return UIFont(name: "OpenSans-Light", size: size)
+    }
+    
+    static func openSansBold(size: CGFloat) -> UIFont? {
+        return UIFont(name: "OpenSans-Bold", size: size)
+    }
+    
+}
+
 //https://gist.github.com/mmick66/9812223
 let centerCellCollectionViewFlowLayoutOffset: CGFloat = 10
 class CenterCellCollectionViewFlowLayout: UICollectionViewFlowLayout {
@@ -169,19 +194,20 @@ extension Double {
         case 0:
             hour = ""
         case 1:
-            hour = "\(hoursMinutes.0) hour"
+            hour = "\(hoursMinutes.0) hr"
         default:
-            hour = "\(hoursMinutes.0) hours"
+            hour = "\(hoursMinutes.0) hrs"
         }
         
         let minute: String
         switch hoursMinutes.1 {
         case 0:
+            if hoursMinutes.0 == 0 { return "0 min" }
             minute = ""
         case 1:
-            minute = "\(hoursMinutes.1) minute"
+            minute = "\(hoursMinutes.1) min"
         default:
-            minute = "\(hoursMinutes.1) minutes"
+            minute = "\(hoursMinutes.1) min"
         }
         
         return hour + " " + minute
@@ -211,6 +237,18 @@ extension RouteLeg {
     
     func longestManeuverStreets() -> (String?, String?) {
         return longestManeuverStreets(maneuvers: maneuver)
+    }
+    
+    func rx_polyline() -> Observable<MKPolyline> {
+        return Observable<MKPolyline>.create { obs -> Disposable in
+            let coordinates: [CLLocationCoordinate2D] = self.maneuver
+                .map {
+                    $0.position
+            }
+            let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
+            obs.onNext(polyline)
+            return Disposables.create()
+        }
     }
 }
 

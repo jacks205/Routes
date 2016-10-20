@@ -18,6 +18,12 @@ struct SelectRouteViewModel {
         self.routes = Variable<[RouteType]>(routes)
     }
     
+    var legs: [RouteLeg] {
+        return routes
+            .value
+            .flatMap { $0.legs }
+    }
+    
     var maneuvers: [[RouteManeuver]] {
         return routes
             .value
@@ -36,21 +42,5 @@ struct SelectRouteViewModel {
     
     var rx_summary: Observable<[RouteSummary]> {
         return Observable.of(summary)
-    }
-    
-    func rx_polyline(maneuvers: [RouteManeuver]) -> Observable<MKPolyline> {
-        return Observable<MKPolyline>.create { obs -> Disposable in
-//            DispatchQueue.global(qos: .userInitiated).async {
-                let coordinates: [CLLocationCoordinate2D] = maneuvers
-                    .map {
-                        $0.position
-                    }
-                let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
-//                DispatchQueue.main.async {
-                    obs.onNext(polyline)
-//                }
-//            }
-            return Disposables.create()
-        }
     }
 }
