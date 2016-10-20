@@ -7,36 +7,35 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
-class RouteSummaryRenameView: UIView {
+class ContainerView: UIView {
     
-    let originRenameView: RouteRenameTextView = {
-        let v = RouteRenameTextView()
+    let leftView: TextContainerView = {
+        let v = TextContainerView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = .clear
         return v
     }()
     
-    let destinationRenameView: RouteRenameTextView = {
-        let v = RouteRenameTextView()
+    let rightView: TextContainerView = {
+        let v = TextContainerView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = .clear
         return v
     }()
     
-    private let arrowImageView: UIImageView = {
-        let iv = UIImageView()
-        iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.image = UIImage(named: "arrow")
-        iv.tintColor = UIColor.white.withAlphaComponent(0.5)
-        return iv
-    }()
+    var rx_viewTap: Observable<String> {
+        return Observable.from([rightView.rx_tap, leftView.rx_tap])
+            .merge()
+            .shareReplayLatestWhileConnected()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        addSubview(originRenameView)
-        addSubview(destinationRenameView)
-        addSubview(arrowImageView)
+        addSubview(leftView)
+        addSubview(rightView)
         setConstraints()
     }
     
@@ -45,40 +44,25 @@ class RouteSummaryRenameView: UIView {
     }
     
     func setConstraints() {
-        arrowImageView.widthAnchor.constraint(equalToConstant: 16).isActive = true
+        leftView.leadingAnchor.constraint(equalTo: leadingAnchor).isActive = true
+        leftView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        leftView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        leftView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5).isActive = true
         
-        addConstraintsWithFormat("H:|[v0]-8-[v1]", views: originRenameView, arrowImageView)
-        addConstraintsWithFormat("V:[v0]-8-[v1]", views: originRenameView, arrowImageView)
+        rightView.leadingAnchor.constraint(equalTo: leftView.trailingAnchor).isActive = true
+        rightView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        rightView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        rightView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
         
-        arrowImageView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        arrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        let arrow: UIImageView = {
+            let i = UIImageView(image: #imageLiteral(resourceName: "arrow"))
+            i.translatesAutoresizingMaskIntoConstraints = false
+            return i
+        }()
         
-        destinationRenameView.leadingAnchor.constraint(equalTo: arrowImageView.trailingAnchor).isActive = true
-        destinationRenameView.trailingAnchor.constraint(equalTo: trailingAnchor).isActive = true
-        destinationRenameView.topAnchor.constraint(equalTo: arrowImageView.bottomAnchor, constant: 0).isActive = true
-//        addConstraintsWithFormat("V:[v0]|", views: destinationRenameView)
-        
-        let editIV1 = UIImageView(image: #imageLiteral(resourceName: "edit-pencil"))
-        editIV1.translatesAutoresizingMaskIntoConstraints = false
-        editIV1.tintColor = .white
-        
-        let editIV2 = UIImageView(image: #imageLiteral(resourceName: "edit-pencil"))
-        editIV2.translatesAutoresizingMaskIntoConstraints = false
-        editIV2.tintColor = .white
-        
-        addSubview(editIV1)
-        addSubview(editIV2)
-        
-        editIV1.leadingAnchor.constraint(equalTo: originRenameView.trailingAnchor, constant: 3).isActive = true
-        editIV1.bottomAnchor.constraint(equalTo: originRenameView.bottomAnchor, constant: -3).isActive = true
-        editIV1.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        editIV1.widthAnchor.constraint(equalToConstant: 11).isActive = true
-        
-        editIV2.leadingAnchor.constraint(equalTo: destinationRenameView.trailingAnchor, constant: 3).isActive = true
-        editIV2.bottomAnchor.constraint(equalTo: destinationRenameView.bottomAnchor, constant: -3).isActive = true
-        editIV2.heightAnchor.constraint(equalToConstant: 11).isActive = true
-        editIV2.widthAnchor.constraint(equalToConstant: 11).isActive = true
-        
+        addSubview(arrow)
+        arrow.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        arrow.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
 }

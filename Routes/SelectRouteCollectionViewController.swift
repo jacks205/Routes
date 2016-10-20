@@ -64,8 +64,8 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
         return v
     }()
     
-    let routeSummaryRenameView: RouteSummaryRenameView = {
-        let v = RouteSummaryRenameView()
+    let routeSummaryRenameView: ContainerView = {
+        let v = ContainerView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = .clear
         return v
@@ -87,14 +87,8 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
         bindPageControl()
         bindConfirmBtn()
         bindShowDirectionsBtn()
-        bindRenameView()
-        setConstraints()
-    }
-    
-    private func bindRenameView() {
-        routeSummaryRenameView.originRenameView.setTextView(text: "1 University Drive,\nOrange, CA 92866")
-        routeSummaryRenameView.destinationRenameView.setTextView(text: "13406 Philadelphia St,\nWhittier, CA 90608")
         view.addSubview(routeSummaryRenameView)
+        setConstraints()
     }
     
     private func bindShowDirectionsBtn() {
@@ -154,18 +148,22 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
     }
     
     private func setConstraints() {
-        view.addConstraintsWithFormat("V:|-20-[v0(110)]-20-[v1][v2(50)]|", views: routeSummaryRenameView, mapView, confirmBtn)
-        view.addConstraintsWithFormat("H:|[v0]|", views: mapView)
-        view.addConstraintsWithFormat("H:|-38-[v0]-38-|", views: routeSummaryRenameView)
+        routeSummaryRenameView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        routeSummaryRenameView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        routeSummaryRenameView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        routeSummaryRenameView.heightAnchor.constraint(equalToConstant: 72).isActive = true
         
         confirmBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         confirmBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
         confirmBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         
+        view.addConstraintsWithFormat("V:[v0][v1(50)]|", views: mapView, confirmBtn)
+        view.addConstraintsWithFormat("H:|[v0]|", views: mapView)
+        mapView.topAnchor.constraint(equalTo: routeSummaryRenameView.bottomAnchor).isActive = true
         mapView.addConstraintsWithFormat("V:|[v0]|", views: collectionView)
         mapView.addConstraintsWithFormat("H:|[v0]|", views: collectionView)
-        
         mapView.addConstraintsWithFormat("V:[v0]-10-|", views: pageControl)
+        
         pageControl.centerXAnchor.constraint(equalTo: mapView.centerXAnchor).isActive = true
         pageControl.heightAnchor.constraint(equalToConstant: 8).isActive = true
         
@@ -197,6 +195,16 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
                 UIView.animate(withDuration: 0.35, animations: {
                     self.mapView.setVisibleMapRect(polyline.boundingMapRect, edgePadding: UIEdgeInsets(top: 75, left: 75, bottom: 137, right: 75), animated: true)
                 })
+            })
+            .addDisposableTo(db)
+        
+        routeSummaryRenameView.leftView.setTextView(text: "My Grandmas House")
+        routeSummaryRenameView.rightView.setTextView(text: "13406 Philadelphia St,\nWhittier, CA 90608")
+        
+        routeSummaryRenameView
+            .rx_viewTap
+            .subscribe(onNext: { name in
+                print(name)
             })
             .addDisposableTo(db)
     }
