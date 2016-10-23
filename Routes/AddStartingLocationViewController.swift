@@ -13,27 +13,37 @@ import RxCocoa
 
 class AddStartingLocationViewController: AddLocationViewController {
     
-    override func bindTableView() {
-        super.bindTableView()
-        let addLocationVC = AddDestinationLocationViewController()
-        let rx_originSelected = tableView
-            .rx.itemSelected
-            .map { $0.row }
-            .filter { $0 > -1 }
-            .asDriver(onErrorJustReturn: -1)
-        
-        rx_originSelected
-            .map { self.locations.value[$0] }
-            .drive(addLocationVC.rx_originLocation)
-            .addDisposableTo(db)
-        
-        rx_originSelected
-            .asObservable()
-            .subscribe(onNext: { row in
+    let addLocationsViewModel: AddLocationsViewModel
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        addLocationsViewModel = AddLocationsViewModel()
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        addLocationsViewModel.originLocation
+            .asDriver()
+            .drive(onNext: { _ in
+                let addLocationVC = AddDestinationLocationViewController(viewModel: self.addLocationsViewModel)
                 addLocationVC.view.backgroundColor = addLocationViewBackgroundColor
-                addLocationVC.searchBar.placeholder = "Enter Starting Location"
+                addLocationVC.searchBar.placeholder = "Enter Destination"
                 self.navigationController?.pushViewController(addLocationVC, animated: true)
             })
+            .addDisposableTo(db)
+    }
+    
+    override func bindTableView() {
+        super.bindTableView()
+        tableView
+            .rx.itemSelected
+            .asDriver()
+            .map { self.locations.value[$0.row] }
+            .drive(addLocationsViewModel.originLocation)
             .addDisposableTo(db)
     }
     

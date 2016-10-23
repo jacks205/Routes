@@ -79,6 +79,28 @@ extension GMSPlacesClient {
             return Disposables.create()
         }
     }
+    
+    func rx_lookUpPlaceID(placeID: String) -> Observable<GMSPlace> {
+        return Observable<GMSPlace>.create { obs -> Disposable in
+            self.lookUpPlaceID(placeID, callback: { (place, error) in
+                defer { obs.onCompleted() }
+                guard let place = place, error == nil else {
+                    if let error = error {
+                        obs.onError(error)
+                    }
+                    return
+                }
+                obs.onNext(place)
+            })
+            return Disposables.create()
+        }
+    }
+    
+    func rx_coordinatesFromPlaceID(placeID: String) -> Observable<CLLocationCoordinate2D> {
+        return rx_lookUpPlaceID(placeID: placeID)
+            .map { $0.coordinate }
+    }
+    
 }
 
 extension UITextView{
@@ -266,4 +288,33 @@ extension RouteManeuver {
     
 }
 
+func detailsViewController(route: RouteType) -> UIViewController {
+    let rDetailVC = RouteDetailsViewController(route: route)
+    let nvc = UINavigationController(rootViewController: rDetailVC)
+    nvc.navigationBar.tintColor = .white
+    nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
+    rDetailVC.title = "DIRECTIONS"
+    rDetailVC.view.backgroundColor = addLocationViewBackgroundColor
+    rDetailVC.navigationItem.leftBarButtonItem = nil
+    rDetailVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: .plain, target: nil, action: nil)
+    rDetailVC.navigationItem
+        .rightBarButtonItem?
+        .rx.tap
+        .subscribe(onNext: {
+            nvc.dismiss(animated: true, completion: nil)
+        })
+        .addDisposableTo(rDetailVC.db)
+    return nvc
+}
+
+func addRouteNicknameViewController() -> AddRouteNicknameViewController {
+    let addNicknameVC = AddRouteNicknameViewController()
+    addNicknameVC.view.backgroundColor = addLocationViewBackgroundColor
+    let nvc = UINavigationController(rootViewController: addNicknameVC)
+    nvc.navigationBar.tintColor = .white
+    nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
+    addNicknameVC.title = "Choose Location Nickname"
+    addNicknameVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: .plain, target: nil, action: nil)
+    return addNicknameVC
+}
 

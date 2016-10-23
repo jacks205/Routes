@@ -10,6 +10,8 @@ import UIKit
 
 class RouteTableViewCell: UITableViewCell {
     
+    static let identifier = "RouteCell"
+    
     let arrowImageView: UIImageView = {
         let ai = UIImageView(image: UIImage(named: "route-arrow"))
         ai.translatesAutoresizingMaskIntoConstraints = false

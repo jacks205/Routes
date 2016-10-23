@@ -72,7 +72,11 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
     }()
     
     init(routes: [RouteType]) {
-        selectRouteViewModel = SelectRouteViewModel(routes: routes)
+        selectRouteViewModel = SelectRouteViewModel(
+            routes: routes,
+            originLocation: routeSummaryRenameView.leftView.textView.rx.text.asObservable(),
+            destinationLocation: routeSummaryRenameView.rightView.textView.rx.text.asObservable()
+        )
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -92,25 +96,6 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
     }
     
     private func bindShowDirectionsBtn() {
-        func detailsViewController(route: RouteType) -> UIViewController {
-            let rDetailVC = RouteDetailsViewController(route: route)
-            let nvc = UINavigationController(rootViewController: rDetailVC)
-            nvc.navigationBar.tintColor = .white
-            nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
-            rDetailVC.title = "DIRECTIONS"
-            rDetailVC.view.backgroundColor = addLocationViewBackgroundColor
-            rDetailVC.navigationItem.leftBarButtonItem = nil
-            rDetailVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: .plain, target: nil, action: nil)
-            rDetailVC.navigationItem
-                .rightBarButtonItem?
-                .rx.tap
-                .subscribe(onNext: {
-                    nvc.dismiss(animated: true, completion: nil)
-                })
-                .addDisposableTo(rDetailVC.db)
-            return nvc
-        }
-        
         showDirectionsBtn
             .btn.rx.tap
             .map { _ in return self.currentCollectionViewCenterRow.value }
@@ -130,6 +115,19 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
     }
     
     private func bindConfirmBtn() {
+        selectRouteViewModel
+            .rx_nicknamesValid
+            .bindTo(confirmBtn.rx.enabled)
+            .addDisposableTo(db)
+        
+        confirmBtn
+            .rx.tap
+            .asDriver()
+            .drive(onNext: {
+                self.navigationController?.dismiss(animated: true, completion: nil)
+            })
+            .addDisposableTo(db)
+        
         view.addSubview(confirmBtn)
     }
     
@@ -222,23 +220,33 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
             })
             .addDisposableTo(db)
         
-        routeSummaryRenameView.leftView.setTextView(text: "My Grandmas House")
-        routeSummaryRenameView.rightView.setTextView(text: "13406 Philadelphia St,\nWhittier, CA 90608")
-        
         routeSummaryRenameView
             .rx_viewTap
-            .subscribe(onNext: { name in
-                print(name)
+            .subscribe(onNext: { textView in
+                let addNicknameVC = addRouteNicknameViewController()
+                guard let nvc = addNicknameVC.navigationController else { return }
+                
+                addNicknameVC.navigationItem.rightBarButtonItem?
+                    .rx.tap
+                    .subscribe(onNext: {
+                        nvc.dismiss(animated: true, completion: nil)
+                    })
+                    .addDisposableTo(addNicknameVC.db)
+                
+                addNicknameVC
+                    .rx_nicknameSelected
+                    .drive(onNext: { nickname in
+                        textView.text = nickname
+                        nvc.dismiss(animated: true, completion: nil)
+                    })
+                    .addDisposableTo(addNicknameVC.db)
+                self.navigationController?.present(nvc, animated: true, completion: nil)
             })
             .addDisposableTo(db)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        
     }
     
     //MARK: - MapView Delegate

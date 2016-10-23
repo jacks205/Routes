@@ -31,7 +31,6 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         t.tableFooterView = UIView()
         t.showsVerticalScrollIndicator = false
         t.separatorColor = .clear
-        t.contentInset.bottom = 200
         return t
     }()
     
@@ -41,7 +40,6 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         l.strokeColor = lightBlueColor.cgColor
         return l
     }()
-    
     
     let db = DisposeBag()
     
@@ -129,6 +127,8 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         mapView.frame = headerView.frame
         headerView.addSubview(mapView)
         tableView.tableHeaderView = headerView
+        
+        tableView.contentInset.bottom = view.frame.height / 2
     }
 
     override func viewDidLoad() {

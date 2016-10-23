@@ -14,8 +14,11 @@ import CoreLocation
 var HERE_API_APP_ID: String?
 var HERE_API_APP_CODE: String?
 
+let endpointClosure = { (target: HERERouteAPI) -> Endpoint<HERERouteAPI> in
+    return Endpoint<HERERouteAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters, parameterEncoding: URLEncoding.default, httpHeaderFields: nil)
+}
 #if DEBUG
-    let RoutesDirectionAPI: RxMoyaProvider<HERERouteAPI> = RxMoyaProvider<HERERouteAPI>(plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)])
+let RoutesDirectionAPI: RxMoyaProvider<HERERouteAPI> = RxMoyaProvider<HERERouteAPI>(endpointClosure: endpointClosure, plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)])
 #else
     let RoutesDirectionAPI: RxMoyaProvider<HERERouteAPI> = RxMoyaProvider<HERERouteAPI>()
 #endif
@@ -29,7 +32,7 @@ private extension String {
 }
 
 public enum HERERouteAPI {
-    case calculateRoute((CLLocationCoordinate2D, CLLocationCoordinate2D), (CLLocationCoordinate2D, CLLocationCoordinate2D))
+    case calculateRoute(CLLocationCoordinate2D, CLLocationCoordinate2D)
     case getRoute(String)
 }
 
@@ -54,14 +57,14 @@ extension HERERouteAPI: TargetType {
             "app_id": apiId as AnyObject,
             "app_code": apiCode as AnyObject,
             "mode": "fastest;car;traffic:enabled" as AnyObject,
-            "alternatives": 2 as AnyObject,
+            "alternatives": 4 as AnyObject,
             "metricSystem": "imperial" as AnyObject,
             "routeAttributes": "waypoints,summary,legs,lines,routeId" as AnyObject
         ]
         switch self {
         case .calculateRoute(let waypoint0, let waypoint1):
-            defaultParameters["waypoint0"] = "geo!\(waypoint0.0),\(waypoint0.1)" as AnyObject?
-            defaultParameters["waypoint1"] = "geo!\(waypoint1.0),\(waypoint1.1)" as AnyObject?
+            defaultParameters["waypoint0"] = "geo!\(waypoint0.latitude),\(waypoint0.longitude)" as AnyObject?
+            defaultParameters["waypoint1"] = "geo!\(waypoint1.latitude),\(waypoint1.longitude)" as AnyObject?
         case .getRoute(let routeId):
             defaultParameters["routeId"] = routeId as AnyObject?
         }
@@ -79,7 +82,10 @@ extension HERERouteAPI: TargetType {
     public var task: Task {
         return Task.request
     }
-    
+}
+
+public func url(_ route: TargetType) -> String {
+    return route.baseURL.appendingPathComponent(route.path).absoluteString
 }
 
 private func JSONResponseDataFormatter(_ data: Data) -> Data {

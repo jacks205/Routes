@@ -81,13 +81,13 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
     
     func bindTableView() {
         tableView.tableHeaderView = searchBar
-        tableView.register(RouteTableViewCell.self, forCellReuseIdentifier: "RouteCell")
+        tableView.register(RouteTableViewCell.self, forCellReuseIdentifier: RouteTableViewCell.identifier)
         tableView
             .rx.setDelegate(self)
             .addDisposableTo(db)
         routes
             .asObservable()
-            .bindTo(tableView.rx_itemsWithCellIdentifier("RouteCell", cellType: RouteTableViewCell.self)) { [weak self] (row, element, cell) in
+            .bindTo(tableView.rx_itemsWithCellIdentifier(RouteTableViewCell.identifier, cellType: RouteTableViewCell.self)) { [weak self] (row, element, cell) in
                 self?.configureCell(element, cell: cell)
             }
             .addDisposableTo(db)

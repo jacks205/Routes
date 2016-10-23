@@ -24,7 +24,11 @@ PODS:
   - Google-Mobile-Ads-SDK (7.11.0)
   - GoogleInterchangeUtilities (1.2.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - GoogleMaps (2.1.0):
+    - GoogleMaps/Maps (= 2.1.0)
   - GoogleMaps/Base (2.1.0)
+  - GoogleMaps/Maps (2.1.0):
+    - GoogleMaps/Base (= 2.1.0)
   - GooglePlaces (2.1.0):
     - GoogleMaps/Base (= 2.1.0)
   - GoogleSymbolUtilities (1.1.1)
@@ -58,6 +62,7 @@ DEPENDENCIES:
   - Crashlytics
   - Fabric
   - Firebase/AdMob
+  - GoogleMaps
   - GooglePlaces
   - JGProgressHUD
   - Kanna (~> 2.0.0)
@@ -108,6 +113,6 @@ SPEC CHECKSUMS:
   RxCocoa: 8cecf331302b8ae5381bbab1bccba4ede2eae6a8
   RxSwift: 0ea939d7d97cb70657190ffde8dc2a9b455778fc
 
-PODFILE CHECKSUM: 79cbbf3a16dd0029f61e7b93707ba4ea8cf8f113
+PODFILE CHECKSUM: 6b9d2e0212e36a3b7d52beb7dd7901d1694b7ce9
 
 COCOAPODS: 1.1.0.rc.2

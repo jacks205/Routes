@@ -26,8 +26,8 @@ class ContainerView: UIView {
         return v
     }()
     
-    var rx_viewTap: Observable<String> {
-        return Observable.from([rightView.rx_tap, leftView.rx_tap])
+    var rx_viewTap: Observable<UITextView> {
+        return Observable.from([rightView.rx_tap.map { _ in return self.rightView.textView }, leftView.rx_tap.map { _ in return self.leftView.textView }])
             .merge()
             .shareReplayLatestWhileConnected()
     }

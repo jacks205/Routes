@@ -14,8 +14,16 @@ import Kanna
 struct SelectRouteViewModel {
     let routes: Variable<[RouteType]>
     
-    init(routes: [RouteType]) {
+    let rx_nicknamesValid: Observable<Bool>
+
+    init(routes: [RouteType], originLocation: Observable<String>, destinationLocation: Observable<String>) {
+        self.rx_nicknamesValid =
+            Observable.combineLatest(originLocation, destinationLocation) { origin, destination -> Bool in
+                return origin.characters.count > 0 && destination.characters.count > 0
+            }
+            .shareReplay(1)
         self.routes = Variable<[RouteType]>(routes)
+        
     }
     
     var legs: [RouteLeg] {

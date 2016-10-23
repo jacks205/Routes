@@ -47,16 +47,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getRootViewController() -> UIViewController {
         //TODO: REMOVE TEST CODE
-//        let vc = RoutesTableViewController()
-        let jsonStr = t_getSampleJSONString()
-        let res = HERERouteDirectionsAPIResponse(JSONString: jsonStr)
-        let vc = SelectRouteCollectionViewController(routes: res!.routes)
+        let vc = RoutesTableViewController()
+//        let jsonStr = t_getSampleJSONString()
+//        let res = HERERouteDirectionsAPIResponse(JSONString: jsonStr)
+//        let vc = SelectRouteCollectionViewController(routes: res!.routes)
 //        let vc = RouteDetailsViewController(route: res!.routes![0])
         
-        vc.view.backgroundColor = addLocationViewBackgroundColor
+//        vc.view.backgroundColor = addLocationViewBackgroundColor
         let nvc = UINavigationController(rootViewController: vc)
         nvc.navigationBar.tintColor = .white
-        nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
+        nvc.navigationBar.barTintColor = .black
+//        nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
         vc.title = "CHOOSE ROUTE"
 //        vc.title = "DIRECTIONS"
 

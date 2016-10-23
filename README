@@ -1,9 +1,6 @@
 TODO:
 - Google attributions
-- Mapbox
-- Mapbox attribution
 - Locally saving data
-- When refreshing data, using the "summary" property to find saved route, else use fastest and tell the user that its a different route
-
+- Nickname tableview set to RxDataSources
 
 https://developers.google.com/maps/pricing-and-plans/

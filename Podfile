@@ -10,6 +10,7 @@ target 'Routes' do
   pod 'Crashlytics'
   pod 'CocoaLumberjack/Swift'
   pod 'GooglePlaces'
+  pod 'GoogleMaps'
   pod 'JGProgressHUD'
   pod 'Firebase/AdMob'
   pod 'Moya-ObjectMapper/RxSwift', :git => 'https://github.com/ivanbruel/Moya-ObjectMapper'

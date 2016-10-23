@@ -26,6 +26,8 @@
 		EA3DFA361DB5771100215049 /* RouteSummaryRenameView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA351DB5771100215049 /* RouteSummaryRenameView.swift */; };
 		EA3DFA381DB5778100215049 /* RouteRenameTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA371DB5778100215049 /* RouteRenameTextView.swift */; };
 		EA3DFA3A1DB5C99E00215049 /* RoutesKeyboardToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA3DFA391DB5C99E00215049 /* RoutesKeyboardToolbar.swift */; };
+		EA4BCE451DB9757500D93FE5 /* AddRouteNicknameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4BCE441DB9757500D93FE5 /* AddRouteNicknameViewController.swift */; };
+		EA4BCE471DB9861900D93FE5 /* AddNicknameSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA4BCE461DB9861900D93FE5 /* AddNicknameSectionView.swift */; };
 		EA894F6D1D3C689B00FE5F56 /* RouteLocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */; };
 		EA894F6F1D3D766600FE5F56 /* Configuration.plist in Resources */ = {isa = PBXBuildFile; fileRef = EA894F6E1D3D766600FE5F56 /* Configuration.plist */; };
 		EA894F711D3D891C00FE5F56 /* RoutesAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */; };
@@ -38,6 +40,7 @@
 		EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAB165281D3B475D0069A6EA /* SelectRouteCollectionViewController.swift */; };
 		EABBC1131D3C1FCE0005D78B /* AddRouteBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */; };
 		EABBC1151D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */; };
+		EACF488E1DBC6D15007228D0 /* AddLocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF488D1DBC6D15007228D0 /* AddLocationsViewModel.swift */; };
 		EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */; };
 		EAF2B3451D38FBDE00723238 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */; };
 		EAF2B3461D38FBDE00723238 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */; };
@@ -92,6 +95,8 @@
 		EA3DFA351DB5771100215049 /* RouteSummaryRenameView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteSummaryRenameView.swift; path = Views/RouteSummaryRenameView.swift; sourceTree = "<group>"; };
 		EA3DFA371DB5778100215049 /* RouteRenameTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteRenameTextView.swift; path = Views/RouteRenameTextView.swift; sourceTree = "<group>"; };
 		EA3DFA391DB5C99E00215049 /* RoutesKeyboardToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoutesKeyboardToolbar.swift; path = Views/RoutesKeyboardToolbar.swift; sourceTree = "<group>"; };
+		EA4BCE441DB9757500D93FE5 /* AddRouteNicknameViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddRouteNicknameViewController.swift; path = Views/AddRouteNicknameViewController.swift; sourceTree = "<group>"; };
+		EA4BCE461DB9861900D93FE5 /* AddNicknameSectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNicknameSectionView.swift; sourceTree = "<group>"; };
 		EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteLocationManager.swift; sourceTree = "<group>"; };
 		EA894F6E1D3D766600FE5F56 /* Configuration.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Configuration.plist; sourceTree = "<group>"; };
 		EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesAPI.swift; sourceTree = "<group>"; };
@@ -104,6 +109,7 @@
 		EAB165281D3B475D0069A6EA /* SelectRouteCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectRouteCollectionViewController.swift; sourceTree = "<group>"; };
 		EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddRouteBaseViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteSummaryCollectionViewCell.swift; sourceTree = "<group>"; };
+		EACF488D1DBC6D15007228D0 /* AddLocationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddLocationsViewModel.swift; path = ViewModels/AddLocationsViewModel.swift; sourceTree = "<group>"; };
 		EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Fonts/OpenSans/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -244,6 +250,7 @@
 			isa = PBXGroup;
 			children = (
 				EA3DFA2A1DB3821E00215049 /* SelectRouteViewModel.swift */,
+				EACF488D1DBC6D15007228D0 /* AddLocationsViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -262,6 +269,7 @@
 				EA18A88B1DB8717500216FD8 /* RoutesMapView.swift */,
 				EA18A88D1DB89C7100216FD8 /* ManeuverDetailView.swift */,
 				EA18A8931DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift */,
+				EA4BCE461DB9861900D93FE5 /* AddNicknameSectionView.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -284,6 +292,7 @@
 				EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */,
 				EAF2B3511D39B5F800723238 /* LocationTableViewCell.swift */,
 				EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */,
+				EA4BCE441DB9757500D93FE5 /* AddRouteNicknameViewController.swift */,
 			);
 			name = AddRoute;
 			sourceTree = "<group>";
@@ -573,6 +582,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				EA4BCE471DB9861900D93FE5 /* AddNicknameSectionView.swift in Sources */,
 				EAF2B3561D3B241B00723238 /* AddDestinationLocationViewController.swift in Sources */,
 				EA3DFA361DB5771100215049 /* RouteSummaryRenameView.swift in Sources */,
 				EABBC1151D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift in Sources */,
@@ -588,12 +598,14 @@
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
 				EA18A88E1DB89C7100216FD8 /* ManeuverDetailView.swift in Sources */,
 				EA18A88C1DB8717500216FD8 /* RoutesMapView.swift in Sources */,
+				EACF488E1DBC6D15007228D0 /* AddLocationsViewModel.swift in Sources */,
 				EA3DFA2E1DB4F57C00215049 /* RouteSummaryOverlayCollectionViewCell.swift in Sources */,
 				EA3DFA301DB4F86200215049 /* RouteSummaryDetailView.swift in Sources */,
 				EAF2B3591D3B365F00723238 /* Extensions.swift in Sources */,
 				EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */,
 				EA18A8941DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift in Sources */,
 				EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */,
+				EA4BCE451DB9757500D93FE5 /* AddRouteNicknameViewController.swift in Sources */,
 				EA18A88A1DB86FBE00216FD8 /* RouteDetailsViewController.swift in Sources */,
 				EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */,
 				EA3DFA381DB5778100215049 /* RouteRenameTextView.swift in Sources */,
