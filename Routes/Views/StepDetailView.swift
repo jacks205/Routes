@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ManeuverDetailView: UIView {
+class StepDetailView: UIView {
     
     let textLabel: UILabel = {
         let l = UILabel()
@@ -16,7 +16,7 @@ class ManeuverDetailView: UIView {
         l.adjustsFontSizeToFitWidth = true
         l.textColor = .white
         l.tintColor = .white
-        l.font = UIFont.montserratRegular(size: 12)
+        l.font = UIFont.montserratRegular(size: 14)
         l.numberOfLines = 0
         return l
     }()
@@ -37,8 +37,15 @@ class ManeuverDetailView: UIView {
 //        l.adjustsFontSizeToFitWidth = true
         l.textColor = .white
         l.tintColor = .white
-        l.font = UIFont.openSansLight(size: 10)
+        l.font = UIFont.openSansLight(size: 12)
         return l
+    }()
+    
+    let pin: UIImageView = {
+        let iv = UIImageView(image: #imageLiteral(resourceName: "pin-detail"))
+        iv.translatesAutoresizingMaskIntoConstraints = false
+        iv.contentMode = .scaleAspectFit
+        return iv
     }()
     
     override init(frame: CGRect) {
@@ -46,6 +53,7 @@ class ManeuverDetailView: UIView {
         addSubview(textLabel)
         addSubview(timeLabel)
         addSubview(distanceLabel)
+        addSubview(pin)
         setConstraints()
     }
     
@@ -54,13 +62,6 @@ class ManeuverDetailView: UIView {
     }
     
     func setConstraints() {
-        let pin: UIImageView = {
-            let iv = UIImageView(image: #imageLiteral(resourceName: "pin-detail"))
-            iv.translatesAutoresizingMaskIntoConstraints = false
-            iv.contentMode = .scaleAspectFit
-            return iv
-        }()
-        addSubview(pin)
         pin.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
         pin.heightAnchor.constraint(equalToConstant: 30).isActive = true
         pin.widthAnchor.constraint(equalToConstant: 25).isActive = true
@@ -69,25 +70,29 @@ class ManeuverDetailView: UIView {
         timeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         distanceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         
-        timeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 8).isActive = true
-        distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -8).isActive = true
+        timeLabel.topAnchor.constraint(equalTo: topAnchor, constant: 6).isActive = true
+        distanceLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -6).isActive = true
         
         textLabel.leadingAnchor.constraint(equalTo: pin.trailingAnchor, constant: 10).isActive = true
         textLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        addConstraintsWithFormat("H:[v0]-10-[v1]", views: textLabel, timeLabel)
-        let top = textLabel.topAnchor.constraint(greaterThanOrEqualTo: topAnchor, constant: 10)
-        top.priority = UILayoutPriorityRequired
-        top.isActive = true
-        let bot = textLabel.bottomAnchor.constraint(lessThanOrEqualTo: bottomAnchor, constant: -10)
-        bot.priority = UILayoutPriorityRequired
-        bot.isActive = true
-        textLabel.setContentHuggingPriority(250, for: .horizontal)
-        timeLabel.setContentCompressionResistancePriority(252, for: .horizontal)
+        
+        textLabel.trailingLessThanOrEqual(anchor: timeLabel.leadingAnchor, constant: -10, priority: UILayoutPriorityDefaultLow, isActive: true)
+        textLabel.topEqual(anchor: topAnchor, constant: 10, priority: UILayoutPriorityDefaultHigh, isActive: true)
+        textLabel.bottomEqual(anchor: bottomAnchor, constant: -10, priority: UILayoutPriorityDefaultHigh, isActive: true)
+        timeLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
+        textLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
+    }
+    
+    func setPinImage(type: GoogleManeuverType) {
+        switch type {
+        default:
+            pin.image = #imageLiteral(resourceName: "pin")
+        }
     }
 
 }
 
-extension ManeuverDetailView {
+extension StepDetailView {
     
     func setTextLabelAttributedString(text: String) {
         let newText = text + "<style>body{font-family: Montserrat-Regular; font-size:12px; color:white;}</style>"

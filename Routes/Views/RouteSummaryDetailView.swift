@@ -13,7 +13,7 @@ class RouteSummaryDetailView: UIView {
     let viaLabel: UILabel = {
         let lbl = UILabel()
         lbl.translatesAutoresizingMaskIntoConstraints = false
-        lbl.font = UIFont(name: "Montserrat-Regular", size: 12)
+        lbl.font = UIFont(name: "Montserrat-Regular", size: 20)
         lbl.adjustsFontSizeToFitWidth = true
         lbl.textColor = .white
         lbl.numberOfLines = 1
@@ -55,16 +55,21 @@ class RouteSummaryDetailView: UIView {
     }
     
     func setConstraints() {
-        viaLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 10).isActive = true
-        viaLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
+        viaLabel.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 16).isActive = true
+        viaLabel.centerYEqual(view: self)
         
         distanceLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         distanceLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        
-        addConstraintsWithFormat("H:[v0]->=8-[v1]", views: viaLabel, distanceLabel)
-        
+
         timeLabel.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -10).isActive = true
         timeLabel.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -10).isActive = true
+        
+        addConstraintsWithFormat("H:[v0]->=10@250-[v1]", views: viaLabel, distanceLabel)
+        addConstraintsWithFormat("H:[v0]->=10@250-[v1]", views: viaLabel, timeLabel)
+        
+        distanceLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
+        timeLabel.setContentHuggingPriority(UILayoutPriorityRequired, for: .horizontal)
+        viaLabel.setContentCompressionResistancePriority(UILayoutPriorityDefaultLow, for: .horizontal)
         
     }
 

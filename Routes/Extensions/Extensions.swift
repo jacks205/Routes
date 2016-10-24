@@ -126,6 +126,62 @@ extension UIView {
     func addConstraintsWithFormat(_ format: String, views: UIView...) {
         addConstraintsWithFormat(format, metrics: nil, views: views)
     }
+    
+    func centerXEqual(view: UIView, constant: CGFloat = 0, priority: UILayoutPriority = UILayoutPriorityRequired, isActive: Bool = true) {
+        let constraint = centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: constant)
+        constraint.priority = priority
+        constraint.isActive = isActive
+    }
+    
+    func centerYEqual(view: UIView, constant: CGFloat = 0, priority: UILayoutPriority = UILayoutPriorityRequired, isActive: Bool = true) {
+        let constraint = centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: constant)
+        constraint.priority = priority
+        constraint.isActive = isActive
+    }
+    
+    func leadingEqual(anchor: NSLayoutXAxisAnchor, constant: CGFloat = 0, priority: UILayoutPriority = UILayoutPriorityRequired, isActive: Bool = true) {
+        let constraint = leadingAnchor.constraint(equalTo: anchor, constant: constant)
+        constraint.priority = priority
+        constraint.isActive = isActive
+    }
+    
+    func trailingEqual(anchor: NSLayoutXAxisAnchor, constant: CGFloat = 0, priority: UILayoutPriority = UILayoutPriorityRequired, isActive: Bool = true) {
+        let constraint = trailingAnchor.constraint(equalTo: anchor, constant: constant)
+        constraint.priority = priority
+        constraint.isActive = isActive
+    }
+    
+    func trailingLessThanOrEqual(anchor: NSLayoutXAxisAnchor, constant: CGFloat = 0, priority: UILayoutPriority = UILayoutPriorityRequired, isActive: Bool = true) {
+        let constraint = trailingAnchor.constraint(lessThanOrEqualTo: anchor, constant: constant)
+        constraint.priority = priority
+        constraint.isActive = isActive
+    }
+    
+    func trailingGreaterThanOrEqual(anchor: NSLayoutXAxisAnchor, constant: CGFloat = 0, priority: UILayoutPriority = UILayoutPriorityRequired, isActive: Bool = true) {
+        let constraint = trailingAnchor.constraint(greaterThanOrEqualTo: anchor, constant: constant)
+        constraint.priority = priority
+        constraint.isActive = isActive
+    }
+    
+    func topEqual(anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0, priority: UILayoutPriority = UILayoutPriorityRequired, isActive: Bool = true) {
+        let constraint = topAnchor.constraint(equalTo: anchor, constant: constant)
+        constraint.priority = priority
+        constraint.isActive = isActive
+    }
+    
+    func bottomEqual(anchor: NSLayoutYAxisAnchor, constant: CGFloat = 0, priority: UILayoutPriority = UILayoutPriorityRequired, isActive: Bool = true) {
+        let constraint = bottomAnchor.constraint(equalTo: anchor, constant: constant)
+        constraint.priority = priority
+        constraint.isActive = isActive
+    }
+    
+    func height(constant: CGFloat) {
+        heightAnchor.constraint(equalToConstant: constant).isActive = true
+    }
+    
+    func width(constant: CGFloat) {
+        widthAnchor.constraint(equalToConstant: constant).isActive = true
+    }
 }
 
 extension UIFont {

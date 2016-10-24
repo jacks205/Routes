@@ -11,8 +11,8 @@
 		2FC804B275CFA6DD1B31CAE7 /* Pods_RoutesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FEF99AF94876C1C6D4788C5B /* Pods_RoutesTests.framework */; };
 		EA18A88A1DB86FBE00216FD8 /* RouteDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A8891DB86FBE00216FD8 /* RouteDetailsViewController.swift */; };
 		EA18A88C1DB8717500216FD8 /* RoutesMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A88B1DB8717500216FD8 /* RoutesMapView.swift */; };
-		EA18A88E1DB89C7100216FD8 /* ManeuverDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A88D1DB89C7100216FD8 /* ManeuverDetailView.swift */; };
-		EA18A8941DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A8931DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift */; };
+		EA18A88E1DB89C7100216FD8 /* StepDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A88D1DB89C7100216FD8 /* StepDetailView.swift */; };
+		EA18A8941DB8B31E00216FD8 /* StepDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA18A8931DB8B31E00216FD8 /* StepDetailTableViewCell.swift */; };
 		EA2E56D71D37246F00D2E4C7 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EA2E56D61D37246F00D2E4C7 /* AppDelegate.swift */; };
 		EA2E56DE1D37246F00D2E4C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */; };
 		EA2E56E11D37246F00D2E4C7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */; };
@@ -41,6 +41,7 @@
 		EABBC1131D3C1FCE0005D78B /* AddRouteBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */; };
 		EABBC1151D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */; };
 		EACF488E1DBC6D15007228D0 /* AddLocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF488D1DBC6D15007228D0 /* AddLocationsViewModel.swift */; };
+		EACF48901DBDFC4E007228D0 /* LegOverviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF488F1DBDFC4E007228D0 /* LegOverviewDetailView.swift */; };
 		EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */; };
 		EAF2B3451D38FBDE00723238 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */; };
 		EAF2B3461D38FBDE00723238 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */; };
@@ -76,8 +77,8 @@
 		C0536A1EED692664FEE20D1F /* Pods_Routes.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Routes.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA18A8891DB86FBE00216FD8 /* RouteDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RouteDetailsViewController.swift; path = Views/RouteDetailsViewController.swift; sourceTree = "<group>"; };
 		EA18A88B1DB8717500216FD8 /* RoutesMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesMapView.swift; sourceTree = "<group>"; };
-		EA18A88D1DB89C7100216FD8 /* ManeuverDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ManeuverDetailView.swift; path = Views/ManeuverDetailView.swift; sourceTree = "<group>"; };
-		EA18A8931DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ManeuverDetailTableViewCell.swift; sourceTree = "<group>"; };
+		EA18A88D1DB89C7100216FD8 /* StepDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StepDetailView.swift; path = Views/StepDetailView.swift; sourceTree = "<group>"; };
+		EA18A8931DB8B31E00216FD8 /* StepDetailTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StepDetailTableViewCell.swift; sourceTree = "<group>"; };
 		EA2E56D31D37246F00D2E4C7 /* RoutesDebug.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoutesDebug.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA2E56D61D37246F00D2E4C7 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EA2E56DD1D37246F00D2E4C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -110,6 +111,7 @@
 		EABBC1121D3C1FCE0005D78B /* AddRouteBaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddRouteBaseViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		EABBC1141D3C21DA0005D78B /* RouteSummaryCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteSummaryCollectionViewCell.swift; sourceTree = "<group>"; };
 		EACF488D1DBC6D15007228D0 /* AddLocationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddLocationsViewModel.swift; path = ViewModels/AddLocationsViewModel.swift; sourceTree = "<group>"; };
+		EACF488F1DBDFC4E007228D0 /* LegOverviewDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LegOverviewDetailView.swift; path = Views/LegOverviewDetailView.swift; sourceTree = "<group>"; };
 		EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
 		EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Fonts/OpenSans/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
@@ -267,9 +269,10 @@
 				EA3DFA391DB5C99E00215049 /* RoutesKeyboardToolbar.swift */,
 				EAA180A91D38E4E8002B22B1 /* RouteTableViewCell.swift */,
 				EA18A88B1DB8717500216FD8 /* RoutesMapView.swift */,
-				EA18A88D1DB89C7100216FD8 /* ManeuverDetailView.swift */,
-				EA18A8931DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift */,
+				EA18A88D1DB89C7100216FD8 /* StepDetailView.swift */,
+				EA18A8931DB8B31E00216FD8 /* StepDetailTableViewCell.swift */,
 				EA4BCE461DB9861900D93FE5 /* AddNicknameSectionView.swift */,
+				EACF488F1DBDFC4E007228D0 /* LegOverviewDetailView.swift */,
 			);
 			name = CustomViews;
 			sourceTree = "<group>";
@@ -596,14 +599,15 @@
 				EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */,
 				EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */,
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
-				EA18A88E1DB89C7100216FD8 /* ManeuverDetailView.swift in Sources */,
+				EA18A88E1DB89C7100216FD8 /* StepDetailView.swift in Sources */,
 				EA18A88C1DB8717500216FD8 /* RoutesMapView.swift in Sources */,
 				EACF488E1DBC6D15007228D0 /* AddLocationsViewModel.swift in Sources */,
 				EA3DFA2E1DB4F57C00215049 /* RouteSummaryOverlayCollectionViewCell.swift in Sources */,
 				EA3DFA301DB4F86200215049 /* RouteSummaryDetailView.swift in Sources */,
+				EACF48901DBDFC4E007228D0 /* LegOverviewDetailView.swift in Sources */,
 				EAF2B3591D3B365F00723238 /* Extensions.swift in Sources */,
 				EAA180AA1D38E4E8002B22B1 /* RouteTableViewCell.swift in Sources */,
-				EA18A8941DB8B31E00216FD8 /* ManeuverDetailTableViewCell.swift in Sources */,
+				EA18A8941DB8B31E00216FD8 /* StepDetailTableViewCell.swift in Sources */,
 				EAF2B3501D39A68700723238 /* AddLocationViewController.swift in Sources */,
 				EA4BCE451DB9757500D93FE5 /* AddRouteNicknameViewController.swift in Sources */,
 				EA18A88A1DB86FBE00216FD8 /* RouteDetailsViewController.swift in Sources */,

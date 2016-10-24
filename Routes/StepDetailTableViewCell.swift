@@ -8,12 +8,12 @@
 
 import UIKit
 
-class ManeuverDetailTableViewCell: UITableViewCell {
+class StepDetailTableViewCell: UITableViewCell {
     
     static let identifier: String = "DetailCell"
     
-    let detailView: ManeuverDetailView = {
-        let v = ManeuverDetailView()
+    let detailView: StepDetailView = {
+        let v = StepDetailView()
         v.translatesAutoresizingMaskIntoConstraints = false
         v.backgroundColor = bottomGradientBackgroundColor
         v.layer.cornerRadius = 2

@@ -39,4 +39,8 @@ struct SelectRouteViewModel {
             .flatMap { $0 }
             .map { $0.steps }
     }
+    
+    func routeColor(index: Int) -> UIColor? {
+        return routes.value[index].legs.first?.routeColor
+    }
 }

@@ -99,6 +99,28 @@ struct Leg: Mappable {
     
     var steps: [Step]!
     
+    var routeColor: UIColor {
+        let percentage = Double(duration) / Double(durationTraffic)
+        var color = lightBlueColor
+        if percentage < 0.75 && percentage > 0.55 {
+            color = darkYellowColor
+        } else if percentage <= 0.55 {
+            color = darkRedColor
+        }
+        return color
+    }
+    
+    var routeColorText: UIColor {
+        let percentage = Double(duration) / Double(durationTraffic)
+        var color = lightBlueColorText
+        if percentage < 0.75 && percentage > 0.55 {
+            color = darkYellowColor
+        } else if percentage <= 0.55 {
+            color = darkRedColor
+        }
+        return color
+    }
+    
     // MARK: JSON
     init?(map: Map) { }
     

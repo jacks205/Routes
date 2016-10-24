@@ -159,6 +159,7 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
                 let leg = route.legs.first
                 cell.detailView.distanceLabel.text = leg?.distanceText ?? "UNKNOWN"
                 cell.detailView.timeLabel.text = leg?.durationText ?? "UNKNOWN"
+                cell.detailView.timeLabel.textColor  = leg?.routeColorText
             }
             .addDisposableTo(db)
         mapView.addSubview(collectionView)
@@ -168,7 +169,7 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
         routeSummaryRenameView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         routeSummaryRenameView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         routeSummaryRenameView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        routeSummaryRenameView.heightAnchor.constraint(equalToConstant: 72).isActive = true
+        routeSummaryRenameView.heightAnchor.constraint(equalToConstant: 36).isActive = true
         
         confirmBtn.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         confirmBtn.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
@@ -250,8 +251,10 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
     
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         //TODO: Look at list of routes and color accordingly
+        let index = pageControl.currentPage
+        let routeColor = selectRouteViewModel.routeColor(index: index)
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = lightBlueColor
+        renderer.strokeColor = routeColor
         renderer.lineWidth = 4
         return renderer
     }

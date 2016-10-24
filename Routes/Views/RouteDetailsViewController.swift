@@ -25,7 +25,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
     let tableView: UITableView = {
         let t = UITableView()
         t.translatesAutoresizingMaskIntoConstraints = false
-        t.register(ManeuverDetailTableViewCell.self, forCellReuseIdentifier: ManeuverDetailTableViewCell.identifier)
+        t.register(StepDetailTableViewCell.self, forCellReuseIdentifier: StepDetailTableViewCell.identifier)
         t.backgroundColor = .clear
         t.allowsSelection = false
         t.tableFooterView = UIView()
@@ -97,7 +97,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
                                     .steps)
         steps
             .asDriver()
-            .drive(tableView.rx_itemsWithCellIdentifier(ManeuverDetailTableViewCell.identifier, cellType: ManeuverDetailTableViewCell.self)) { r, step, c in
+            .drive(tableView.rx_itemsWithCellIdentifier(StepDetailTableViewCell.identifier, cellType: StepDetailTableViewCell.self)) { r, step, c in
                 c.backgroundColor = .clear
                 c.detailView.setTextLabelAttributedString(text: step.instructions)
                 c.detailView.timeLabel.text = step.durationText
@@ -121,6 +121,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         path.move(to: .zero)
         path.addLine(to: CGPoint(x: view.frame.width, y: 0))
         lineLayer.path = path.cgPath
+        lineLayer.strokeColor = route.value.legs.first?.routeColor.cgColor
         view.layer.addSublayer(lineLayer)
         
         let headerView = UIView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 210))
@@ -151,11 +152,12 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         let headerView = UIView()
         headerView.backgroundColor = addLocationViewBackgroundColor
         headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 70)
-        let v = ManeuverDetailView()
+        let v = LegOverviewDetailView()
         headerView.addSubview(v)
         v.frame = CGRect(x: 10, y: 10 + 6, width: tableView.frame.width - 16, height: 50)
         v.backgroundColor = .clear
-        v.textLabel.text = route.value.summary
+        v.originLabel.text = "19332 Trino Circle"
+        v.destinationLabel.text = "Disneyland Drive"
         v.timeLabel.text = route.value.legs.first?.durationText
         v.distanceLabel.text = route.value.legs.first?.distanceText
         return headerView
@@ -178,7 +180,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         //TODO: Look at list of routes and color accordingly
         let renderer = MKPolylineRenderer(overlay: overlay)
-        renderer.strokeColor = lightBlueColor
+        renderer.strokeColor = route.value.legs.first?.routeColor
         renderer.lineWidth = 4
         return renderer
     }
