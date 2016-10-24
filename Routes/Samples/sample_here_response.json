@@ -300,7 +300,7 @@
                           },
                           "duration_in_traffic" : {
                           "text" : "41 mins",
-                          "value" : 2473
+                          "value" : 3518
                           },
                           "end_address" : "Chapman University West Campus Parking Structure, 230 N Cypress St, Orange, CA 92866, USA",
                           "end_location" : {
@@ -620,7 +620,7 @@
                           },
                           "duration_in_traffic" : {
                           "text" : "42 mins",
-                          "value" : 2538
+                          "value" : 7000
                           },
                           "end_address" : "Chapman University West Campus Parking Structure, 230 N Cypress St, Orange, CA 92866, USA",
                           "end_location" : {
