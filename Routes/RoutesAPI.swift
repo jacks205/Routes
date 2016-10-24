@@ -11,16 +11,15 @@ import Moya
 import CoreLocation
 
 // MARK: - Provider setup
-var HERE_API_APP_ID: String?
-var HERE_API_APP_CODE: String?
+var GMS_SERVICES_API_KEY: String?
 
-let endpointClosure = { (target: HERERouteAPI) -> Endpoint<HERERouteAPI> in
-    return Endpoint<HERERouteAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters, parameterEncoding: URLEncoding.default, httpHeaderFields: nil)
+let endpointClosure = { (target: GoogleDirectionsAPI) -> Endpoint<GoogleDirectionsAPI> in
+    return Endpoint<GoogleDirectionsAPI>(URL: url(target), sampleResponseClosure: {.networkResponse(200, target.sampleData)}, method: target.method, parameters: target.parameters, parameterEncoding: URLEncoding.default, httpHeaderFields: nil)
 }
 #if DEBUG
-let RoutesDirectionAPI: RxMoyaProvider<HERERouteAPI> = RxMoyaProvider<HERERouteAPI>(endpointClosure: endpointClosure, plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)])
+let GoogleDirectionAPI: RxMoyaProvider<GoogleDirectionsAPI> = RxMoyaProvider<GoogleDirectionsAPI>(endpointClosure: endpointClosure, plugins: [NetworkLoggerPlugin(verbose: true, responseDataFormatter: JSONResponseDataFormatter)])
 #else
-    let RoutesDirectionAPI: RxMoyaProvider<HERERouteAPI> = RxMoyaProvider<HERERouteAPI>()
+    let GoogleDirectionAPI: RxMoyaProvider<GoogleDirectionsAPI> = RxMoyaProvider<GoogleDirectionsAPI>(endpointClosure: endpointClosure)
 #endif
 
 // MARK: - Provider support
@@ -31,44 +30,37 @@ private extension String {
     }
 }
 
-public enum HERERouteAPI {
-    case calculateRoute(CLLocationCoordinate2D, CLLocationCoordinate2D)
-    case getRoute(String)
+public enum GoogleDirectionsAPI {
+    case directions(String, String)
 }
 
-extension HERERouteAPI: TargetType {
-    public var baseURL: URL { return URL(string: "https://route.cit.api.here.com/routing/7.2")! }
+extension GoogleDirectionsAPI: TargetType {
+    public var baseURL: URL { return URL(string: "https://maps.googleapis.com/maps/api")! }
     public var path: String {
         switch self {
-        case .calculateRoute:
-            return "/calculateroute.json"
-        case .getRoute:
-            return "/getroute.json"
+        case .directions:
+            return "/directions/json"
         }
     }
     public var method: Moya.Method {
         return .get
     }
     public var parameters: [String: Any]? {
-        guard let apiId = HERE_API_APP_ID, let apiCode = HERE_API_APP_CODE else {
-            fatalError("HERE API ID and CODE must be provided.")
+        guard let apiKey = GMS_SERVICES_API_KEY else {
+            fatalError("GMS API KEY must be provided.")
         }
         var defaultParameters: [String: Any] = [
-            "app_id": apiId as AnyObject,
-            "app_code": apiCode as AnyObject,
-            "mode": "fastest;car;traffic:enabled" as AnyObject,
-            "alternatives": 4 as AnyObject,
-            "metricSystem": "imperial" as AnyObject,
-            "routeAttributes": "waypoints,summary,legs,lines,routeId" as AnyObject
+            "key": apiKey as AnyObject,
+            "traffic_model": "best_guess" as AnyObject,
+            "alternatives": "true" as AnyObject,
+            "departure_time": "now" as AnyObject
         ]
         switch self {
-        case .calculateRoute(let waypoint0, let waypoint1):
-            defaultParameters["waypoint0"] = "geo!\(waypoint0.latitude),\(waypoint0.longitude)" as AnyObject?
-            defaultParameters["waypoint1"] = "geo!\(waypoint1.latitude),\(waypoint1.longitude)" as AnyObject?
-        case .getRoute(let routeId):
-            defaultParameters["routeId"] = routeId as AnyObject?
-        }
+        case .directions(let pid1, let pid2):
+            defaultParameters["origin"] = "place_id:\(pid1)" as AnyObject?
+            defaultParameters["destination"] = "place_id:\(pid2)" as AnyObject?
         return defaultParameters
+        }
     }
     
     public var sampleData: Data {

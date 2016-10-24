@@ -1,1 +1,943 @@
-{"response":{"metaInfo":{"timestamp":"2016-10-16T03:03:26Z","mapVersion":"8.30.63.157","moduleVersion":"7.2.73.0-67447","interfaceVersion":"2.6.25"},"route":[{"routeId":"AJAACAAAAB4AAAA/AAAAnQAAAK0AAAB42mNYy8DAxMQABNmzDXU+XmaPYIACHu8G0e/MnDYM//9DBD7sZ0ACXECsxKR5jYlB6YGAzq1lmnCNLN1NonMZ8Grk3J20iRFoMVxwfWPjVg6gyJIwXQXmJO6mBiZG1wYGBgGGQAYHDgUmB1YBoCI2BoEGAN3VHb7d184r","waypoint":[{"linkId":"-923594651","mappedPosition":{"latitude":33.7933123,"longitude":-117.8525001},"originalPosition":{"latitude":33.7929999,"longitude":-117.8525001},"type":"stopOver","spot":0.484375,"sideOfStreet":"left","mappedRoadName":"University Dr","label":"University Dr","shapeIndex":0},{"linkId":"-927306772","mappedPosition":{"latitude":33.9790786,"longitude":-118.0322962},"originalPosition":{"latitude":33.9788,"longitude":-118.0323},"type":"stopOver","spot":0.6792453,"sideOfStreet":"right","mappedRoadName":"Philadelphia St","label":"Philadelphia St","shapeIndex":275}],"mode":{"type":"fastest","transportModes":["car"],"trafficMode":"enabled","feature":[]},"leg":[{"start":{"linkId":"-923594651","mappedPosition":{"latitude":33.7933123,"longitude":-117.8525001},"originalPosition":{"latitude":33.7929999,"longitude":-117.8525001},"type":"stopOver","spot":0.484375,"sideOfStreet":"left","mappedRoadName":"University Dr","label":"University Dr","shapeIndex":0},"end":{"linkId":"-927306772","mappedPosition":{"latitude":33.9790786,"longitude":-118.0322962},"originalPosition":{"latitude":33.9788,"longitude":-118.0323},"type":"stopOver","spot":0.6792453,"sideOfStreet":"right","mappedRoadName":"Philadelphia St","label":"Philadelphia St","shapeIndex":275},"length":34766,"travelTime":2690,"maneuver":[{"position":{"latitude":33.7933123,"longitude":-117.8525001},"instruction":"Head toward <span class=\"toward_street\">W Sycamore Ave</span> on <span class=\"street\">University Dr</span>. <span class=\"distance-description\">Go for <span class=\"length\">180 ft</span>.</span>","travelTime":24,"length":55,"id":"M1","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7933016,"longitude":-117.8530991},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">N Glassell St</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.1 mi</span>.</span>","travelTime":50,"length":197,"id":"M2","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7950718,"longitude":-117.8530991},"instruction":"Turn <span class=\"direction\">left</span> onto <span class=\"next-street\">W Walnut Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.8 mi</span>.</span>","travelTime":128,"length":1246,"id":"M3","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7951684,"longitude":-117.8665638},"instruction":"Continue on <span class=\"next-street\">W Orangewood Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.9 mi</span>.</span>","travelTime":165,"length":1451,"id":"M4","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7959623,"longitude":-117.8819704},"instruction":"Turn <span class=\"direction\">left</span> onto <span class=\"next-street\">N Rampart St</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.6 mi</span>.</span>","travelTime":89,"length":1011,"id":"M5","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7892997,"longitude":-117.8865409},"instruction":"Turn <span class=\"direction\">right</span> and take ramp onto <span class=\"number\">I-5 N</span> <span class=\"next-street\">(Santa Ana Fwy)</span>. <span class=\"distance-description\">Go for <span class=\"length\">10.4 mi</span>.</span>","travelTime":691,"length":16759,"id":"M6","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.8825548,"longitude":-118.025887},"instruction":"Take exit <span class=\"exit\">118</span> toward <span class=\"sign\"><span lang=\"en\">Valley View Ave</span>/<span lang=\"en\">La Mirada</span></span> onto <span class=\"next-street\">Gateway Dr</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.2 mi</span>.</span>","travelTime":42,"length":307,"id":"M7","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.8845611,"longitude":-118.0271637},"instruction":"Turn <span class=\"direction\">left</span> onto <span class=\"next-street\">Firestone Blvd</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.1 mi</span>.</span>","travelTime":70,"length":240,"id":"M8","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.8857841,"longitude":-118.0289555},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">Valley View Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">2.2 mi</span>.</span>","travelTime":314,"length":3484,"id":"M9","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9170265,"longitude":-118.0292451},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">Imperial Hwy</span>. <span class=\"distance-description\">Go for <span class=\"length\">1.0 mi</span>.</span>","travelTime":153,"length":1596,"id":"M10","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9171338,"longitude":-118.0119932},"instruction":"Turn <span class=\"direction\">left</span> onto <span class=\"next-street\">La Mirada Blvd</span>. <span class=\"distance-description\">Go for <span class=\"length\">1.6 mi</span>.</span>","travelTime":311,"length":2651,"id":"M11","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9407158,"longitude":-118.0124652},"instruction":"Continue on <span class=\"next-street\">Colima Rd</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.6 mi</span>.</span>","travelTime":115,"length":1043,"id":"M12","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9487302,"longitude":-118.0065429},"instruction":"Turn <span class=\"direction\">left</span> onto <span class=\"next-street\">Whittier Blvd</span> <span class=\"number\">(CA-72)</span>. <span class=\"distance-description\">Go for <span class=\"length\">1.8 mi</span>.</span>","travelTime":325,"length":2936,"id":"M13","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9632893,"longitude":-118.0328178},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">Painter Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">1.1 mi</span>.</span>","travelTime":208,"length":1756,"id":"M14","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9790821,"longitude":-118.0326676},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">Philadelphia St</span>. <span class=\"distance-description\">Go for <span class=\"length\">112 ft</span>.</span>","travelTime":5,"length":34,"id":"M15","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9790786,"longitude":-118.0322962},"instruction":"Arrive at <span class=\"street\">Philadelphia St</span>. Your destination is on the right.","travelTime":0,"length":0,"id":"M16","_type":"PrivateTransportManeuverType"}]}],"summary":{"distance":34766,"trafficTime":2690,"baseTime":2472,"flags":["noThroughRoad","motorway"],"text":"The trip takes <span class=\"length\">21.6 mi</span> and <span class=\"time\">45 mins</span>.","travelTime":2690,"_type":"RouteSummaryType"}},{"routeId":"AIoACAAAAB4AAAA/AAAAnQAAAKcAAAB42mNYzsDAxMQABNmzDXU+XmaPYIACHu8G0e/MnDYM//9DBD7sZ0ACXECsxKR5jYlB6YGAzq1lmnCNLN1NonMZ8Grk3J20iRFoMVzwWdOzB1eB9JIwXQXmBhYeRwdGCQXmLgYGR0YGRoYHQKUCAFMfHmu7bj05","waypoint":[{"linkId":"-923594651","mappedPosition":{"latitude":33.7933123,"longitude":-117.8525001},"originalPosition":{"latitude":33.7929999,"longitude":-117.8525001},"type":"stopOver","spot":0.484375,"sideOfStreet":"left","mappedRoadName":"University Dr","label":"University Dr","shapeIndex":0},{"linkId":"-927306772","mappedPosition":{"latitude":33.9790786,"longitude":-118.0322962},"originalPosition":{"latitude":33.9788,"longitude":-118.0323},"type":"stopOver","spot":0.6792453,"sideOfStreet":"right","mappedRoadName":"Philadelphia St","label":"Philadelphia St","shapeIndex":218}],"mode":{"type":"fastest","transportModes":["car"],"trafficMode":"enabled","feature":[]},"leg":[{"start":{"linkId":"-923594651","mappedPosition":{"latitude":33.7933123,"longitude":-117.8525001},"originalPosition":{"latitude":33.7929999,"longitude":-117.8525001},"type":"stopOver","spot":0.484375,"sideOfStreet":"left","mappedRoadName":"University Dr","label":"University Dr","shapeIndex":0},"end":{"linkId":"-927306772","mappedPosition":{"latitude":33.9790786,"longitude":-118.0322962},"originalPosition":{"latitude":33.9788,"longitude":-118.0323},"type":"stopOver","spot":0.6792453,"sideOfStreet":"right","mappedRoadName":"Philadelphia St","label":"Philadelphia St","shapeIndex":218},"length":32024,"travelTime":2484,"maneuver":[{"position":{"latitude":33.7933123,"longitude":-117.8525001},"instruction":"Head toward <span class=\"toward_street\">W Sycamore Ave</span> on <span class=\"street\">University Dr</span>. <span class=\"distance-description\">Go for <span class=\"length\">180 ft</span>.</span>","travelTime":24,"length":55,"id":"M1","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7933016,"longitude":-117.8530991},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">N Glassell St</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.1 mi</span>.</span>","travelTime":50,"length":197,"id":"M2","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7950718,"longitude":-117.8530991},"instruction":"Turn <span class=\"direction\">left</span> onto <span class=\"next-street\">W Walnut Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.8 mi</span>.</span>","travelTime":128,"length":1246,"id":"M3","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7951684,"longitude":-117.8665638},"instruction":"Continue on <span class=\"next-street\">W Orangewood Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">1.6 mi</span>.</span>","travelTime":286,"length":2563,"id":"M4","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7962413,"longitude":-117.8939652},"instruction":"Turn <span class=\"direction\">slightly right</span> onto <span class=\"next-street\">S Anaheim Way</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.3 mi</span>.</span>","travelTime":42,"length":460,"id":"M5","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7993634,"longitude":-117.8972161},"instruction":"Take <span class=\"direction\">left</span> ramp onto <span class=\"number\">I-5 N</span> <span class=\"next-street\">(Santa Ana Fwy)</span>. <span class=\"distance-description\">Go for <span class=\"length\">10.7 mi</span>.</span>","travelTime":723,"length":17188,"id":"M6","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.8918459,"longitude":-118.0433857},"instruction":"Take exit <span class=\"exit\">119</span> toward <span class=\"sign\"><span lang=\"en\">Carmenita Rd</span></span>. <span class=\"distance-description\">Go for <span class=\"length\">0.3 mi</span>.</span>","travelTime":19,"length":407,"id":"M7","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.8942277,"longitude":-118.0467224},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">Carmenita Rd</span>. <span class=\"distance-description\">Go for <span class=\"length\">6.1 mi</span>.</span>","travelTime":1207,"length":9874,"id":"M8","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9790821,"longitude":-118.0326676},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">Philadelphia St</span>. <span class=\"distance-description\">Go for <span class=\"length\">112 ft</span>.</span>","travelTime":5,"length":34,"id":"M9","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9790786,"longitude":-118.0322962},"instruction":"Arrive at <span class=\"street\">Philadelphia St</span>. Your destination is on the right.","travelTime":0,"length":0,"id":"M10","_type":"PrivateTransportManeuverType"}]}],"summary":{"distance":32024,"trafficTime":2484,"baseTime":2261,"flags":["noThroughRoad","motorway"],"text":"The trip takes <span class=\"length\">19.9 mi</span> and <span class=\"time\">41 mins</span>.","travelTime":2484,"_type":"RouteSummaryType"}},{"routeId":"AIYACAAAAB4AAAA/AAAAnQAAAKIAAAB42mNYxMDAxMQABNmzDXU+XmaPYIACHu8G0e/MnDYM//9DBD7sZ0ACXECsxKR5jYlB6YGAzq1lmnCNLN1NonMZ8Grk3J20iRFoMVxQeGle9zogvSRMV4G5gYXH0YGRwUCAgUGCoYGBQQEAhl0bwK5hO5E=","waypoint":[{"linkId":"-923594651","mappedPosition":{"latitude":33.7933123,"longitude":-117.8525001},"originalPosition":{"latitude":33.7929999,"longitude":-117.8525001},"type":"stopOver","spot":0.484375,"sideOfStreet":"left","mappedRoadName":"University Dr","label":"University Dr","shapeIndex":0},{"linkId":"-927306772","mappedPosition":{"latitude":33.9790786,"longitude":-118.0322962},"originalPosition":{"latitude":33.9788,"longitude":-118.0323},"type":"stopOver","spot":0.6792453,"sideOfStreet":"right","mappedRoadName":"Philadelphia St","label":"Philadelphia St","shapeIndex":269}],"mode":{"type":"fastest","transportModes":["car"],"trafficMode":"enabled","feature":[]},"leg":[{"start":{"linkId":"-923594651","mappedPosition":{"latitude":33.7933123,"longitude":-117.8525001},"originalPosition":{"latitude":33.7929999,"longitude":-117.8525001},"type":"stopOver","spot":0.484375,"sideOfStreet":"left","mappedRoadName":"University Dr","label":"University Dr","shapeIndex":0},"end":{"linkId":"-927306772","mappedPosition":{"latitude":33.9790786,"longitude":-118.0322962},"originalPosition":{"latitude":33.9788,"longitude":-118.0323},"type":"stopOver","spot":0.6792453,"sideOfStreet":"right","mappedRoadName":"Philadelphia St","label":"Philadelphia St","shapeIndex":269},"length":39552,"travelTime":2399,"maneuver":[{"position":{"latitude":33.7933123,"longitude":-117.8525001},"instruction":"Head toward <span class=\"toward_street\">W Sycamore Ave</span> on <span class=\"street\">University Dr</span>. <span class=\"distance-description\">Go for <span class=\"length\">180 ft</span>.</span>","travelTime":24,"length":55,"id":"M1","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7933016,"longitude":-117.8530991},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">N Glassell St</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.1 mi</span>.</span>","travelTime":50,"length":197,"id":"M2","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7950718,"longitude":-117.8530991},"instruction":"Turn <span class=\"direction\">left</span> onto <span class=\"next-street\">W Walnut Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.8 mi</span>.</span>","travelTime":128,"length":1246,"id":"M3","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7951684,"longitude":-117.8665638},"instruction":"Continue on <span class=\"next-street\">W Orangewood Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">1.6 mi</span>.</span>","travelTime":286,"length":2563,"id":"M4","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7962413,"longitude":-117.8939652},"instruction":"Turn <span class=\"direction\">slightly right</span> onto <span class=\"next-street\">S Anaheim Way</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.3 mi</span>.</span>","travelTime":42,"length":460,"id":"M5","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.7993634,"longitude":-117.8972161},"instruction":"Take <span class=\"direction\">left</span> ramp onto <span class=\"number\">I-5 N</span> <span class=\"next-street\">(Santa Ana Fwy)</span>. <span class=\"distance-description\">Go for <span class=\"length\">14.9 mi</span>.</span>","travelTime":1056,"length":24007,"id":"M6","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9358342,"longitude":-118.092953},"instruction":"Take the exit onto <span class=\"number\">I-605 N</span> <span class=\"next-street\">(San Gabriel River Fwy)</span>. <span class=\"distance-description\">Go for <span class=\"length\">4.0 mi</span>.</span>","travelTime":267,"length":6515,"id":"M7","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9892316,"longitude":-118.0701864},"instruction":"Take exit <span class=\"exit\">15</span> toward <span class=\"sign\"><span lang=\"en\">Whittier Blvd</span>/<span lang=\"en\">Whittier</span></span>. <span class=\"distance-description\">Go for <span class=\"length\">0.3 mi</span>.</span>","travelTime":45,"length":433,"id":"M8","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9925146,"longitude":-118.0678475},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">Whittier Blvd</span> <span class=\"number\">(CA-72)</span>. <span class=\"distance-description\">Go for <span class=\"length\">1.1 mi</span>.</span>","travelTime":204,"length":1717,"id":"M9","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9827406,"longitude":-118.0534387},"instruction":"Turn <span class=\"direction\">slightly left</span> onto <span class=\"next-street\">Hadley St</span>. <span class=\"distance-description\">Go for <span class=\"length\">1.2 mi</span>.</span>","travelTime":223,"length":1921,"id":"M10","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9827085,"longitude":-118.0326569},"instruction":"Turn <span class=\"direction\">right</span> onto <span class=\"next-street\">Painter Ave</span>. <span class=\"distance-description\">Go for <span class=\"length\">0.3 mi</span>.</span>","travelTime":69,"length":404,"id":"M11","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9790821,"longitude":-118.0326676},"instruction":"Turn <span class=\"direction\">left</span> onto <span class=\"next-street\">Philadelphia St</span>. <span class=\"distance-description\">Go for <span class=\"length\">112 ft</span>.</span>","travelTime":5,"length":34,"id":"M12","_type":"PrivateTransportManeuverType"},{"position":{"latitude":33.9790786,"longitude":-118.0322962},"instruction":"Arrive at <span class=\"street\">Philadelphia St</span>. Your destination is on the right.","travelTime":0,"length":0,"id":"M13","_type":"PrivateTransportManeuverType"}]}],"summary":{"distance":39552,"trafficTime":2399,"baseTime":2267,"flags":["noThroughRoad","motorway"],"text":"The trip takes <span class=\"length\">24.6 mi</span> and <span class=\"time\">40 mins</span>.","travelTime":2399,"_type":"RouteSummaryType"}}],"language":"en-us"}}
+{
+    "geocoded_waypoints" : [
+                            {
+                            "geocoder_status" : "OK",
+                            "partial_match" : true,
+                            "place_id" : "ChIJrUEdS4vTwoAR6MLmiXIfYpA",
+                            "types" : [ "establishment", "park", "point_of_interest" ]
+                            },
+                            {
+                            "geocoder_status" : "OK",
+                            "partial_match" : true,
+                            "place_id" : "ChIJN8F_Wt7Z3IAR2sQfw-vPUgo",
+                            "types" : [ "premise" ]
+                            }
+                            ],
+    "routes" : [
+                {
+                "bounds" : {
+                "northeast" : {
+                "lat" : 33.97957210000001,
+                "lng" : -117.8563467
+                },
+                "southwest" : {
+                "lat" : 33.7878212,
+                "lng" : -118.047154
+                }
+                },
+                "copyrights" : "Map data ©2016 Google",
+                "legs" : [
+                          {
+                          "distance" : {
+                          "text" : "20.5 mi",
+                          "value" : 33063
+                          },
+                          "duration" : {
+                          "text" : "40 mins",
+                          "value" : 2370
+                          },
+                          "duration_in_traffic" : {
+                          "text" : "42 mins",
+                          "value" : 2518
+                          },
+                          "end_address" : "Chapman University West Campus Parking Structure, 230 N Cypress St, Orange, CA 92866, USA",
+                          "end_location" : {
+                          "lat" : 33.7901201,
+                          "lng" : -117.8563531
+                          },
+                          "start_address" : "Whittier College Softball field, 7208 Canyon Dr, Whittier, CA 90602, USA",
+                          "start_location" : {
+                          "lat" : 33.9793011,
+                          "lng" : -118.0230506
+                          },
+                          "steps" : [
+                                     {
+                                     "distance" : {
+                                     "text" : "0.3 mi",
+                                     "value" : 555
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 124
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.975375,
+                                     "lng" : -118.0251245
+                                     },
+                                     "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eCanyon Dr\u003c/b\u003e toward \u003cb\u003eWorsham Canyon Trail\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "sqknE`kjoUU?M@KFEHAL@J@NJJVLvBz@x@R|@\\h@T`GdDRJPD`@Fd@Hx@AzAE"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9793011,
+                                     "lng" : -118.0230506
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.4 mi",
+                                     "value" : 696
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 92
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.9754332,
+                                     "lng" : -118.0326703
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003ePenn St\u003c/b\u003e",
+                                     "maneuver" : "turn-right",
+                                     "polyline" : {
+                                     "points" : "cyjnE~wjoU@p@AVElKApDCzN@~I"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.975375,
+                                     "lng" : -118.0251245
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "2.1 mi",
+                                     "value" : 3328
+                                     },
+                                     "duration" : {
+                                     "text" : "6 mins",
+                                     "value" : 383
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.9495035,
+                                     "lng" : -118.046307
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003ePainter Ave\u003c/b\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "myjnEdgloU`A?nB?pB?~A@jC?dB?|A?xA?rD?n@@t@?nG@nA?|@?r@?`A?pA?rB?jA@t@@b@?N?n@?D?DHL@rA@R?nAA|A?J@VBXNRHl@l@z@z@RT|AzAdAdAp@l@|@dA^^^^^^\\\\jDjDh@j@HJd@d@v@t@DFVVvBxB`D`DdAdArBtBdEfEzB~BXXRRh@f@nArAp@n@LLj@l@NNjAhAzBzBnEpElBnBTRt@j@ZVl@\\z@^x@X"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9754332,
+                                     "lng" : -118.0326703
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "3.9 mi",
+                                     "value" : 6265
+                                     },
+                                     "duration" : {
+                                     "text" : "10 mins",
+                                     "value" : 584
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.89330169999999,
+                                     "lng" : -118.047154
+                                     },
+                                     "html_instructions" : "Continue onto \u003cb\u003eCarmenita Rd\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "kwenEl|noUl@NpAVxAH`@@nE?dB?X?bEAfH?dB?bB?lC?jBALKn@?x@@F?b@LfA?l@@`@AbA?`A?l@?fABnA@vH?tA?ZAZ?Z?j@Ap@?d@?Z?`B?hB?rD?j@?X?z@?vB?BA|A?p@?|@?xA?pA?lA@pIAdA@jC?jA?d@?pA?`B?Z?vC?v@?jC?|@?`A?lA?zA?rA?dD?|A?h@?~@?p@@T@N@P@f@DzALLBVDhADV@N?R?rA?lBAX?ZK`BAj@?tE?RHzC?pC?zCAbDAR?lG@fCAfLAH?@?P?nDC`@Mt@?~LCl@?tA?jCAX?zB?rAAp@?j@?r@?`A?|@?xDAj@?fA?x@?t@@r@Az@@^C`A?r@AdA@bATlAN`AHx@Jh@Jr@DvAJTBB?f@D^D`@B"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9495035,
+                                     "lng" : -118.046307
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.4 mi",
+                                     "value" : 592
+                                     },
+                                     "duration" : {
+                                     "text" : "1 min",
+                                     "value" : 61
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.8906954,
+                                     "lng" : -118.0415807
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto the ramp to \u003cb\u003eI-5\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "cxzmEtaooUb@u@xJgXFSRk@Xs@Xs@Vo@@c@"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.89330169999999,
+                                     "lng" : -118.047154
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "10.7 mi",
+                                     "value" : 17145
+                                     },
+                                     "duration" : {
+                                     "text" : "10 mins",
+                                     "value" : 602
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7974167,
+                                     "lng" : -117.8965531
+                                     },
+                                     "html_instructions" : "Merge onto \u003cb\u003eI-5 S\u003c/b\u003e",
+                                     "maneuver" : "merge",
+                                     "polyline" : {
+                                     "points" : "{gzmEz~moUdT_h@`AaCvAeD~@wB~@wBjEwJTg@pAsCr@_Br@_BjCcG|AmD`AuBTk@@Ah@mAnPk_@|CeHbB}DdA_Cl@wAHQFO^}@Xm@dB_EhFoLdAwBdAmBd@u@V_@j@y@^c@JMHKX]X_@`@e@@A~AmB|CuDp@_Az@qAn@gA|@cBb@s@h@gAjDgIzAeDdEoJZs@lAqC~BmFfAaCzAkDFMTg@@Cj@oAtFgMpAsCxAaDnD}Hb@y@Xg@lAsBn@gAlAqBZo@nAsBb@u@NY^s@Ra@jAaC`AsBp@aB\\}@b@kAd@uAnBsFnAgDVo@|@aCHWRo@Xw@DM?ADKDKl@_BNe@pA_EJ[\\uABMVeA^yAXmAf@aBRo@f@sAd@iAXm@`@w@`AaBv@oA`BaCn@o@d@q@p@eAlB_DNY\\u@tDuIhJ}SnL{ZrAkDNa@Rg@JUNc@JUzCqHf@sAr@gBN]Vo@d@cAz@cBRc@l@gAZg@LUbCcEHKlBcDZm@^{@pGuNhFoLhBaE~EaL|@sBzIgSt@cBjAmCb@gA?ADILYDM?ADI`AmDl@sCFc@F_@?AJu@NcALu@ZwBRqALaAd@yCPkANy@Ps@Jg@DQFSFWHWVw@X}@Zw@Xu@Rg@Rc@Vg@Xg@PWT[T]T]T]T]RWPUh@k@dG{GnCuCLOhFuFbCkCHIHKxAsAvAmALKZWdAw@zH{FfBsAvAiA`Ay@|@w@h@g@TUd@g@`AcAjK{KbBiBf@g@hBiBnCsC^_@pBsBvLoMb@c@@Ab@e@fAoATW~A{Ab@a@dEmE~LqMRUjDsDzA}AnE}EbDiDl@o@XWFGHGJQZW^_@^a@f@o@^a@p@y@z@eArCmD`AoA|@kAr@{@h@o@NQZ]DGb@e@\\]Z_@rF{FdFkFbCgCDEPQzLmM"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.8906954,
+                                     "lng" : -118.0415807
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.7 mi",
+                                     "value" : 1159
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 99
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7897815,
+                                     "lng" : -117.8888342
+                                     },
+                                     "html_instructions" : "Take exit \u003cb\u003e107C\u003c/b\u003e for \u003cb\u003eThe City Dr\u003c/b\u003e toward \u003cb\u003eState College Blvd\u003c/b\u003e",
+                                     "maneuver" : "ramp-right",
+                                     "polyline" : {
+                                     "points" : "{`hmEltqnUH@D?B?BAB?@A@Aj@e@p@k@lB_BBA^[@Ar@k@`AcA@?FGRSLOn@s@~@_AlBqB`AcATSn@o@LKPMXSZSZOBALELELETEjB]|@QHAJCDCDADADCFEDEHGHKHMJUDK@E@GTcBPmABUL}@Ji@BIDMHOLSJMxCaD"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7974167,
+                                     "lng" : -117.8965531
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "1.9 mi",
+                                     "value" : 3073
+                                     },
+                                     "duration" : {
+                                     "text" : "6 mins",
+                                     "value" : 381
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7878741,
+                                     "lng" : -117.8563467
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eW Chapman Ave\u003c/b\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "cqfmEddpnUz@}@Z]G_@Cc@?i@AE?a@?E@]@[?GBU?C@C?CD_@DO?C@GP}@@y@L]NYN]R]@CHOj@gAh@_AFMN[JYHY`@mBFq@Ds@?oA?YBy@A}A?S?A@SAc@Ac@FO@ABW?[?m@?k@@iA?A?M?I?E?I?U?_@?AAs@?_B?eBA[?s@IS?{@?e@AwAAkB?cB?qA?c@Ac@?]?S?Y?_@@oB?_C?g@@eA@aG?m@?s@?eB?i@?wB?eA@oFAeA?kC?}C?i@?oA@gA?O?mA?kA?uC?y@?_B?s@?s@?gA?}A?sA?eC?iA?oA?aA?gA?mA?aA?w@?yA?_AAKAo@Bo@@kA?m@"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7897815,
+                                     "lng" : -117.8888342
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.2 mi",
+                                     "value" : 250
+                                     },
+                                     "duration" : {
+                                     "text" : "1 min",
+                                     "value" : 44
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7901201,
+                                     "lng" : -117.8563531
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eN Cypress St\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the left\u003c/div\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "eefmEdyinUwD?qC?c@?sA?"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7878741,
+                                     "lng" : -117.8563467
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     }
+                                     ],
+                          "traffic_speed_entry" : [],
+                          "via_waypoint" : []
+                          }
+                          ],
+                "overview_polyline" : {
+                "points" : "sqknE`kjoUc@@KFEH?X@NJJnChAx@R|@\\h@T`GdDd@PfAPtCGGhSAzYpD?bM@nZBzH?tDBt@?DHL@fB@lDAb@Dl@XzEzEvBrB|AdBhGhGhMnMbTlT`SbSjA~@hAt@tBx@~Bf@zBJtH?jRApF?jBALKhB@j@LzE?nB?vCDdMA~CAtS?|WAjT@fV?xF@~AJhBP`BJnC@fCAZK`BA`G?RHzC?lHAvDAfYAR?nDC`@MtNCbC?tJCrE?jJA~E@`BCxB?bATlANzBTh@Jr@DlBNlBNb@u@xJgXZ_Ar@gBVo@@c@fVal@vC}GrJkTtMcZvZor@~AwD~BmFnHgPjBcDbAyAnA{A|@gA|FcHlBqClBkDlA{BhNq[pJmTlNg[rEwJfB{ChF}IfBeDlCuFnA_DhG}PrByFhBeF|A{E`@cBv@_D`AoDz@cC~@wBbByCxCqEtAaB~CeFl@oA~Os^fPqb@bEaKbCiG`BgD`AkBvDmGhCqEpHqPpRgc@`Oa]^_A`AmDl@sCNcAh@qDbBeL`@eC\\{A^uAp@uBt@mBf@kAp@oArAoBpAiBlMmNvJkKbB_BdByAdO_LxCcCfB_BhO}OjCqCxF}FlRgSbCoCbC}BdS_T~DiEzA}AnE}EpEyE`@_@TYz@w@xCmDnIoKhC{CbBkBbRuRlM_NN@LClEsDd@_@r@k@`AcA@?xA_BdGiG|@{@j@a@v@c@PGZK`Cc@xA[XMNMRYTo@x@eGNs@N]Xa@tE_FZ]G_@CmAAm@FwAFk@XyA@y@L]^w@jAyBp@mAZu@j@gCLeB?iB@wC?mAAc@FODY@_E?_@AuEAaC?s@IS?aBCcEA}F?kBDgX@cn@Ayb@@_B@yBaM?"
+                },
+                "summary" : "I-5 S",
+                "warnings" : [],
+                "waypoint_order" : []
+                },
+                {
+                "bounds" : {
+                "northeast" : {
+                "lat" : 33.97957210000001,
+                "lng" : -117.8563467
+                },
+                "southwest" : {
+                "lat" : 33.7878231,
+                "lng" : -118.0274783
+                }
+                },
+                "copyrights" : "Map data ©2016 Google",
+                "legs" : [
+                          {
+                          "distance" : {
+                          "text" : "20.0 mi",
+                          "value" : 32202
+                          },
+                          "duration" : {
+                          "text" : "43 mins",
+                          "value" : 2566
+                          },
+                          "duration_in_traffic" : {
+                          "text" : "41 mins",
+                          "value" : 2473
+                          },
+                          "end_address" : "Chapman University West Campus Parking Structure, 230 N Cypress St, Orange, CA 92866, USA",
+                          "end_location" : {
+                          "lat" : 33.7901201,
+                          "lng" : -117.8563531
+                          },
+                          "start_address" : "Whittier College Softball field, 7208 Canyon Dr, Whittier, CA 90602, USA",
+                          "start_location" : {
+                          "lat" : 33.9793011,
+                          "lng" : -118.0230506
+                          },
+                          "steps" : [
+                                     {
+                                     "distance" : {
+                                     "text" : "0.3 mi",
+                                     "value" : 555
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 124
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.975375,
+                                     "lng" : -118.0251245
+                                     },
+                                     "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eCanyon Dr\u003c/b\u003e toward \u003cb\u003eWorsham Canyon Trail\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "sqknE`kjoUU?M@KFEHAL@J@NJJVLvBz@x@R|@\\h@T`GdDRJPD`@Fd@Hx@AzAE"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9793011,
+                                     "lng" : -118.0230506
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.1 mi",
+                                     "value" : 217
+                                     },
+                                     "duration" : {
+                                     "text" : "1 min",
+                                     "value" : 31
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.97541150000001,
+                                     "lng" : -118.0274783
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003ePenn St\u003c/b\u003e",
+                                     "maneuver" : "turn-right",
+                                     "polyline" : {
+                                     "points" : "cyjnE~wjoU@p@AVElK"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.975375,
+                                     "lng" : -118.0251245
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.2 mi",
+                                     "value" : 262
+                                     },
+                                     "duration" : {
+                                     "text" : "1 min",
+                                     "value" : 51
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.973052,
+                                     "lng" : -118.0274738
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eCollege Ave\u003c/b\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "iyjnEvfkoUvA?nACfD@fC?"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.97541150000001,
+                                     "lng" : -118.0274783
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "1.7 mi",
+                                     "value" : 2724
+                                     },
+                                     "duration" : {
+                                     "text" : "4 mins",
+                                     "value" : 236
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.9619038,
+                                     "lng" : -118.0020896
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eMar Vista St\u003c/b\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "qjjnEtfkoU`CiF`BkDj@oApAsCbBuDr@}Ab@_Ab@_AtCoGpAuCpAmC`BqDLYlBeEjB_ElBcElBiElBeEtBoEtA{CtAyCRe@^{@Pc@Pa@H[HYFW@GF_@@U@S?Y?aA@s@AaA?g@AMAUKa@GUEQEWCSCQAQAUAS@S?S@QBWBUDSBO@CDQHUNe@BGNe@Xo@zDuIHYFS?CBQDWBY@U?Q@OE[C[GcA"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.973052,
+                                     "lng" : -118.0274738
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "1.6 mi",
+                                     "value" : 2620
+                                     },
+                                     "duration" : {
+                                     "text" : "4 mins",
+                                     "value" : 250
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.9409937,
+                                     "lng" : -118.0124763
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eColima Rd\u003c/b\u003e",
+                                     "maneuver" : "turn-right",
+                                     "polyline" : {
+                                     "points" : "{dhnE`hfoUxCcAd@OjA_@\\KdA[|@Sf@Gr@Ix@GfACx@?`ADxAL|@NpBh@x@\\fAf@|A|@fBdATLrAv@x@d@bB`A|CfB\\RbAh@lBfANHJFbAj@jBfA\\PlAr@ZPLHz@f@`@VRLTPpBrARNvA~@dAr@l@b@pA|@v@h@pA|@TNhCfBxBzAbBhAnA|@`Ap@fDzBj@`@dAt@NJZTNJFDB@TPNJnBrAdBbA"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9619038,
+                                     "lng" : -118.0020896
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "4.3 mi",
+                                     "value" : 6909
+                                     },
+                                     "duration" : {
+                                     "text" : "11 mins",
+                                     "value" : 637
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.8845526,
+                                     "lng" : -117.9955733
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eLa Mirada Blvd\u003c/b\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "ebdnE~hhoUbADFCV?|D[dAMfFe@JAHALMx@ILH|AMhAKj@CRA^?rAAbB@T?rE?v@?b@?nB?hA?f@?`A?b@?nE?d@?l@?~C@lF?n@?n@?bBFlCLR@zBHtA?zCAfBApA@lEAr@?l@AnB?fDCx@?dA@~@?v@AL?|A?R?D?v@A\\?x@?L@|A@F?j@?jAAZ@rCEh@AfAAjB?fAAf@?r@AT?tD?J?zFCpA?fA?lB?rCC|A?v@?dA?D?J?|DAhCA~A?RArCAnBDx@@pA@hB?RKF?L?R?LDB@FBB?vB?pAAj@Af@Al@EvDi@vASlAQrDk@t@MnBWRCrB[|@Q`@Kj@Ol@Ud@QXM`@U`@U`@W`@YBCPMTQj@g@TWVY^a@V]RYNUNUP[NY^q@hDkHjAcCvAyCjAcC~@qBTe@dAyB\\u@Rc@BETe@Xk@R_@R]T_@T[DIXa@RYPSPW\\_@X[VWPQTSTS^[\\YVS`@W\\Un@a@v@a@rAm@HEVMXOTKTKZQTK`@YRQTSRQRUPU`@m@x@qAfBuCt@kAVa@T]v@qA"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9409937,
+                                     "lng" : -118.0124763
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "1.3 mi",
+                                     "value" : 2145
+                                     },
+                                     "duration" : {
+                                     "text" : "4 mins",
+                                     "value" : 262
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.8660196,
+                                     "lng" : -117.9982446
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eBeach Blvd\u003c/b\u003e",
+                                     "maneuver" : "turn-right",
+                                     "polyline" : {
+                                     "points" : "maymEh_eoURNb@ZTNbAl@VP@?XPf@b@XVZX^`@p@x@lArARRHHTTz@j@VLZP\\Nj@NXF\\D^DR?d@?j@?~@CvAGv@Cj@EP?L?dAAdAAfAA|A?dAApDA`C?zEClC?fJCzFCbBAX?jFAN?HAt@?\\?J?hAAZ@vC?D?@?N?@?L?@?@?D?T?P?J?@?H?^?"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.8845526,
+                                     "lng" : -117.9955733
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "7.6 mi",
+                                     "value" : 12288
+                                     },
+                                     "duration" : {
+                                     "text" : "8 mins",
+                                     "value" : 451
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7974167,
+                                     "lng" : -117.8965531
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e to merge onto \u003cb\u003eI-5 S\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "smumE~oeoUXg@`@eArAwCvByEDOj@sA`@oABI@I@G?ECa@xAaDnD}Hb@y@Xg@lAsBn@gAlAqBZo@nAsBb@u@NY^s@Ra@jAaC`AsBp@aB\\}@b@kAd@uAnBsFnAgDVo@|@aCHWRo@Xw@DM?ADKDKl@_BNe@pA_EJ[\\uABMVeA^yAXmAf@aBRo@f@sAd@iAXm@`@w@`AaBv@oA`BaCn@o@d@q@p@eAlB_DNY\\u@tDuIhJ}SnL{ZrAkDNa@Rg@JUNc@JUzCqHf@sAr@gBN]Vo@d@cAz@cBRc@l@gAZg@LUbCcEHKlBcDZm@^{@pGuNhFoLhBaE~EaL|@sBzIgSt@cBjAmCb@gA?ADILYDM?ADI`AmDl@sCFc@F_@?AJu@NcALu@ZwBRqALaAd@yCPkANy@Ps@Jg@DQFSFWHWVw@X}@Zw@Xu@Rg@Rc@Vg@Xg@PWT[T]T]T]T]RWPUh@k@dG{GnCuCLOhFuFbCkCHIHKxAsAvAmALKZWdAw@zH{FfBsAvAiA`Ay@|@w@h@g@TUd@g@`AcAjK{KbBiBf@g@hBiBnCsC^_@pBsBvLoMb@c@@Ab@e@fAoATW~A{Ab@a@dEmE~LqMRUjDsDzA}AnE}EbDiDl@o@XWFGHGJQZW^_@^a@f@o@^a@p@y@z@eArCmD`AoA|@kAr@{@h@o@NQZ]DGb@e@\\]Z_@rF{FdFkFbCgCDEPQzLmM"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.8660196,
+                                     "lng" : -117.9982446
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.7 mi",
+                                     "value" : 1159
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 99
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7897815,
+                                     "lng" : -117.8888342
+                                     },
+                                     "html_instructions" : "Take exit \u003cb\u003e107C\u003c/b\u003e for \u003cb\u003eThe City Dr\u003c/b\u003e toward \u003cb\u003eState College Blvd\u003c/b\u003e",
+                                     "maneuver" : "ramp-right",
+                                     "polyline" : {
+                                     "points" : "{`hmEltqnUH@D?B?BAB?@A@Aj@e@p@k@lB_BBA^[@Ar@k@`AcA@?FGRSLOn@s@~@_AlBqB`AcATSn@o@LKPMXSZSZOBALELELETEjB]|@QHAJCDCDADADCFEDEHGHKHMJUDK@E@GTcBPmABUL}@Ji@BIDMHOLSJMxCaD"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7974167,
+                                     "lng" : -117.8965531
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "1.9 mi",
+                                     "value" : 3073
+                                     },
+                                     "duration" : {
+                                     "text" : "6 mins",
+                                     "value" : 381
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7878741,
+                                     "lng" : -117.8563467
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eW Chapman Ave\u003c/b\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "cqfmEddpnUz@}@Z]G_@Cc@?i@AE?a@?E@]@[?GBU?C@C?CD_@DO?C@GP}@@y@L]NYN]R]@CHOj@gAh@_AFMN[JYHY`@mBFq@Ds@?oA?YBy@A}A?S?A@SAc@Ac@FO@ABW?[?m@?k@@iA?A?M?I?E?I?U?_@?AAs@?_B?eBA[?s@IS?{@?e@AwAAkB?cB?qA?c@Ac@?]?S?Y?_@@oB?_C?g@@eA@aG?m@?s@?eB?i@?wB?eA@oFAeA?kC?}C?i@?oA@gA?O?mA?kA?uC?y@?_B?s@?s@?gA?}A?sA?eC?iA?oA?aA?gA?mA?aA?w@?yA?_AAKAo@Bo@@kA?m@"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7897815,
+                                     "lng" : -117.8888342
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.2 mi",
+                                     "value" : 250
+                                     },
+                                     "duration" : {
+                                     "text" : "1 min",
+                                     "value" : 44
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7901201,
+                                     "lng" : -117.8563531
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eN Cypress St\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the right\u003c/div\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "eefmEdyinUwD?qC?c@?sA?"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7878741,
+                                     "lng" : -117.8563467
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     }
+                                     ],
+                          "traffic_speed_entry" : [],
+                          "via_waypoint" : [
+                                            {
+                                            "location" : {
+                                            "lat" : 33.9034169,
+                                            "lng" : -118.0118782
+                                            },
+                                            "step_index" : 5,
+                                            "step_interpolation" : 0.6064328367195057
+                                            }
+                                            ]
+                          }
+                          ],
+                "overview_polyline" : {
+                "points" : "sqknE`kjoUc@@KFEH?X@NJJnChAx@R|@\\h@T`GdDd@PfAPtCG?hAElKvA?vFAfC?`CiFlC{FtDiIpGmNrGoNdY_n@vAgD\\uAHu@@m@?_FCc@Sw@SoACoAHsAPy@l@iBtEeKPm@LgA@g@Ck@K_B~DsAhBk@bCo@zAQ`CKzBDvC\\pBh@x@\\dDdBjGpDbJfF`MdH~BvArFtDhRpMzPnLp@d@~B~AdBbAbAD^CbGi@rFg@HALMx@ILHfDY~@ErBAdK@dG?fY@rCF`DNzBHtA?bGC~G?`BAvKArIClDBfHEdHEfHAxXGfTGhDFzD@RKF?`@?\\J|GEl@EvDi@dDe@hFy@bC[pDm@lA[rAg@z@c@hBkAf@_@`A_AbBsB`AaBtQq_@jAeCvAiChAaBzAgBtAqAvBaBlAw@jCoApAo@p@]v@e@pAmAr@cA`DgFzC}Ev@j@xA|@zAfAt@p@pAzA`CfCrAx@x@`@dAV|@Jx@?jBClEQ`FEvMCfi@OhBAbG?j@?t@?h@?z@mBjEqJp@cBd@yABQCg@hG_NzD}G|EkInCqFrBuE`AiCtCiIfBwEtBaGJ[r@kB`BeFdAeEx@gDz@qClA}Cz@eBxBqD`BaCn@o@vAwB|ByDrEkKhJ}SnL{ZbBmE^}@~E_MbAeC|@sBnAgChAoBhGiKz@iBzNe\\bV_j@~DmJfAyD|@yE~CaTr@gDp@{Bt@uBl@}AvAkCvAuBh@u@z@aAtKqLvFeGvCaDzEeE`KsH~D}C~DoDvQqR`IeInQiRjBuBtBsB|TwUfGqGrJgKxAwAfBkBtDqEfIeKzAgBrUkVzLmMH@H?JEdH}F|EcFnDuDdAcAtAaAz@]lE{@`@KXQRSTc@FQVkBn@kEHWVc@|FkGKcAAo@@eAD}@Lw@@KP}@@y@\\w@b@{@`B{CVi@Ts@`@mBFq@Ds@?oABsAAqBA}AHQBs@@eD?}AA{FAoAIS?{@A}BAoEAwDDmT@{j@?cg@CuED{B?m@wD?uD?sA?"
+                },
+                "summary" : "County Hwy N8 and I-5 S",
+                "warnings" : [],
+                "waypoint_order" : []
+                },
+                {
+                "bounds" : {
+                "northeast" : {
+                "lat" : 33.97957210000001,
+                "lng" : -117.8563481
+                },
+                "southwest" : {
+                "lat" : 33.7901201,
+                "lng" : -118.047154
+                }
+                },
+                "copyrights" : "Map data ©2016 Google",
+                "legs" : [
+                          {
+                          "distance" : {
+                          "text" : "22.8 mi",
+                          "value" : 36717
+                          },
+                          "duration" : {
+                          "text" : "40 mins",
+                          "value" : 2400
+                          },
+                          "duration_in_traffic" : {
+                          "text" : "42 mins",
+                          "value" : 2538
+                          },
+                          "end_address" : "Chapman University West Campus Parking Structure, 230 N Cypress St, Orange, CA 92866, USA",
+                          "end_location" : {
+                          "lat" : 33.7901201,
+                          "lng" : -117.8563531
+                          },
+                          "start_address" : "Whittier College Softball field, 7208 Canyon Dr, Whittier, CA 90602, USA",
+                          "start_location" : {
+                          "lat" : 33.9793011,
+                          "lng" : -118.0230506
+                          },
+                          "steps" : [
+                                     {
+                                     "distance" : {
+                                     "text" : "0.3 mi",
+                                     "value" : 555
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 124
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.975375,
+                                     "lng" : -118.0251245
+                                     },
+                                     "html_instructions" : "Head \u003cb\u003enorth\u003c/b\u003e on \u003cb\u003eCanyon Dr\u003c/b\u003e toward \u003cb\u003eWorsham Canyon Trail\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "sqknE`kjoUU?M@KFEHAL@J@NJJVLvBz@x@R|@\\h@T`GdDRJPD`@Fd@Hx@AzAE"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9793011,
+                                     "lng" : -118.0230506
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.4 mi",
+                                     "value" : 696
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 92
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.9754332,
+                                     "lng" : -118.0326703
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003ePenn St\u003c/b\u003e",
+                                     "maneuver" : "turn-right",
+                                     "polyline" : {
+                                     "points" : "cyjnE~wjoU@p@AVElKApDCzN@~I"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.975375,
+                                     "lng" : -118.0251245
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "2.1 mi",
+                                     "value" : 3328
+                                     },
+                                     "duration" : {
+                                     "text" : "6 mins",
+                                     "value" : 383
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.9495035,
+                                     "lng" : -118.046307
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003ePainter Ave\u003c/b\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "myjnEdgloU`A?nB?pB?~A@jC?dB?|A?xA?rD?n@@t@?nG@nA?|@?r@?`A?pA?rB?jA@t@@b@?N?n@?D?DHL@rA@R?nAA|A?J@VBXNRHl@l@z@z@RT|AzAdAdAp@l@|@dA^^^^^^\\\\jDjDh@j@HJd@d@v@t@DFVVvBxB`D`DdAdArBtBdEfEzB~BXXRRh@f@nArAp@n@LLj@l@NNjAhAzBzBnEpElBnBTRt@j@ZVl@\\z@^x@X"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9754332,
+                                     "lng" : -118.0326703
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "3.9 mi",
+                                     "value" : 6265
+                                     },
+                                     "duration" : {
+                                     "text" : "10 mins",
+                                     "value" : 584
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.89330169999999,
+                                     "lng" : -118.047154
+                                     },
+                                     "html_instructions" : "Continue onto \u003cb\u003eCarmenita Rd\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "kwenEl|noUl@NpAVxAH`@@nE?dB?X?bEAfH?dB?bB?lC?jBALKn@?x@@F?b@LfA?l@@`@AbA?`A?l@?fABnA@vH?tA?ZAZ?Z?j@Ap@?d@?Z?`B?hB?rD?j@?X?z@?vB?BA|A?p@?|@?xA?pA?lA@pIAdA@jC?jA?d@?pA?`B?Z?vC?v@?jC?|@?`A?lA?zA?rA?dD?|A?h@?~@?p@@T@N@P@f@DzALLBVDhADV@N?R?rA?lBAX?ZK`BAj@?tE?RHzC?pC?zCAbDAR?lG@fCAfLAH?@?P?nDC`@Mt@?~LCl@?tA?jCAX?zB?rAAp@?j@?r@?`A?|@?xDAj@?fA?x@?t@@r@Az@@^C`A?r@AdA@bATlAN`AHx@Jh@Jr@DvAJTBB?f@D^D`@B"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.9495035,
+                                     "lng" : -118.046307
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.4 mi",
+                                     "value" : 592
+                                     },
+                                     "duration" : {
+                                     "text" : "1 min",
+                                     "value" : 61
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.8906954,
+                                     "lng" : -118.0415807
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto the ramp to \u003cb\u003eI-5\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "cxzmEtaooUb@u@xJgXFSRk@Xs@Xs@Vo@@c@"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.89330169999999,
+                                     "lng" : -118.047154
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "3.7 mi",
+                                     "value" : 5896
+                                     },
+                                     "duration" : {
+                                     "text" : "4 mins",
+                                     "value" : 221
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.8608008,
+                                     "lng" : -117.9889784
+                                     },
+                                     "html_instructions" : "Merge onto \u003cb\u003eI-5 S\u003c/b\u003e",
+                                     "maneuver" : "merge",
+                                     "polyline" : {
+                                     "points" : "{gzmEz~moUdT_h@`AaCvAeD~@wB~@wBjEwJTg@pAsCr@_Br@_BjCcG|AmD`AuBTk@@Ah@mAnPk_@|CeHbB}DdA_Cl@wAHQFO^}@Xm@dB_EhFoLdAwBdAmBd@u@V_@j@y@^c@JMHKX]X_@`@e@@A~AmB|CuDp@_Az@qAn@gA|@cBb@s@h@gAjDgIzAeDdEoJZs@lAqC~BmFfAaCzAkDFMTg@@Cj@oAtFgMpAsCxAaDnD}Hb@y@Xg@lAsBn@gAlAqBZo@nAsBb@u@NY"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.8906954,
+                                     "lng" : -118.0415807
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "6.3 mi",
+                                     "value" : 10114
+                                     },
+                                     "duration" : {
+                                     "text" : "6 mins",
+                                     "value" : 357
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.8523666,
+                                     "lng" : -117.8821432
+                                     },
+                                     "html_instructions" : "Take exit \u003cb\u003e114B\u003c/b\u003e to merge onto \u003cb\u003eCA-91 E\u003c/b\u003e toward \u003cb\u003eRiverside\u003c/b\u003e",
+                                     "maneuver" : "ramp-right",
+                                     "polyline" : {
+                                     "points" : "_mtmEbvcoUF?B@@A@?B?@A@ADGz@sAbAgBpAiCr@aBr@iBDI`AeCnAgD^aAXq@rAkDZw@Ri@Na@BEJWd@oATk@Tm@L_@Lc@J_@BOBODS?ADWF_@Da@@C?A?GB]BeA@K?G?U?UASAS?OCYC_@OoBAWAKIy@?ISiCAk@?GCm@?eA?A@G?S?y@@i@Bc@Fo@Hw@Hq@Fa@Hm@De@BU?e@b@_Cr@cDt@wDn@yCT_APo@vAkGp@yCBGn@sCNm@R_ARgARsAHw@R_CHqB@eA@kAEwBGcDK}O?q@AA?U?E?A?GAo@CmCAqLCmD?}@?[AgB?yAA{AAsBAcE?uBCaHAiB?cC@kOGcLAmD?qCAy@?]?u@AaKAcC?kE?sBCqO?aF@qH?wD@YP{EViGNgDHuF?U?k@AiECgAAq@AOAY?KEo@IuBOqCGiAGoAGqAGsBC}A?K?aA?_@Au@?[BcADwBHuBBy@NcDJ_DFmAD_ANgK?eHAiA?S?QAs@?q@?q@GmSAyA?U?AAqBAuK@oACgLE{R?aAAsB?YCaDAmAAm@C_BM}DI_DCgACiAEgC?wC?]?_E?yB?yA?_A@}@?_AF}ABc@B_@B_@RmBTkBVaBZqBHa@Ha@~@eElCaJ"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.8608008,
+                                     "lng" : -117.9889784
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "3.9 mi",
+                                     "value" : 6292
+                                     },
+                                     "duration" : {
+                                     "text" : "4 mins",
+                                     "value" : 224
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7989647,
+                                     "lng" : -117.8778132
+                                     },
+                                     "html_instructions" : "Take exit \u003cb\u003e30B\u003c/b\u003e to merge onto \u003cb\u003eCA-57 S\u003c/b\u003e toward \u003cb\u003eSanta Ana\u003c/b\u003e",
+                                     "maneuver" : "ramp-right",
+                                     "polyline" : {
+                                     "points" : "ixrmEjznnU\\a@JQPe@lEaLBIN[DE@A@CDGFMVm@Ra@N_@^s@Vc@TYd@g@ZY~AyAfAeAx@u@XUJIPKNGPI@?PGLCXGNEN?n@Ad@AD?ZAD?DAB?D?DAFEFEDCbFHj@?xE@L?fI@xD@`BAnFCjK@l@?@?V?@?l@?`LDrBA`H@xC?\\?rNBt[GF?nI?|CBhCAxDDhE?xCBdCFn@DVB^FxD\\ZBPBzBZL@PBj@HlATf@Lb@Nj@L|Cv@VFPDxGlBzAd@tA`@|@ZRFv@Tv@Vl@PhFzAj@Pj@P`Bf@PF^Jd@N\\HXFh@LdAR|@L~AJ`ADZ@FAF?D?R@T?p@AB?h@Ab@ATCVCh@EbAOn@ILCVGt@QLEZINEHCNCHCtB{@b@STMVOZOdAi@j@WrBaA~@a@j@Sb@MTIDC`AUr@MnAU"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.8523666,
+                                     "lng" : -117.8821432
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.2 mi",
+                                     "value" : 354
+                                     },
+                                     "duration" : {
+                                     "text" : "1 min",
+                                     "value" : 25
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7958318,
+                                     "lng" : -117.8783011
+                                     },
+                                     "html_instructions" : "Take exit \u003cb\u003e1E\u003c/b\u003e for \u003cb\u003eOrangewood Ave\u003c/b\u003e",
+                                     "maneuver" : "ramp-right",
+                                     "polyline" : {
+                                     "points" : "ojhmEh_nnUTLB@FBF@DAxAEx@@^CB?t@HP@D@B?r@HPBh@Fh@Fz@RhAPVB"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7989647,
+                                     "lng" : -117.8778132
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.7 mi",
+                                     "value" : 1127
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 125
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7951727,
+                                     "lng" : -117.8665348
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eleft\u003c/b\u003e onto \u003cb\u003eW Orangewood Ave\u003c/b\u003e",
+                                     "maneuver" : "turn-left",
+                                     "polyline" : {
+                                     "points" : "}vgmEjbnnUVH?y@CuBAcD@k@AM?y@?OEKA}@A{@?sA?}B?cAHg@?_@?k@Bg@Dg@Dg@F[FYViADa@HSJUL]Nm@Ja@DUD]DU@SBU@W@U@W?]BqC?o@?yB?k@AQ?y@Cc@Ic@?EMk@EWCMEm@Ac@@c@"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7958318,
+                                     "lng" : -117.8783011
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.6 mi",
+                                     "value" : 941
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 114
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7951251,
+                                     "lng" : -117.856353
+                                     },
+                                     "html_instructions" : "Continue onto \u003cb\u003eW Walnut Ave\u003c/b\u003e",
+                                     "polyline" : {
+                                     "points" : "yrgmExxknUAyA?sBAy@AUAe@?_A?qABu@Bg@BW?W@kB?yB@cB?kA?kC?{E?aC?aC?aD?I?K?I?kE"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7951727,
+                                     "lng" : -117.8665348
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     },
+                                     {
+                                     "distance" : {
+                                     "text" : "0.3 mi",
+                                     "value" : 557
+                                     },
+                                     "duration" : {
+                                     "text" : "2 mins",
+                                     "value" : 90
+                                     },
+                                     "end_location" : {
+                                     "lat" : 33.7901201,
+                                     "lng" : -117.8563531
+                                     },
+                                     "html_instructions" : "Turn \u003cb\u003eright\u003c/b\u003e onto \u003cb\u003eN Cypress St\u003c/b\u003e\u003cdiv style=\"font-size:0.9em\"\u003eDestination will be on the right\u003c/div\u003e",
+                                     "maneuver" : "turn-right",
+                                     "polyline" : {
+                                     "points" : "qrgmEdyinUhJ?dA?`E?`B?dA?nE?"
+                                     },
+                                     "start_location" : {
+                                     "lat" : 33.7951251,
+                                     "lng" : -117.856353
+                                     },
+                                     "travel_mode" : "DRIVING"
+                                     }
+                                     ],
+                          "traffic_speed_entry" : [],
+                          "via_waypoint" : [
+                                            {
+                                            "location" : {
+                                            "lat" : 33.853856,
+                                            "lng" : -117.9230561
+                                            },
+                                            "step_index" : 6,
+                                            "step_interpolation" : 0.6226231591937906
+                                            }
+                                            ]
+                          }
+                          ],
+                "overview_polyline" : {
+                "points" : "sqknE`kjoUc@@KFEH?X@NJJnChAx@R|@\\h@T`GdDd@PfAPtCGGhSAzYpD?bM@nZBzH?tDBt@?DHL@fB@lDAb@Dl@XzEzEvBrB|AdBhGhGhMnMbTlT`SbSjA~@hAt@tBx@~Bf@zBJtH?jRApF?jBALKhB@j@LzE?nB?vCDdMA~CAtS?|WAjT@fV?xF@~AJhBP`BJnC@fCAZK`BA`G?RHzC?lHAvDAfYAR?nDC`@MtNCbC?tJCrE?jJA~E@`BCxB?bATlANzBTh@Jr@DlBNlBNb@u@xJgXZ_Ar@gBVo@@c@fVal@vC}GrJkTtMcZvZor@~AwD~BmFnHgPjBcDbAyAnA{A|@gA|FcHlBqClBkDlA{BhNq[pJmTlNg[rEwJfB{ChF}Ir@oAJ@HCFI~B{DdCkFx@sBjEaLrCoHjAyCb@mAXcALu@T}AFmB@_AGqAWsDIcAUuDC{B@]@cBJsAd@yDH{@?e@b@_ChB{IdAyE~C}M~@aEf@gC\\kCR_CHqBBqCM{GMqQ?e@E}DE_RA{GEiOEkK@oSK}WGkl@BeVh@eNNgDHuF?aAEqGEgBg@aKOaDKqEAcDB_BNmFf@kMTgMAoJAkCIoXAsB?eNKye@GwH_@eOIqE?uD?sM@}BJaCF_Ah@yEr@sERcA~@eElCaJh@s@rFmNNSbA}Bv@wAz@aA|FoFd@_@`@Sr@Uh@M~@AlACTCNKDCbFHdG@tI@zG?nFCjK@l@?X?pMDlQ?rNBt[GvI?jTFxCBdCFfAHfGl@fEj@tBb@nA\\tD~@jHrBbGjBrQnF|Bl@nB`@|@L~AJ|AFNA`B?fBGtDc@nD{@xDaBdDaBrDcBnAa@ZMtBc@nAUTLJDL?xAEx@@b@CfAJnANrANdCd@n@LCoD?oEAgA?OEKCyB?qE?cAHg@?kAHoALcA^cBDa@HSXs@ZoAJs@LwAF}EAgF?y@Cc@Ii@ScAI{@AuGEuDBgCF_ABaJ?oZ?uEnL?xP?"
+                },
+                "summary" : "CA-91 E",
+                "warnings" : [],
+                "waypoint_order" : []
+                }
+                ],
+    "status" : "OK"
+}

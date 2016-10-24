@@ -47,10 +47,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func getRootViewController() -> UIViewController {
         //TODO: REMOVE TEST CODE
-        let vc = RoutesTableViewController()
-//        let jsonStr = t_getSampleJSONString()
-//        let res = HERERouteDirectionsAPIResponse(JSONString: jsonStr)
-//        let vc = SelectRouteCollectionViewController(routes: res!.routes)
+//        let vc = RoutesTableViewController()
+        let jsonStr = t_getSampleJSONString()
+        let res = GoogleDirectionsAPIResponse(JSONString: jsonStr)
+        let locations = (RoutesLocation(), RoutesLocation())
+        let vc = SelectRouteCollectionViewController(locations: locations, routes: res!.routes)
 //        let vc = RouteDetailsViewController(route: res!.routes![0])
         
 //        vc.view.backgroundColor = addLocationViewBackgroundColor
@@ -80,30 +81,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Fabric.with([Crashlytics.self, Answers.self])
         if let plistPath = Bundle.main.path(forResource: "Configuration", ofType: "plist"),
             let config = NSDictionary(contentsOfFile: plistPath),
-            let gmsServices = config["GMSServices"] as? [String: AnyObject],
-            let hereAPIServices = config["HERE_API"] as? [String: AnyObject] {
+            let gmsServices = config["GMSServices"] as? [String: AnyObject] {
             
             if let GoogleAPIKey = gmsServices["APIKey"] as? String {
                 GMSPlacesClient.provideAPIKey(GoogleAPIKey)
+                GMS_SERVICES_API_KEY = GoogleAPIKey
             } else {
                 fatalError("Need to include valid GoogleAPIKey")
-            }
-            
-            #if DEBUG
-                let hereAPIConfig = hereAPIServices["DEBUG"] as? [String: AnyObject]
-            #else
-                let hereAPIConfig = hereAPIServices["RELEASE"] as? [String: AnyObject]
-            #endif
-            
-            if let appId = hereAPIConfig?["app_id"] as? String {
-                HERE_API_APP_ID = appId
-            } else {
-                fatalError("Need to include valid HERE API app_id")
-            }
-            if let appCode = hereAPIConfig?["app_code"] as? String {
-                HERE_API_APP_CODE = appCode
-            } else {
-                fatalError("Need to include valid HERE API app_code")
             }
         }
     }

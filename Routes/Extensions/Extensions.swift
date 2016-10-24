@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import GooglePlaces
+import GoogleMaps
 import Kanna
 import MapKit
 
@@ -237,58 +238,62 @@ extension Double {
     
 }
 
-extension RouteLeg {
-    
-    private func priorityQueueOrdered(maneuvers: [RouteManeuver]) -> PriorityQueue<RouteManeuver> {
-        let queue = PriorityQueue<RouteManeuver> { (new, old) -> Bool in
-            return new.length > old.length
-        }
-        let _ = maneuvers.map { queue.push($0) }
-        return queue
-    }
-    
-    func longestManeuver(maneuvers: [RouteManeuver]) -> (RouteManeuver?, RouteManeuver?) {
-        let queue = priorityQueueOrdered(maneuvers: maneuvers)
-        return (queue.pop(), queue.pop())
-    }
-    
-    func longestManeuverStreets(maneuvers: [RouteManeuver]) -> (String?, String?) {
-        let longestManeuvers = longestManeuver(maneuvers: maneuvers)
-        return (longestManeuvers.0?.parseNextStreet(), longestManeuvers.1?.parseNextStreet())
-    }
-    
-    func longestManeuverStreets() -> (String?, String?) {
-        return longestManeuverStreets(maneuvers: maneuver)
-    }
-    
+extension Route {
     func rx_polyline() -> Observable<MKPolyline> {
         return Observable<MKPolyline>.create { obs -> Disposable in
-            let coordinates: [CLLocationCoordinate2D] = self.maneuver
-                .map {
-                    $0.position
+            if let path = GMSPath(fromEncodedPath: self.overviewPolyline) {
+                let count = path.count()
+                let coordinates = (0..<count).map { index -> CLLocationCoordinate2D in
+                    return path.coordinate(at: index)
+                }
+                let polyline = MKPolyline(coordinates: coordinates, count: Int(count))
+                obs.onNext(polyline)
             }
-            let polyline = MKPolyline(coordinates: coordinates, count: coordinates.count)
-            obs.onNext(polyline)
             return Disposables.create()
         }
     }
 }
 
-extension RouteManeuver {
-    
-    func parseNextStreet() -> String? {
-        if let doc = HTML(html: instruction, encoding: .utf8) {
-            return doc.css("span").filter { element -> Bool in
-                return element.className == "number" || element.className == "next-street"
-            }
-            .map { $0.text }[0]
-        }
-        return nil
-    }
-    
-}
+//extension Leg {
+//    
+//    private func priorityQueueOrdered(steps: [Step]) -> PriorityQueue<Step> {
+//        let queue = PriorityQueue<Step> { (new, old) -> Bool in
+//            return new.distance > old.distance
+//        }
+//        let _ = steps.map { queue.push($0) }
+//        return queue
+//    }
+//    
+//    func longestManeuver(steps: [Step]) -> (Step?, Step?) {
+//        let queue = priorityQueueOrdered(steps: steps)
+//        return (queue.pop(), queue.pop())
+//    }
+//    
+//    func longestManeuverStreets(steps: [Step]) -> (String?, String?) {
+//        let longestSteps = longestManeuver(steps: steps)
+//        return (longestSteps.0?.parseNextStreet(), longestSteps.1?.parseNextStreet())
+//    }
+//    
+//    func longestManeuverStreets() -> (String?, String?) {
+//        return longestManeuverStreets(steps: steps)
+//    }
+//}
+//
+//extension Step {
+//    
+//    func parseNextStreet() -> String? {
+//        if let doc = HTML(html: instructions, encoding: .utf8) {
+//            return doc.css("span").filter { element -> Bool in
+//                return element.className == "number" || element.className == "next-street"
+//            }
+//            .map { $0.text }[0]
+//        }
+//        return nil
+//    }
+//    
+//}
 
-func detailsViewController(route: RouteType) -> UIViewController {
+func detailsViewController(route: Route) -> UIViewController {
     let rDetailVC = RouteDetailsViewController(route: route)
     let nvc = UINavigationController(rootViewController: rDetailVC)
     nvc.navigationBar.tintColor = .white
@@ -317,4 +322,3 @@ func addRouteNicknameViewController() -> AddRouteNicknameViewController {
     addNicknameVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: .plain, target: nil, action: nil)
     return addNicknameVC
 }
-

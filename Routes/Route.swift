@@ -9,175 +9,150 @@
 import ObjectMapper
 import CoreLocation
 
-struct HERERoutePlacesAPIResponse: Mappable {
-    var results: [PlaceAutoCompleteResult]!
+enum GoogleDirectionsStatus: String {
+    case ok = "OK", notFound = "NOT_FOUND", zeroResults = "ZERO_RESULTS", maxWaypointsExceeded = "MAX_WAYPOINTS_EXCEEDED", invalidRequest = "INVALID_REQUEST", overQueryLimit = "OVER_QUERY_LIMIT", requestDenied = "REQUEST_DENIED", unknownError = "UNKNOWN_ERROR"
+}
+
+enum GoogleTravelMode: String {
+    case driving = "DRIVING", bicycling = "BICYCLING", walking = "WALKING"
+}
+
+enum GoogleManeuverType: String {
+    case merge = "merge", turnRight = "turn-right", turnLeft = "turn-left", rampRight = "ramp-right", rampLeft = "ramp-left"
+}
+
+struct GoogleDirectionsAPIResponse: Mappable {
+    var status: GoogleDirectionsStatus!
+    var error: String?
+    var geocodedWaypoints: [GeocodedWaypoint]!
+    var routes: [Route]!
     
     // MARK: JSON
     init?(map: Map) { }
     
     mutating func mapping(map: Map) {
-        results <- map["results"]
+        status <- map["status"]
+        error <- map["error_message"]
+        geocodedWaypoints <- map["geocoded_waypoints"]
+        routes <- map["routes"]
     }
 }
 
-struct PlaceAutoCompleteResult: Mappable {
-    var title: String!
-    var highlightedTitle: String!
-    var vicinity: String!
-    var highlightedVicinity: String!
-    var category: String!
-    fileprivate var _position: [Double]!
-    var position: (Double, Double) {
-        get {
-            return (_position[0], _position[1])
-        }
-    }
-    var id: String!
+struct GeocodedWaypoint: Mappable {
+    var status: GoogleDirectionsStatus!
+    var partialMatch: Bool!
+    var placeID: String!
+    var types: [String]!
     
     // MARK: JSON
     init?(map: Map) { }
     
     mutating func mapping(map: Map) {
-        title <- map["title"]
-        highlightedTitle <- map["highlightedTitle"]
-        vicinity <- map["vicinity"]
-        highlightedVicinity <- map["highlightedVicinity"]
-        category <- map["category"]
-        _position <- map["position"]
-        id <- map["id"]
+        status <- map["geocoder_status"]
+        partialMatch <- map["partial_match"]
+        placeID <- map["place_id"]
+        types <- map["types"]
     }
 }
 
-struct HERERouteDirectionsAPIResponse: Mappable {
-    var metaInfo: RouteResponseMetaInfo!
-    var routes: [RouteType]!
-    var language: String!
-    
-    // MARK: JSON
-    init?(map: Map) { }
-    
-    mutating func mapping(map: Map) {
-        metaInfo <- map["response.metaInfo"]
-        routes <- map["response.route"]
-        language <- map["response.language"]
+struct Route: Mappable {
+    struct Bounds {
+        var northEast: CLLocationCoordinate2D!
+        var southEast: CLLocationCoordinate2D!
     }
-}
-
-struct RouteResponseMetaInfo: Mappable {
-    var timestamp: String!
-    var mapVersion: String!
-    var moduleVersion: String!
-    var interfaceVersion: String!
+    
+    var bounds: Bounds!
+    var copyright: String!
+    var legs: [Leg]!
+    var overviewPolyline: String!
+    var summary: String!
+    var warnings: [String]!
     
     // MARK: JSON
     init?(map: Map) { }
     
     mutating func mapping(map: Map) {
-        timestamp <- map["timestamp"]
-        mapVersion <- map["mapVersion"]
-        moduleVersion <- map["moduleVersion"]
-        interfaceVersion <- map["interfaceVersion"]
-    }
-}
-
-struct RouteType: Mappable {
-    var routeId: String!
-    var waypoints: [RouteWaypoint]!
-    var legs: [RouteLeg]!
-    var summary: RouteSummary!
-    
-    // MARK: JSON
-    init?(map: Map) { }
-    
-    mutating func mapping(map: Map) {
-        waypoints <- map["waypoint"]
-        legs <- map["leg"]
-        routeId <- map["routeId"]
+        bounds = Bounds()
+        bounds.northEast <- map["bounds.northeast"]
+        bounds.southEast <- map["bounds.southwest"]
+        copyright <- map["copyright"]
+        legs <- map["legs"]
+        overviewPolyline <- map["overview_polyline.points"]
         summary <- map["summary"]
+        warnings <- map["warnings"]
     }
 }
 
-struct RouteWaypoint: Mappable {
-    var linkId: String!
-    var mappedPosition: CLLocationCoordinate2D!
-    var originalPosition: CLLocationCoordinate2D!
-    var type: String!
-    var spot: Double?
-    var sideOfStreet: String!
-    var mappedRoadName: String!
-    var label: String!
-    var shapeIndex: Int!
+struct Leg: Mappable {
+    var distance: Int!
+    var distanceText: String!
+    var duration: Int!
+    var durationText: String!
+    var durationTraffic: Int!
+    var durationTrafficText: String!
+    
+    var startAddress: String!
+    var endAddress: String!
+    
+    var startLocation: CLLocationCoordinate2D!
+    var endLocation: CLLocationCoordinate2D!
+    
+    var steps: [Step]!
     
     // MARK: JSON
     init?(map: Map) { }
     
     mutating func mapping(map: Map) {
-        linkId <- map["linkId"]
-        mappedPosition <- map["mappedPosition"]
-        originalPosition <- map["originalPosition"]
-        type <- map["type"]
-        spot <- map["spot"]
-        sideOfStreet <- map["sideOfStreet"]
-        mappedRoadName <- map["mappedRoadName"]
-        label <- map["label"]
-        shapeIndex <- map["shapeIndex"]
+        distance <- map["distance.value"]
+        distanceText <- map["distance.text"]
+        duration <- map["duration.value"]
+        durationText <- map["duration.text"]
+        durationTraffic <- map["duration_in_traffic.value"]
+        durationTrafficText <- map["duration_in_traffic.text"]
+        
+        startAddress <- map["start_address"]
+        endAddress <- map["end_address"]
+        
+        startLocation <- map["start_location"]
+        endLocation <- map["end_location"]
+        
+        steps <- map["steps"]
     }
 }
 
-struct RouteLeg: Mappable {
-    var start: RouteWaypoint!
-    var end: RouteWaypoint!
-    var length: Double!
-    var travelTime: Double!
-    var maneuver: [RouteManeuver]!
+struct Step: Mappable {
+    var distance: Int!
+    var distanceText: String!
+    var duration: Int!
+    var durationText: String!
+    
+    var startLocation: CLLocationCoordinate2D!
+    var endLocation: CLLocationCoordinate2D!
+    
+    var instructions: String!
+    var polyline: String!
+    
+    var travelMode: GoogleTravelMode!
+    
+    var maneuver: GoogleManeuverType?
     
     // MARK: JSON
     init?(map: Map) { }
     
     mutating func mapping(map: Map) {
-        start <- map["start"]
-        end <- map["end"]
-        length <- map["length"]
-        travelTime <- map["travelTime"]
+        distance <- map["distance.value"]
+        distanceText <- map["distance.text"]
+        duration <- map["duration.value"]
+        durationText <- map["duration.text"]
+        
+        startLocation <- map["start_location"]
+        endLocation <- map["end_location"]
+        
+        instructions <- map["html_instructions"]
+        polyline <- map["polyline.points"]
+        
+        travelMode <- map["travel_mode"]
         maneuver <- map["maneuver"]
-    }
-}
-
-struct RouteManeuver: Mappable {
-    var id: String!
-    var position: CLLocationCoordinate2D!
-    var instruction: String!
-    var length: Double!
-    var travelTime: Double!
-    
-    // MARK: JSON
-    init?(map: Map) { }
-    
-    mutating func mapping(map: Map) {
-        id <- map["id"]
-        position <- map["position"]
-        instruction <- map["instruction"]
-        length <- map["length"]
-        travelTime <- map["travelTime"]
-    }
-}
-
-struct RouteSummary: Mappable {
-    var distance: Double!
-    var trafficTime: Double!
-    var baseTime: Double!
-    var text: String!
-    var travelTime: Double!
-    
-    // MARK: JSON
-    init?(map: Map) { }
-    
-    mutating func mapping(map: Map) {
-        distance <- map["distance"]
-        trafficTime <- map["trafficTime"]
-        baseTime <- map["baseTime"]
-        text <- map["text"]
-        travelTime <- map["travelTime"]
     }
 }
 
@@ -188,7 +163,7 @@ extension CLLocationCoordinate2D: Mappable {
     }
     
     mutating public func mapping(map: Map) {
-        latitude <- map["latitude"]
-        longitude <- map["longitude"]
+        latitude <- map["lat"]
+        longitude <- map["lng"]
     }
 }

@@ -13,7 +13,7 @@ import MapKit
 
 class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate {
     
-    let route: Variable<RouteType>
+    let route: Variable<Route>
     
     let mapView: MKMapView = {
         let mv = MKMapView()
@@ -43,8 +43,8 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
     
     let db = DisposeBag()
     
-    init(route: RouteType) {
-        self.route = Variable<RouteType>(route)
+    init(route: Route) {
+        self.route = Variable<Route>(route)
         super.init(nibName: nil, bundle: nil)
         bindNavigationBar()
     }
@@ -91,17 +91,17 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
             .rx.setDelegate(self)
             .addDisposableTo(db)
         
-        let maneuvers = Variable<[RouteManeuver]>(route
-                                                    .value
-                                                    .legs.first!
-                                                    .maneuver)
-        maneuvers
+        let steps = Variable<[Step]>(route
+                                    .value
+                                    .legs.first!
+                                    .steps)
+        steps
             .asDriver()
-            .drive(tableView.rx_itemsWithCellIdentifier(ManeuverDetailTableViewCell.identifier, cellType: ManeuverDetailTableViewCell.self)) { r, m, c in
+            .drive(tableView.rx_itemsWithCellIdentifier(ManeuverDetailTableViewCell.identifier, cellType: ManeuverDetailTableViewCell.self)) { r, step, c in
                 c.backgroundColor = .clear
-                c.detailView.setTextLabelAttributedString(text: m.instruction)
-                c.detailView.timeLabel.text = m.travelTime.secondsToHoursMinutesString()
-                c.detailView.distanceLabel.text = m.length.metersToMilesString()
+                c.detailView.setTextLabelAttributedString(text: step.instructions)
+                c.detailView.timeLabel.text = step.durationText
+                c.detailView.distanceLabel.text = step.distanceText
             }
             .addDisposableTo(db)
         
@@ -136,7 +136,6 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         
         route
             .value
-            .legs.first?
             .rx_polyline()
             .subscribe(onNext: { polyline in
                 self.mapView.add(polyline)
@@ -156,9 +155,9 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         headerView.addSubview(v)
         v.frame = CGRect(x: 10, y: 10 + 6, width: tableView.frame.width - 16, height: 50)
         v.backgroundColor = .clear
-        v.textLabel.text = "Turn Left on Whittier BlvdTurn Left on Whittier Blvd Turn Left on Whittier BlvdTurn Left on Whittier BlvdTurn Left on Whittier Blvd Turn Left on Whittier Blvd"
-        v.timeLabel.text = "99 hrs 99 min"
-        v.distanceLabel.text = "9999 mi"
+        v.textLabel.text = route.value.summary
+        v.timeLabel.text = route.value.legs.first?.durationText
+        v.distanceLabel.text = route.value.legs.first?.distanceText
         return headerView
     }
     
@@ -180,7 +179,7 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         //TODO: Look at list of routes and color accordingly
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = lightBlueColor
-        renderer.lineWidth = 3
+        renderer.lineWidth = 4
         return renderer
     }
     

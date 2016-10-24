@@ -12,43 +12,31 @@ import MapKit
 import Kanna
 
 struct SelectRouteViewModel {
-    let routes: Variable<[RouteType]>
+    let routes: Variable<[Route]>
     
     let rx_nicknamesValid: Observable<Bool>
 
-    init(routes: [RouteType], originLocation: Observable<String>, destinationLocation: Observable<String>) {
+    init(routes: [Route], originLocation: Observable<String>, destinationLocation: Observable<String>) {
         self.rx_nicknamesValid =
             Observable.combineLatest(originLocation, destinationLocation) { origin, destination -> Bool in
                 return origin.characters.count > 0 && destination.characters.count > 0
             }
             .shareReplay(1)
-        self.routes = Variable<[RouteType]>(routes)
+        self.routes = Variable<[Route]>(routes)
         
     }
     
-    var legs: [RouteLeg] {
+    var legs: [Leg] {
         return routes
             .value
             .flatMap { $0.legs }
     }
     
-    var maneuvers: [[RouteManeuver]] {
+    var steps: [[Step]] {
         return routes
             .value
             .flatMap { $0.legs }
             .flatMap { $0 }
-            .map { $0.maneuver }
-    }
-    
-    var rx_maneuvers: Observable<[[RouteManeuver]]> {
-        return Observable.of(maneuvers)
-    }
-    
-    var summary: [RouteSummary] {
-        return routes.value.flatMap { $0.summary }
-    }
-    
-    var rx_summary: Observable<[RouteSummary]> {
-        return Observable.of(summary)
+            .map { $0.steps }
     }
 }

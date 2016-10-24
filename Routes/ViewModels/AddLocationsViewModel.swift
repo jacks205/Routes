@@ -24,6 +24,22 @@ class AddLocationsViewModel {
             .shareReplay(1)
     }
     
+    var rx_routingInformation: Observable<GoogleDirectionsAPIResponse> {
+        return rx_locations
+            .filter { $0.origin.placeID != nil && $0.destination.placeID != nil }
+            .flatMap { locations in
+                return GoogleDirectionAPI
+                    .request(.directions(locations.origin.placeID!, locations.destination.placeID!))
+                    .mapObject(GoogleDirectionsAPIResponse.self)
+        }
+    }
+    
+    var rx_routingInformationAndLocations: Observable<(RoutesLocations, GoogleDirectionsAPIResponse)> {
+        return Observable.combineLatest(rx_locations, rx_routingInformation, resultSelector: { (locations, response) -> (RoutesLocations, GoogleDirectionsAPIResponse) in
+            return (locations, response)
+        })
+    }
+    
     init() {
         rx_locationsSelected = Observable.combineLatest(originLocation.asObservable(), destinationLocation.asObservable()) { r1, r2 -> Bool in
             return r1 != nil && r2 != nil
@@ -31,22 +47,5 @@ class AddLocationsViewModel {
         .shareReplay(1)
     }
     
-    func rx_retrieveRoutingInformation() -> Observable<HERERouteDirectionsAPIResponse> {
-        return rx_locations
-            .filter { $0.origin.placeID != nil && $0.destination.placeID != nil }
-            .flatMap({ (locations) -> Observable<CLLocationCoordinates> in
-                return rx_coordinatesFromPlaceIDs(locations.origin.placeID!, locations.destination.placeID!)
-            })
-            .flatMap { locations in
-                return RoutesDirectionAPI
-                    .request(.calculateRoute(locations.origin, locations.destination))
-                    .mapObject(HERERouteDirectionsAPIResponse.self)
-            }
-    }
-}
-
-func rx_coordinatesFromPlaceIDs(_ p1: String, _ p2: String) -> Observable<CLLocationCoordinates> {
-    return Observable.combineLatest(GMSPlacesClient.shared().rx_coordinatesFromPlaceID(placeID: p1), GMSPlacesClient.shared().rx_coordinatesFromPlaceID(placeID: p2), resultSelector: { (c1, c2) -> CLLocationCoordinates in
-        return (c1, c2)
-    })
+    
 }

@@ -29,9 +29,10 @@ class AddDestinationLocationViewController: AddLocationViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addLocationsViewModel
-            .rx_retrieveRoutingInformation()
-            .subscribe(onNext: { [unowned self] response in
-                let selectRouteCVC = SelectRouteCollectionViewController(routes: response.routes)
+            .rx_routingInformationAndLocations
+            .subscribe(onNext: { [unowned self] routingAndResponse in
+                let (locations, response) = routingAndResponse
+                let selectRouteCVC = SelectRouteCollectionViewController(locations: locations, routes: response.routes)
                 selectRouteCVC.view.backgroundColor = self.view.backgroundColor
                 selectRouteCVC.title = "SELECT ROUTE"
                 self.navigationController?.pushViewController(selectRouteCVC, animated: true)

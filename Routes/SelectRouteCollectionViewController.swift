@@ -71,13 +71,18 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
         return v
     }()
     
-    init(routes: [RouteType]) {
+    init(locations: RoutesLocations, routes: [Route]) {
         selectRouteViewModel = SelectRouteViewModel(
             routes: routes,
             originLocation: routeSummaryRenameView.leftView.textView.rx.text.asObservable(),
             destinationLocation: routeSummaryRenameView.rightView.textView.rx.text.asObservable()
         )
         super.init(nibName: nil, bundle: nil)
+        //TODO: REMOVE TEST
+        routeSummaryRenameView.leftView.setTextView(text: "19332 Trino Circle")
+        routeSummaryRenameView.rightView.setTextView(text: "Disneyland")
+//        routeSummaryRenameView.leftView.setTextView(text: locations.origin.name)
+//        routeSummaryRenameView.rightView.setTextView(text: locations.destination.name)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -149,19 +154,11 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
             .routes
             .asDriver()
             .drive(collectionView.rx_itemsWithCellIdentifier(reuseIdentifier, cellType: RouteSummaryOverlayCollectionViewCell.self)) { (index, route, cell) in
-                let (longestStreet, secondLongestStreet) = route.legs[0].longestManeuverStreets()
-                if let longestStreet = longestStreet,
-                    let secondLongestStreet = secondLongestStreet {
-                    cell.detailView.viaLabel.text = longestStreet + " & " + secondLongestStreet
-                } else if let longestStreet = longestStreet {
-                    cell.detailView.viaLabel.text = longestStreet
-                } else if let secondLongestStreet = secondLongestStreet {
-                    cell.detailView.viaLabel.text = secondLongestStreet
-                }
-                
-                let summary = route.summary
-                cell.detailView.distanceLabel.text = summary?.distance.metersToMilesString() ?? "UNKNOWN"
-                cell.detailView.timeLabel.text = summary?.travelTime.secondsToHoursMinutesString() ?? "UNKNOWN"
+                let routes = self.selectRouteViewModel.routes.value
+                cell.detailView.viaLabel.text = routes[index].summary
+                let leg = route.legs.first
+                cell.detailView.distanceLabel.text = leg?.distanceText ?? "UNKNOWN"
+                cell.detailView.timeLabel.text = leg?.durationText ?? "UNKNOWN"
             }
             .addDisposableTo(db)
         mapView.addSubview(collectionView)
@@ -207,7 +204,7 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
             .distinctUntilChanged()
             .flatMap { i -> Observable<MKPolyline> in
                 return self.selectRouteViewModel
-                    .legs[i]
+                    .routes.value[i]
                     .rx_polyline()
             }
             .subscribe(onNext: { polyline in
@@ -255,7 +252,7 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
         //TODO: Look at list of routes and color accordingly
         let renderer = MKPolylineRenderer(overlay: overlay)
         renderer.strokeColor = lightBlueColor
-        renderer.lineWidth = 5
+        renderer.lineWidth = 4
         return renderer
     }
     

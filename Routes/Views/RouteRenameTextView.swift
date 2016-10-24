@@ -23,22 +23,21 @@ class TextContainerView: UIView, UITextViewDelegate {
         tv.textContainer.lineBreakMode = .byClipping
         tv.isUserInteractionEnabled = false
         tv.isScrollEnabled = false
-        tv.showsVerticalScrollIndicator = false
-        tv.showsHorizontalScrollIndicator = false
         tv.backgroundColor = .clear
         tv.tintColor = .white
-        tv.contentInset = UIEdgeInsets.zero
         tv.backgroundColor = .clear
-        tv.keyboardDismissMode = .interactive
+        tv.textContainer.lineFragmentPadding = 0
+        tv.contentInset.bottom = -8
+        tv.textAlignment = .left
         return tv
     }()
     
-    private let lineLayer: CAShapeLayer = {
-        let l = CAShapeLayer()
-        l.lineWidth = 1
-        l.strokeColor = UIColor.white.withAlphaComponent(0.5).cgColor
-        return l
-    }()
+//    private let lineLayer: CAShapeLayer = {
+//        let l = CAShapeLayer()
+//        l.lineWidth = 1
+//        l.strokeColor = UIColor.white.withAlphaComponent(0.5).cgColor
+//        return l
+//    }()
     
     private let btn: UIButton = {
         let b = UIButton()
@@ -55,7 +54,7 @@ class TextContainerView: UIView, UITextViewDelegate {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        textView.layer.addSublayer(lineLayer)
+//        textView.layer.addSublayer(lineLayer)
         addSubview(textView)
         addSubview(btn)
         setConstraints()
@@ -67,6 +66,16 @@ class TextContainerView: UIView, UITextViewDelegate {
     }
     
     func setConstraints() {
+        let iv: UIImageView = {
+            let iv = UIImageView(image: #imageLiteral(resourceName: "edit-pencil"))
+            iv.translatesAutoresizingMaskIntoConstraints = false
+            return iv
+        }()
+        
+        addSubview(iv)
+        iv.leadingAnchor.constraint(equalTo: textView.trailingAnchor, constant: 3).isActive = true
+        iv.centerYAnchor.constraint(equalTo: textView.centerYAnchor, constant: 0).isActive = true
+        
         textView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         textView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         let vL = textView.leadingAnchor.constraint(greaterThanOrEqualTo: leadingAnchor, constant: 8)
@@ -89,18 +98,23 @@ class TextContainerView: UIView, UITextViewDelegate {
     }
     
     override func layoutSubviews() {
-        lineLayer.frame = bounds
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: 0, y: textView.frame.height))
-        path.addLine(to: CGPoint(x: textView.frame.width, y: textView.frame.height))
-        lineLayer.path = path.cgPath
+        textView.contentSize = textView.frame.size
+        
+//        lineLayer.frame = bounds
+//        let path = UIBezierPath()
+//        path.move(to: CGPoint(x: 0, y: textView.frame.height))
+//        path.addLine(to: CGPoint(x: textView.frame.width, y: textView.frame.height))
+//        lineLayer.path = path.cgPath
     }
     
     func setTextView(text: String) {
-        textView.text = text
-        textView.sizeToFit()
-        textView.layoutIfNeeded()
-        layoutIfNeeded()
+        let attributedString = NSAttributedString(string: text, attributes: [
+            NSFontAttributeName: textView.font!,
+            NSForegroundColorAttributeName: textView.textColor!,
+            NSUnderlineStyleAttributeName: NSNumber(integerLiteral: NSUnderlineStyle.styleSingle.rawValue),
+            NSUnderlineColorAttributeName: UIColor.white.withAlphaComponent(0.5)
+            ])
+        textView.attributedText = attributedString
     }
     
     private func shrinkFontToFit(textView: UITextView) {
