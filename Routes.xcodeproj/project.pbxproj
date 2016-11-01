@@ -43,6 +43,9 @@
 		EACF488E1DBC6D15007228D0 /* AddLocationsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF488D1DBC6D15007228D0 /* AddLocationsViewModel.swift */; };
 		EACF48901DBDFC4E007228D0 /* LegOverviewDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACF488F1DBDFC4E007228D0 /* LegOverviewDetailView.swift */; };
 		EACFD3551D3731E7004AB14C /* RoutesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */; };
+		EAD1ED071DC8496D00011324 /* RoutesTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1ED061DC8496D00011324 /* RoutesTableViewModel.swift */; };
+		EAD1ED0A1DC8972100011324 /* RouteRanker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAD1ED091DC8972100011324 /* RouteRanker.swift */; };
+		EAE15AC11DC72C4E0095267C /* RoutesDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = EAE15AC01DC72C4E0095267C /* RoutesDataService.swift */; };
 		EAF2B3451D38FBDE00723238 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */; };
 		EAF2B3461D38FBDE00723238 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */; };
 		EAF2B3471D38FBDE00723238 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = EAF2B33D1D38FBDE00723238 /* OpenSans-ExtraBold.ttf */; };
@@ -113,6 +116,9 @@
 		EACF488D1DBC6D15007228D0 /* AddLocationsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddLocationsViewModel.swift; path = ViewModels/AddLocationsViewModel.swift; sourceTree = "<group>"; };
 		EACF488F1DBDFC4E007228D0 /* LegOverviewDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LegOverviewDetailView.swift; path = Views/LegOverviewDetailView.swift; sourceTree = "<group>"; };
 		EACFD3541D3731E7004AB14C /* RoutesTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesTableViewController.swift; sourceTree = "<group>"; };
+		EAD1ED061DC8496D00011324 /* RoutesTableViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoutesTableViewModel.swift; path = ViewModels/RoutesTableViewModel.swift; sourceTree = "<group>"; };
+		EAD1ED091DC8972100011324 /* RouteRanker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RouteRanker.swift; sourceTree = "<group>"; };
+		EAE15AC01DC72C4E0095267C /* RoutesDataService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoutesDataService.swift; sourceTree = "<group>"; };
 		EAF2B33B1D38FBDE00723238 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-Bold.ttf"; path = "Fonts/OpenSans/OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		EAF2B33C1D38FBDE00723238 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-BoldItalic.ttf"; path = "Fonts/OpenSans/OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		EAF2B33D1D38FBDE00723238 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "OpenSans-ExtraBold.ttf"; path = "Fonts/OpenSans/OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -203,6 +209,7 @@
 				EA2E56DF1D37246F00D2E4C7 /* LaunchScreen.storyboard */,
 				EA2E56E21D37246F00D2E4C7 /* Info.plist */,
 				EA894F6E1D3D766600FE5F56 /* Configuration.plist */,
+				EAD1ED081DC8970900011324 /* Ranker */,
 				EAF2B3571D3B364200723238 /* Helpers */,
 				EAA180AD1D38F21C002B22B1 /* RxSwift+Helpers */,
 				EAF2B3261D38FBAB00723238 /* Fonts */,
@@ -234,6 +241,7 @@
 				EA894F701D3D891C00FE5F56 /* RoutesAPI.swift */,
 				EA894F721D3DA23600FE5F56 /* Route.swift */,
 				EA894F6C1D3C689B00FE5F56 /* RouteLocationManager.swift */,
+				EAE15AC01DC72C4E0095267C /* RoutesDataService.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -253,6 +261,7 @@
 			children = (
 				EA3DFA2A1DB3821E00215049 /* SelectRouteViewModel.swift */,
 				EACF488D1DBC6D15007228D0 /* AddLocationsViewModel.swift */,
+				EAD1ED061DC8496D00011324 /* RoutesTableViewModel.swift */,
 			);
 			name = ViewModels;
 			sourceTree = "<group>";
@@ -307,6 +316,14 @@
 				EA18A8891DB86FBE00216FD8 /* RouteDetailsViewController.swift */,
 			);
 			name = Home;
+			sourceTree = "<group>";
+		};
+		EAD1ED081DC8970900011324 /* Ranker */ = {
+			isa = PBXGroup;
+			children = (
+				EAD1ED091DC8972100011324 /* RouteRanker.swift */,
+			);
+			name = Ranker;
 			sourceTree = "<group>";
 		};
 		EAF2B3261D38FBAB00723238 /* Fonts */ = {
@@ -390,7 +407,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0800;
+				LastUpgradeCheck = 0810;
 				ORGANIZATIONNAME = "Mark Jackson";
 				TargetAttributes = {
 					EA2E56D21D37246F00D2E4C7 = {
@@ -596,10 +613,13 @@
 				EA3DFA341DB55C9000215049 /* PriorityQueue.swift in Sources */,
 				EA3DFA2B1DB3821E00215049 /* SelectRouteViewModel.swift in Sources */,
 				EA894F731D3DA23600FE5F56 /* Route.swift in Sources */,
+				EAE15AC11DC72C4E0095267C /* RoutesDataService.swift in Sources */,
 				EAB165291D3B475D0069A6EA /* SelectRouteCollectionViewController.swift in Sources */,
 				EAA180AF1D38F233002B22B1 /* ActivityIndicator.swift in Sources */,
 				EAA180AC1D38E65B002B22B1 /* RouteProgressBarView.swift in Sources */,
+				EAD1ED071DC8496D00011324 /* RoutesTableViewModel.swift in Sources */,
 				EA18A88E1DB89C7100216FD8 /* StepDetailView.swift in Sources */,
+				EAD1ED0A1DC8972100011324 /* RouteRanker.swift in Sources */,
 				EA18A88C1DB8717500216FD8 /* RoutesMapView.swift in Sources */,
 				EACF488E1DBC6D15007228D0 /* AddLocationsViewModel.swift in Sources */,
 				EA3DFA2E1DB4F57C00215049 /* RouteSummaryOverlayCollectionViewCell.swift in Sources */,

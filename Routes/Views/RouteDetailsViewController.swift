@@ -10,6 +10,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 import MapKit
+import RealmSwift
 
 class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableViewDelegate {
     
@@ -41,12 +42,23 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
         return l
     }()
     
+    private let overviewDetailView: LegOverviewDetailView = {
+        let v = LegOverviewDetailView()
+        v.backgroundColor = .clear
+        return v
+    }()
+    
     let db = DisposeBag()
     
-    init(route: Route) {
+    init(origin: String, destination: String, route: Route) {
         self.route = Variable<Route>(route)
         super.init(nibName: nil, bundle: nil)
         bindNavigationBar()
+        
+        overviewDetailView.originLabel.text = origin
+        overviewDetailView.destinationLabel.text = destination
+        overviewDetailView.timeLabel.text = route.legs.first?.durationText
+        overviewDetailView.distanceLabel.text = route.legs.first?.distanceText
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -91,10 +103,10 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
             .rx.setDelegate(self)
             .addDisposableTo(db)
         
-        let steps = Variable<[Step]>(route
-                                    .value
-                                    .legs.first!
-                                    .steps)
+        let steps = Variable<List<Step>>(route
+                                        .value
+                                        .legs.first!
+                                        .steps)
         steps
             .asDriver()
             .drive(tableView.rx_itemsWithCellIdentifier(StepDetailTableViewCell.identifier, cellType: StepDetailTableViewCell.self)) { r, step, c in
@@ -147,20 +159,18 @@ class RouteDetailsViewController: UIViewController, MKMapViewDelegate, UITableVi
             .addDisposableTo(db)
     }
     
-    //MARK: - TableView Delegate
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableViewHeaderView() -> UIView {
         let headerView = UIView()
         headerView.backgroundColor = addLocationViewBackgroundColor
         headerView.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: 70)
-        let v = LegOverviewDetailView()
-        headerView.addSubview(v)
-        v.frame = CGRect(x: 10, y: 10 + 6, width: tableView.frame.width - 16, height: 50)
-        v.backgroundColor = .clear
-        v.originLabel.text = "19332 Trino Circle"
-        v.destinationLabel.text = "Disneyland Drive"
-        v.timeLabel.text = route.value.legs.first?.durationText
-        v.distanceLabel.text = route.value.legs.first?.distanceText
+        overviewDetailView.frame = CGRect(x: 10, y: 10, width: tableView.frame.width - 16, height: 50)
+        headerView.addSubview(overviewDetailView)
         return headerView
+    }
+    
+    //MARK: - TableView Delegate
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return tableViewHeaderView()
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

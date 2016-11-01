@@ -20,7 +20,7 @@ public class PriorityQueue<T> {
     
     public func push(_ newElement: T) {
         _heap.append(newElement)
-        siftUp(index: _heap.endIndex - 1)
+        let _ = siftUp(index: _heap.endIndex - 1)
     }
     
     public func pop() -> T? {
@@ -32,7 +32,7 @@ public class PriorityQueue<T> {
         }
         swap(&_heap[0], &_heap[_heap.endIndex - 1])
         let pop = _heap.removeLast()
-        siftDown(index: 0)
+        let _ = siftDown(index: 0)
         return pop
     }
     
@@ -49,7 +49,7 @@ public class PriorityQueue<T> {
         }
         if smallest != index {
             swap(&_heap[index], &_heap[smallest])
-            siftDown(index: smallest)
+            let _ = siftDown(index: smallest)
             return true
         }
         return false
@@ -62,7 +62,7 @@ public class PriorityQueue<T> {
         let parent = (index - 1) >> 1
         if compare(_heap[index], _heap[parent]) {
             swap(&_heap[index], &_heap[parent])
-            siftUp(index: parent)
+            let _ = siftUp(index: parent)
             return true
         }
         return false
@@ -78,7 +78,7 @@ extension PriorityQueue {
         return _heap.isEmpty
     }
     
-    public func update<T2 where T2: Equatable>(element: T2) -> T? {
+    public func update<T2>(element: T2) -> T? where T2: Equatable {
         assert(element is T)  // How to enforce this with type constraints?
         for (index, item) in _heap.enumerated() {
             if (item as! T2) == element {
@@ -91,13 +91,13 @@ extension PriorityQueue {
         return nil
     }
     
-    public func remove<T2 where T2: Equatable>(element: T2) -> T? {
+    public func remove<T2>(element: T2) -> T? where T2: Equatable {
         assert(element is T)  // How to enforce this with type constraints?
         for (index, item) in _heap.enumerated() {
             if (item as! T2) == element {
                 swap(&_heap[index], &_heap[_heap.endIndex - 1])
                 _heap.removeLast()
-                siftDown(index: index)
+                let _ = siftDown(index: index)
                 return item
             }
         }

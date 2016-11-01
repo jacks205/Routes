@@ -52,6 +52,14 @@ PODS:
     - Moya/Core
     - RxSwift
   - ObjectMapper (2.0.0)
+  - ObjectMapper+Realm (0.1):
+    - ObjectMapper
+    - RealmSwift
+  - Realm (2.0.2):
+    - Realm/Headers (= 2.0.2)
+  - Realm/Headers (2.0.2)
+  - RealmSwift (2.0.2):
+    - Realm (= 2.0.2)
   - Result (3.0.0)
   - RxCocoa (3.0.0-beta.1):
     - RxSwift (~> 3.0.0-beta.1)
@@ -68,6 +76,8 @@ DEPENDENCIES:
   - Kanna (~> 2.0.0)
   - Moya (from `https://github.com/Moya/Moya`)
   - Moya-ObjectMapper/RxSwift (from `https://github.com/ivanbruel/Moya-ObjectMapper`)
+  - ObjectMapper+Realm (from `https://github.com/Jakenberg/ObjectMapper-Realm.git`, branch `master`)
+  - RealmSwift
   - RxCocoa (= 3.0.0-beta.1)
   - RxSwift (from `https://github.com/ReactiveX/RxSwift`)
 
@@ -76,6 +86,9 @@ EXTERNAL SOURCES:
     :git: https://github.com/Moya/Moya
   Moya-ObjectMapper:
     :git: https://github.com/ivanbruel/Moya-ObjectMapper
+  ObjectMapper+Realm:
+    :branch: master
+    :git: https://github.com/Jakenberg/ObjectMapper-Realm.git
   RxSwift:
     :git: https://github.com/ReactiveX/RxSwift
 
@@ -86,6 +99,9 @@ CHECKOUT OPTIONS:
   Moya-ObjectMapper:
     :commit: b0ea096d5c77371be2ca1afecff59371a112c11a
     :git: https://github.com/ivanbruel/Moya-ObjectMapper
+  ObjectMapper+Realm:
+    :commit: 53d297b268c7db6cedefa3cae539b62ebf7ddec5
+    :git: https://github.com/Jakenberg/ObjectMapper-Realm.git
   RxSwift:
     :commit: 832f79cd02a2eae6316ff989eb38c2dced826a34
     :git: https://github.com/ReactiveX/RxSwift
@@ -109,10 +125,13 @@ SPEC CHECKSUMS:
   Moya: 920d40f738e6f4ece84010cec701bb9693be8251
   Moya-ObjectMapper: d5ac1aafdc31f2b50620ae78b8d4cdefd0504791
   ObjectMapper: aed2570edabbd3c9b26c939e1cabdb6558f933e0
+  ObjectMapper+Realm: dbcf666c2081d82dc527b054c574b9f3777df060
+  Realm: 0f5a194af0b7e6158b83db41b4ee1a00be7ddf1a
+  RealmSwift: 0eb5070d851cba7c66e841ca756d83609dc78bc8
   Result: 1b3e431f37cbcd3ad89c6aa9ab0ae55515fae3b6
   RxCocoa: 8cecf331302b8ae5381bbab1bccba4ede2eae6a8
   RxSwift: 0ea939d7d97cb70657190ffde8dc2a9b455778fc
 
-PODFILE CHECKSUM: 6b9d2e0212e36a3b7d52beb7dd7901d1694b7ce9
+PODFILE CHECKSUM: ace99ed61110102db265caea3835bc4e09aa8f6c
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.1.1

@@ -30,12 +30,14 @@ class AddDestinationLocationViewController: AddLocationViewController {
         super.viewDidLoad()
         addLocationsViewModel
             .rx_routingInformationAndLocations
-            .subscribe(onNext: { [unowned self] routingAndResponse in
+            .subscribe(onNext: { [weak self] routingAndResponse in
                 let (locations, response) = routingAndResponse
                 let selectRouteCVC = SelectRouteCollectionViewController(locations: locations, routes: response.routes)
-                selectRouteCVC.view.backgroundColor = self.view.backgroundColor
+                selectRouteCVC.view.backgroundColor = self?.view.backgroundColor
                 selectRouteCVC.title = "SELECT ROUTE"
-                self.navigationController?.pushViewController(selectRouteCVC, animated: true)
+                
+                self?.hud?.dismiss(animated: true)
+                self?.navigationController?.pushViewController(selectRouteCVC, animated: true)
             })
             .addDisposableTo(db)
     }
@@ -46,8 +48,21 @@ class AddDestinationLocationViewController: AddLocationViewController {
         tableView
             .rx.itemSelected
             .asDriver()
-            .map { self.locations.value[$0.row] }
+            .map { [unowned self] indexPath in
+                self.hud?.show(in: self.view)
+                return self.locations.value[indexPath.row]
+            }
             .drive(addLocationsViewModel.destinationLocation)
+            .addDisposableTo(db)
+    }
+    
+    override func bindBackBtn() {
+        super.bindBackBtn()
+        navigationItem.leftBarButtonItem?
+            .rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                self?.addLocationsViewModel.destinationLocation.value = nil
+            })
             .addDisposableTo(db)
     }
 }

@@ -54,7 +54,7 @@ class RouteSummaryOverlayCollectionViewCell: UICollectionViewCell {
             let viaText = detailView.viaLabel.text! as NSString
             let viaFrame = viaText.boundingRect(with: detailView.viaLabel.frame.size, options: .truncatesLastVisibleLine, attributes: [NSFontAttributeName: detailView.viaLabel.font], context: nil)
             
-            let width = min(16 + viaFrame.width + 10 + detailView.distanceLabel.frame.width + 10, 254)
+            let width = min(16 + viaFrame.width + 16 + detailView.timeLabel.frame.width + 10, 254)
             detailView.widthAnchor.constraint(equalToConstant: width).isActive = true
             layoutSized = true
         }

@@ -13,7 +13,7 @@ import RxCocoa
 
 class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearchResultsUpdating {
     
-    let routes = Variable<[String]>(["California", "Arizona"])
+    let routesViewModel: RoutesTableViewModel
     
     let tableView: UITableView = {
         let tb = UITableView()
@@ -34,8 +34,8 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         sc.searchBar.sizeToFit()
         sc.searchBar.barStyle = .black
         sc.searchBar.searchBarStyle = .minimal
-        sc.searchBar.tintColor = UIColor.gray
-        sc.searchBar.backgroundColor = UIColor.clear
+        sc.searchBar.tintColor = .gray
+        sc.searchBar.backgroundColor = .clear
         sc.searchBar.placeholder = ""
         return sc
     }()
@@ -57,8 +57,9 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
     
     let db = DisposeBag()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    init(viewModel: RoutesTableViewModel) {
+        routesViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -85,10 +86,10 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         tableView
             .rx.setDelegate(self)
             .addDisposableTo(db)
-        routes
+        routesViewModel.routes
             .asObservable()
-            .bindTo(tableView.rx_itemsWithCellIdentifier(RouteTableViewCell.identifier, cellType: RouteTableViewCell.self)) { [weak self] (row, element, cell) in
-                self?.configureCell(element, cell: cell)
+            .bindTo(tableView.rx_itemsWithCellIdentifier(RouteTableViewCell.identifier, cellType: RouteTableViewCell.self)) { [unowned self] (row, route, cell) in
+                self.routesViewModel.configureCell(route: route, cell: cell)
             }
             .addDisposableTo(db)
         tableView
@@ -124,34 +125,20 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
             .addDisposableTo(db)
     }
     
-    func configureCell(_ element: String, cell: RouteTableViewCell) {
-        let random = Double(arc4random_uniform(100) + 1) / 100.0
-        var color = darkGreenColor
-        if random >= 0.75 {
-            color = darkRedColor
-        } else if random < 0.75 && random > 0.45 {
-            color = darkYellowColor
-        }
-        cell.selectionStyle = .none
-        cell.backgroundColor = UIColor.clear
-        cell.originNameLabel.text = element
-        cell.destinationNameLabel.text = element
-        cell.descriptionLabel.text = "via I-55s and Chapman Ave"
-        cell.distanceLabel.text = "47.3 mi"
-        cell.progressBarView.textLabel.font = UIFont(name: "OpenSans", size: 10)
-        cell.progressBarView.textLabel.textColor = UIColor.white
-        cell.updateProgressBarView(random, color: color, text: "\(random)")
-    }
-    
     fileprivate func createRefreshControl() {
         refreshControl = UIRefreshControl()
         refreshControl?.backgroundColor = UIColor.clear
         refreshControl?
             .rx.controlEvent(.valueChanged)
-            .subscribe(onNext: { [unowned self] strings in
-                self.tableView.reloadData()
-                self.refreshControl?.endRefreshing()
-            })
+            .flatMap { self.routesViewModel.rx_refreshRoutes() }
+            .bindTo(self.routesViewModel.routes)
+            .addDisposableTo(db)
+        
+        routesViewModel
+            .routes
+            .asObservable()
+            .map { _ in return false }
+            .bindTo(refreshControl!.rx.refreshing)
             .addDisposableTo(db)
         
         activityIndicator = ActivityIndicator()
@@ -168,15 +155,9 @@ class RoutesTableViewController: UIViewController, UITableViewDelegate, UISearch
         addBarBtn.image = UIImage(named: "add")
         addBarBtn
             .rx.tap
-            .subscribe(onNext: { [weak self] in
-                let addLocationVC = AddStartingLocationViewController()
-                addLocationVC.view.backgroundColor = addLocationViewBackgroundColor
-                addLocationVC.searchBar.placeholder = "Enter Starting Location"
-                let addNvc = UINavigationController(rootViewController: addLocationVC)
-                addNvc.navigationBar.tintColor = .white
-                addNvc.navigationBar.barTintColor = bottomGradientBackgroundColor
-                addNvc.interactivePopGestureRecognizer?.isEnabled = false
-                self?.navigationController?.present(addNvc, animated: true, completion: nil)
+            .subscribe(onNext: { [unowned self] in
+                let addLocationNVC = addLocationViewController()
+                self.navigationController?.present(addLocationNVC, animated: true, completion: nil)
             })
             .addDisposableTo(db)
         navigationItem.rightBarButtonItem = addBarBtn

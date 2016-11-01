@@ -11,6 +11,7 @@ import Fabric
 import Crashlytics
 import CocoaLumberjack
 import GooglePlaces
+import RealmSwift
 
 let topGradientBackgroundColor = UIColor.black
 let bottomGradientBackgroundColor = UIColor(red: 0.28, green: 0.34, blue: 0.38, alpha: 1)
@@ -41,17 +42,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let rootVC = getRootViewController()
         window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
-        
+
         return true
     }
     
     func getRootViewController() -> UIViewController {
         //TODO: REMOVE TEST CODE
-//        let vc = RoutesTableViewController()
-        let jsonStr = t_getSampleJSONString()
-        let res = GoogleDirectionsAPIResponse(JSONString: jsonStr)
-        let locations = (RoutesLocation(), RoutesLocation())
-        let vc = SelectRouteCollectionViewController(locations: locations, routes: res!.routes)
+        let routesViewModel = RoutesTableViewModel()
+        let vc = RoutesTableViewController(viewModel: routesViewModel)
+//        let jsonStr = t_getSampleJSONString()
+//        let res = GoogleDirectionsAPIResponse(JSONString: jsonStr)
+//        let locations = (RoutesLocation(), RoutesLocation())
+//        let vc = SelectRouteCollectionViewController(locations: locations, routes: res!.routes)
 //        let vc = RouteDetailsViewController(route: res!.routes![0])
         
 //        vc.view.backgroundColor = addLocationViewBackgroundColor
@@ -59,7 +61,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         nvc.navigationBar.tintColor = .white
         nvc.navigationBar.barTintColor = .black
 //        nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
-        vc.title = "CHOOSE ROUTE"
+        vc.title = "ROUTES"
+//        vc.title = "CHOOSE ROUTE"
 //        vc.title = "DIRECTIONS"
 
         //END TEST
@@ -73,7 +76,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             DDLog.add(DDASLLogger.sharedInstance()) // ASL = Apple System Logs
             
             let fileLogger: DDFileLogger = DDFileLogger() // File Logger
-            fileLogger.rollingFrequency = 60*60*24  // 24 hours
+            fileLogger.rollingFrequency = 60*60*24.0  // 24 hours
             fileLogger.logFileManager.maximumNumberOfLogFiles = 7
             DDLog.add(fileLogger)
         }

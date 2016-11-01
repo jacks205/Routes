@@ -7,7 +7,13 @@
 //
 
 import ObjectMapper
+import RealmSwift
+import ObjectMapper_Realm
 import CoreLocation
+
+class IdentifiableObject: Object {
+    private(set) dynamic var uuid = NSUUID().uuidString
+}
 
 enum GoogleDirectionsStatus: String {
     case ok = "OK", notFound = "NOT_FOUND", zeroResults = "ZERO_RESULTS", maxWaypointsExceeded = "MAX_WAYPOINTS_EXCEEDED", invalidRequest = "INVALID_REQUEST", overQueryLimit = "OVER_QUERY_LIMIT", requestDenied = "REQUEST_DENIED", unknownError = "UNKNOWN_ERROR"
@@ -21,33 +27,42 @@ enum GoogleManeuverType: String {
     case merge = "merge", turnRight = "turn-right", turnLeft = "turn-left", rampRight = "ramp-right", rampLeft = "ramp-left"
 }
 
-struct GoogleDirectionsAPIResponse: Mappable {
+class GoogleDirectionsAPIResponse: Mappable {
     var status: GoogleDirectionsStatus!
     var error: String?
     var geocodedWaypoints: [GeocodedWaypoint]!
     var routes: [Route]!
     
     // MARK: JSON
-    init?(map: Map) { }
+    required convenience init?(map: Map) {
+        self.init()
+    }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         status <- map["status"]
         error <- map["error_message"]
         geocodedWaypoints <- map["geocoded_waypoints"]
         routes <- map["routes"]
+        
+        _ = routes.map {
+            $0.startPlaceId = geocodedWaypoints.first?.placeID
+            $0.endPlaceId = geocodedWaypoints.popLast()?.placeID
+        }
     }
 }
 
-struct GeocodedWaypoint: Mappable {
+class GeocodedWaypoint: Mappable {
     var status: GoogleDirectionsStatus!
     var partialMatch: Bool!
     var placeID: String!
     var types: [String]!
     
     // MARK: JSON
-    init?(map: Map) { }
+    required convenience init?(map: Map) {
+        self.init()
+    }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         status <- map["geocoder_status"]
         partialMatch <- map["partial_match"]
         placeID <- map["place_id"]
@@ -55,49 +70,59 @@ struct GeocodedWaypoint: Mappable {
     }
 }
 
-struct Route: Mappable {
-    struct Bounds {
-        var northEast: CLLocationCoordinate2D!
-        var southEast: CLLocationCoordinate2D!
-    }
-    
-    var bounds: Bounds!
-    var copyright: String!
-    var legs: [Leg]!
-    var overviewPolyline: String!
-    var summary: String!
-    var warnings: [String]!
+class Bounds: IdentifiableObject {
+    dynamic var northEast: RouteLocationCoordinate2D!
+    dynamic var southEast: RouteLocationCoordinate2D!
+}
+
+class Route: IdentifiableObject, Mappable {
+    dynamic var startPlaceId: String?
+    dynamic var endPlaceId: String?
+    dynamic var bounds: Bounds? = Bounds()
+    dynamic var copyrights: String!
+    var legs = List<Leg>()
+    dynamic var overviewPolyline: String!
+    dynamic var summary: String!
+    let warnings = List<RString>()
     
     // MARK: JSON
-    init?(map: Map) { }
+    required convenience init?(map: Map) {
+        self.init()
+    }
     
-    mutating func mapping(map: Map) {
-        bounds = Bounds()
-        bounds.northEast <- map["bounds.northeast"]
-        bounds.southEast <- map["bounds.southwest"]
-        copyright <- map["copyright"]
-        legs <- map["legs"]
+    func mapping(map: Map) {
+        bounds!.northEast <- map["bounds.northeast"]
+        bounds!.southEast <- map["bounds.southwest"]
+        copyrights <- map["copyrights"]
+        legs <- (map["legs"], ListTransform<Leg>())
         overviewPolyline <- map["overview_polyline.points"]
         summary <- map["summary"]
-        warnings <- map["warnings"]
+        
+        var warningArr: [String]? = nil
+        warningArr <- map["warnings"] // Maps to local variable
+        let _ = warningArr?.map { warning in // Then fill options to `List`
+            let value = RString()
+            value.value = warning
+            self.warnings.append(value)
+        }
     }
 }
 
-struct Leg: Mappable {
-    var distance: Int!
-    var distanceText: String!
-    var duration: Int!
-    var durationText: String!
-    var durationTraffic: Int!
-    var durationTrafficText: String!
+class Leg: IdentifiableObject, Mappable {
+    dynamic var distance: Int = 0
+    dynamic var distanceText: String!
+    dynamic var duration: Int = 0
+    dynamic var durationText: String!
+    dynamic var durationTraffic: Int = 0
+    dynamic var durationTrafficText: String!
     
-    var startAddress: String!
-    var endAddress: String!
+    dynamic var startAddress: String!
+    dynamic var endAddress: String!
     
-    var startLocation: CLLocationCoordinate2D!
-    var endLocation: CLLocationCoordinate2D!
+    dynamic var startLocation: RouteLocationCoordinate2D?
+    dynamic var endLocation: RouteLocationCoordinate2D?
     
-    var steps: [Step]!
+    var steps = List<Step>()
     
     var routeColor: UIColor {
         let percentage = Double(duration) / Double(durationTraffic)
@@ -122,9 +147,11 @@ struct Leg: Mappable {
     }
     
     // MARK: JSON
-    init?(map: Map) { }
+    required convenience init?(map: Map) {
+        self.init()
+    }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         distance <- map["distance.value"]
         distanceText <- map["distance.text"]
         duration <- map["duration.value"]
@@ -138,30 +165,38 @@ struct Leg: Mappable {
         startLocation <- map["start_location"]
         endLocation <- map["end_location"]
         
-        steps <- map["steps"]
+        steps <- (map["steps"], ListTransform<Step>())
     }
 }
 
-struct Step: Mappable {
-    var distance: Int!
-    var distanceText: String!
-    var duration: Int!
-    var durationText: String!
+class Step: IdentifiableObject, Mappable {
+    dynamic var distance: Int = 0
+    dynamic var distanceText: String!
+    dynamic var duration: Int = 0
+    dynamic var durationText: String!
     
-    var startLocation: CLLocationCoordinate2D!
-    var endLocation: CLLocationCoordinate2D!
+    dynamic var startLocation: RouteLocationCoordinate2D?
+    dynamic var endLocation: RouteLocationCoordinate2D?
     
-    var instructions: String!
-    var polyline: String!
+    dynamic var instructions: String!
+    dynamic var polyline: String!
     
-    var travelMode: GoogleTravelMode!
+    var travelMode: GoogleTravelMode {
+        return GoogleTravelMode(rawValue: _travelMode)!
+    }
+    private dynamic var _travelMode: String!
     
-    var maneuver: GoogleManeuverType?
+    var maneuver: GoogleManeuverType? {
+        return GoogleManeuverType(rawValue: _maneuver ?? "")
+    }
+    private dynamic var _maneuver: String?
     
     // MARK: JSON
-    init?(map: Map) { }
+    required convenience init?(map: Map) {
+        self.init()
+    }
     
-    mutating func mapping(map: Map) {
+    func mapping(map: Map) {
         distance <- map["distance.value"]
         distanceText <- map["distance.text"]
         duration <- map["duration.value"]
@@ -173,19 +208,26 @@ struct Step: Mappable {
         instructions <- map["html_instructions"]
         polyline <- map["polyline.points"]
         
-        travelMode <- map["travel_mode"]
-        maneuver <- map["maneuver"]
+        _travelMode <- map["travel_mode"]
+        _maneuver <- map["maneuver"]
     }
 }
 
-extension CLLocationCoordinate2D: Mappable {
+class RouteLocationCoordinate2D: IdentifiableObject, Mappable {
+    dynamic var latitude: Double = 0.0
+    dynamic var longitude: Double = 0.0
+    
     // MARK: JSON
-    public init?(map: Map) {
+    required convenience init?(map: Map) {
         self.init()
     }
     
-    mutating public func mapping(map: Map) {
+    func mapping(map: Map) {
         latitude <- map["lat"]
         longitude <- map["lng"]
     }
+}
+
+class RString: IdentifiableObject {
+    dynamic var value: String?
 }

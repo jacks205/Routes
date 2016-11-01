@@ -11,6 +11,7 @@ import CocoaLumberjack
 import RxSwift
 import RxCocoa
 import MapKit
+import RealmSwift
 
 private let reuseIdentifier = "RouteCollectionCell"
 
@@ -73,16 +74,14 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
     
     init(locations: RoutesLocations, routes: [Route]) {
         selectRouteViewModel = SelectRouteViewModel(
+            locations: locations,
             routes: routes,
             originLocation: routeSummaryRenameView.leftView.textView.rx.text.asObservable(),
             destinationLocation: routeSummaryRenameView.rightView.textView.rx.text.asObservable()
         )
         super.init(nibName: nil, bundle: nil)
-        //TODO: REMOVE TEST
-        routeSummaryRenameView.leftView.setTextView(text: "19332 Trino Circle")
-        routeSummaryRenameView.rightView.setTextView(text: "Disneyland")
-//        routeSummaryRenameView.leftView.setTextView(text: locations.origin.name)
-//        routeSummaryRenameView.rightView.setTextView(text: locations.destination.name)
+        routeSummaryRenameView.leftView.setTextView(text: locations.origin.name)
+        routeSummaryRenameView.rightView.setTextView(text: locations.destination.name)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,8 +105,12 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
             .map { _ in return self.currentCollectionViewCenterRow.value }
             .map { row in return self.selectRouteViewModel.routes.value[row] }
             .subscribe(onNext: { route in
-                let vc = detailsViewController(route: route)
-                self.navigationController?.present(vc, animated: true, completion: nil)
+                let origin = self.routeSummaryRenameView.leftView.textView.text ?? route.legs.first?.startAddress ?? "Start"
+                let destination = self.routeSummaryRenameView.rightView.textView.text ?? route.legs.first?.endAddress ?? "End"
+                let vc = detailsViewControllerModal(origin: origin, destination: destination, route: route)
+                if let nvc = vc.navigationController {
+                    self.navigationController?.present(nvc, animated: true, completion: nil)
+                }
             })
             .addDisposableTo(db)
         
@@ -127,8 +130,10 @@ class SelectRouteCollectionViewController: AddRouteBaseViewController, MKMapView
         
         confirmBtn
             .rx.tap
-            .asDriver()
-            .drive(onNext: {
+            .map { _ in return self.selectRouteViewModel.routes.value[self.pageControl.currentPage] }
+            .flatMap { RoutesDataService.instance.rx_saveRoutes(routes: [$0]) }
+            .subscribe(onNext: { [unowned self] _ in
+                //TODO: Error handling
                 self.navigationController?.dismiss(animated: true, completion: nil)
             })
             .addDisposableTo(db)

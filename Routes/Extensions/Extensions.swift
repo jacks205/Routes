@@ -308,6 +308,13 @@ extension Route {
             return Disposables.create()
         }
     }
+    
+    func update(newRoute: Route) {
+        legs.first?.duration = newRoute.legs.first?.duration ?? legs.first?.duration ?? 0
+        legs.first?.durationText = newRoute.legs.first?.durationText
+        legs.first?.durationTraffic = newRoute.legs.first?.durationTraffic ?? legs.first?.durationTraffic ?? 0
+        legs.first?.durationTrafficText = newRoute.legs.first?.durationTrafficText
+    }
 }
 
 //extension Leg {
@@ -349,13 +356,19 @@ extension Route {
 //    
 //}
 
-func detailsViewController(route: Route) -> UIViewController {
-    let rDetailVC = RouteDetailsViewController(route: route)
+func detailsViewController(origin: String, destination: String, route: Route) -> RouteDetailsViewController {
+    let rDetailVC = RouteDetailsViewController(origin: origin, destination: destination, route: route)
     let nvc = UINavigationController(rootViewController: rDetailVC)
     nvc.navigationBar.tintColor = .white
     nvc.navigationBar.barTintColor = bottomGradientBackgroundColor
     rDetailVC.title = "DIRECTIONS"
     rDetailVC.view.backgroundColor = addLocationViewBackgroundColor
+    return rDetailVC
+}
+
+func detailsViewControllerModal(origin: String, destination: String, route: Route) -> RouteDetailsViewController {
+    let rDetailVC = detailsViewController(origin: origin, destination: destination, route: route)
+    let nvc = rDetailVC.navigationController!
     rDetailVC.navigationItem.leftBarButtonItem = nil
     rDetailVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: .plain, target: nil, action: nil)
     rDetailVC.navigationItem
@@ -365,7 +378,7 @@ func detailsViewController(route: Route) -> UIViewController {
             nvc.dismiss(animated: true, completion: nil)
         })
         .addDisposableTo(rDetailVC.db)
-    return nvc
+    return rDetailVC
 }
 
 func addRouteNicknameViewController() -> AddRouteNicknameViewController {
@@ -377,4 +390,15 @@ func addRouteNicknameViewController() -> AddRouteNicknameViewController {
     addNicknameVC.title = "Choose Location Nickname"
     addNicknameVC.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "cancel"), style: .plain, target: nil, action: nil)
     return addNicknameVC
+}
+
+func addLocationViewController() -> UIViewController {
+    let addLocationVC = AddStartingLocationViewController()
+    addLocationVC.view.backgroundColor = addLocationViewBackgroundColor
+    addLocationVC.searchBar.placeholder = "Enter Starting Location"
+    let addNvc = UINavigationController(rootViewController: addLocationVC)
+    addNvc.navigationBar.tintColor = .white
+    addNvc.navigationBar.barTintColor = bottomGradientBackgroundColor
+    addNvc.interactivePopGestureRecognizer?.isEnabled = false
+    return addNvc
 }
