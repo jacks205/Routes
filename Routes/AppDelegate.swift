@@ -138,12 +138,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     //MARK: - Testing
     fileprivate func t_getSampleJSONString() -> String {
-        if let path = Bundle.main.path(forResource: "sample_here_response", ofType: "json")
-        {
+        if let path = Bundle.main.path(forResource: "sample_here_response", ofType: "json") {
             let url = URL(fileURLWithPath: path)
             if let jsonData = try? Data(contentsOf: url, options: .mappedIfSafe),
-                let json = String(data: jsonData, encoding: .utf8)
-            {
+                let json = String(data: jsonData, encoding: .utf8) {
                 return json
             }
         }

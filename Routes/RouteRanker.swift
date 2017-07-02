@@ -70,18 +70,18 @@ enum RouteRankerError: Error {
 
 //MARK: - Operator Overloads
 
-func +(left: Int, right: RouteScore) -> Int {
+func + (left: Int, right: RouteScore) -> Int {
     return left + right.rawValue
 }
 
-func +(left: Int, right: RouteRankScore) -> Int {
+func + (left: Int, right: RouteRankScore) -> Int {
     return left + right.overallScore
 }
 
-func >(left: RouteRankScore, right: RouteRankScore) -> Bool {
+func > (left: RouteRankScore, right: RouteRankScore) -> Bool {
     return left.overallScore > right.overallScore
 }
 
-func <(left: RouteRankScore, right: RouteRankScore) -> Bool {
+func < (left: RouteRankScore, right: RouteRankScore) -> Bool {
     return left.overallScore < right.overallScore
 }

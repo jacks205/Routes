@@ -46,6 +46,5 @@ class AddLocationsViewModel {
         }
         .shareReplay(1)
     }
-    
-    
+
 }

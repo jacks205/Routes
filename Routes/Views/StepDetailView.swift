@@ -100,7 +100,7 @@ extension StepDetailView {
             do {
                 let attr = try NSAttributedString(data: data, options: [NSDocumentTypeDocumentAttribute: NSHTMLTextDocumentType], documentAttributes: nil)
                 textLabel.attributedText = attr
-            }catch {}
+            } catch {}
         }
     }
     
